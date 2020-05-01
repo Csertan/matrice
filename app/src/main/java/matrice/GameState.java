@@ -10,7 +10,7 @@ import java.util.Random;
  * Class representing the current state of the game table
  *
  * Variables:
- * boardsize (int): the size of the game board. Can be 3 or higher.
+ * boardSize (int): the size of the game board. Can be 3 or higher.
  * state (Boolean[][]): the state of the table.
  */
 public class GameState {
@@ -25,7 +25,7 @@ public class GameState {
      * @param boardSize Size of the game board.
      * @return Returns an arbitrary game state.
      */
-    public static Boolean[][] generate(int boardSize) {
+    private static Boolean[][] generate(int boardSize) {
         Boolean[][] state = new Boolean[boardSize][boardSize];
         Random rand = new Random();
 
@@ -41,7 +41,7 @@ public class GameState {
     /* Constructors */
 
     /**
-     * Base Constructor function. Initialises state with random values.
+     * Basic Constructor function. Initialises state with random values.
      * @param boardSize Size of the game table
      */
     public GameState(int boardSize) {
@@ -50,7 +50,7 @@ public class GameState {
     }
 
     /**
-     * Copy constructor for GameState objects
+     * Copy constructor for GameState objects.
      * @param other The state that is wished to be copied to the new object.
      */
     public GameState(GameState other) {
@@ -58,7 +58,7 @@ public class GameState {
         this.setState(other.getState());
     }
 
-    /* Getters and Setters*/
+    /* Getters and Setters */
 
     public int getBoardSize() {
         return boardSize;
@@ -82,8 +82,8 @@ public class GameState {
 
     /**
      * Updates the requested cell of the game state with the given value
-     * @param row Row of the table to be updated.
-     * @param col Column of the table to be updated.
+     * @param row Row of the cell to be updated.
+     * @param col Column of the cell to be updated.
      * @param value New value.
      */
     public void updateCell(int row, int col, Boolean value) throws IllegalArgumentException {
@@ -94,8 +94,8 @@ public class GameState {
 
     /**
      * Gets the value of the wished cell of the game state
-     * @param row Row of the table to be got.
-     * @param col Column of the table to be got.
+     * @param row Row of the cell to be got.
+     * @param col Column of the cell to be got.
      * @return Value of the specified location.
      */
     public Boolean getCell(int row, int col) {
@@ -103,7 +103,16 @@ public class GameState {
     }
 
     /**
-     * Calculates the integer format of the given current state. Used for logging user path.
+     * Inverts the value of the given cell of the table
+     * @param row Row of the cell to be inverted.
+     * @param col Column of the cell to be inverted.
+     */
+    public void invertCell (int row, int col) {
+        this.state[row][col] = !this.state[row][col];
+    }
+
+    /**
+     * Calculates the integer format of the given current state. Used for logging user path
      * @return Id of the current State.
      */
     public int getStateId() {
