@@ -2,8 +2,6 @@ package matrice;
 
 import androidx.annotation.Nullable;
 
-import java.sql.Array;
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -44,25 +42,26 @@ public class GameState {
      * Basic Constructor function. Initialises state with random values.
      * @param boardSize Size of the game table
      */
-    public GameState(int boardSize) {
+    GameState(int boardSize) {
         this.setBoardSize(boardSize);
-        this.state = GameState.generate(boardSize);
+        this.setState(GameState.generate(boardSize));
     }
 
     /**
      * Copy constructor for GameState objects.
      * @param other The state that is wished to be copied to the new object.
      */
-    public GameState(GameState other) {
+    GameState(GameState other) {
         this.setBoardSize(other.getBoardSize());
         this.setState(other.getState());
     }
 
     /* Getters and Setters */
 
-    public int getBoardSize() {
+    int getBoardSize() {
         return boardSize;
     }
+
     private void setBoardSize(int boardSize) throws IllegalArgumentException {
         /* Board size can be 3 or higher */
         if(boardSize < 3)
@@ -71,14 +70,14 @@ public class GameState {
         }
         this.boardSize = boardSize;
     }
-    public Boolean[][] getState() {
+
+    private Boolean[][] getState() {
         return state;
     }
-    public void setState(Boolean[][] state) {
+
+    private void setState(Boolean[][] state) {
         this.state = state;
     }
-
-    /* Other */
 
     /**
      * Updates the requested cell of the game state with the given value
@@ -86,7 +85,7 @@ public class GameState {
      * @param col Column of the cell to be updated.
      * @param value New value.
      */
-    public void updateCell(int row, int col, Boolean value) throws IllegalArgumentException {
+    public void setCell(int row, int col, Boolean value) throws IllegalArgumentException {
         if(value == null)
             throw new IllegalArgumentException("Value of a field cell can not be null.");
         this.state[row][col] = value;
@@ -101,6 +100,8 @@ public class GameState {
     public Boolean getCell(int row, int col) {
         return this.state[row][col];
     }
+
+    /* Other */
 
     /**
      * Inverts the value of the given cell of the table
@@ -166,5 +167,11 @@ public class GameState {
             }
         }
         return true;
+    }
+
+    /* Logging */
+    //TODO Implement logging
+    public void logState() {
+
     }
 }

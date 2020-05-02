@@ -4,6 +4,9 @@ import org.apache.commons.lang3.time.StopWatch;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Class for a Game upon given Settings, handles game control, timing and logging out statistics
+ */
 public class Game {
 
     private GameLevel currentGame;
@@ -11,14 +14,21 @@ public class Game {
     private FigureSet figureSet;
     private long startTime;
     private StopWatch stopWatch;
-    private boolean gameStopped;
+    private boolean isGameStopped;
 
     /* Constructors */
+
+    /**
+     * Basic constructor for a Game object
+     * @param transformation Type of the transformation of the move
+     * @param boardSize Size of the game board
+     * @param figureSet Set of figures on the game board screen
+     */
     public Game(Transformation transformation, int boardSize, FigureSet figureSet) {
         this.currentGame = new GameLevel(transformation, boardSize);
-        this.figureSet = figureSet;
-        this.gameStopped = false;
-        this.startTime = System.currentTimeMillis();
+        this.setFigureSet(figureSet);
+        this.setGameStopped(false);
+        this.setStartTime(System.currentTimeMillis());
         this.stopWatch = new StopWatch();
         stopWatch.start();
     }
@@ -29,7 +39,7 @@ public class Game {
         return figureSet;
     }
     public boolean isGameStopped() {
-        return gameStopped;
+        return isGameStopped;
     }
     public long getStartTime() {
         return startTime;
@@ -41,25 +51,93 @@ public class Game {
     public void setCurrentGame(GameLevel currentGame) {
         this.currentGame = currentGame;
     }
-    public void setFigureSet(FigureSet figureSet) {
+    private void setFigureSet(FigureSet figureSet) {
         this.figureSet = figureSet;
     }
-    public void setTransformation(Transformation transformation) {
-        this.currentGame.setTransformation(transformation);
+    private void setGameStopped(boolean gameStopped) {
+        isGameStopped = gameStopped;
+    }
+    private void setStartTime(long startTime) {
+        this.startTime = startTime;
     }
 
     /* Game Control */
+
+    /**
+     * Pauses game, halts timers. When game is stopped players can not make moves.
+     */
     public void pause() {
-        this.stopWatch.suspend();
+        if(!this.isGameStopped)
+        {
+            this.stopWatch.suspend();
+        }
+        this.setGameStopped(true);
     }
+
+    /**
+     * Resumes game, continues timers.
+     */
     public void resume() {
-        this.stopWatch.resume();
+        if(this.isGameStopped)
+        {
+            this.stopWatch.resume();
+        }
+        this.setGameStopped(false);
     }
+
+    /**
+     * Restarts game upon user action.
+     */
     public void restart() {
         this.startTime = System.currentTimeMillis();
         this.stopWatch.reset();
-        this.currentGame.restart();
+        if(this.currentGame.getStepSize() > 1)
+        {
+            this.currentGame.restart();
+        }
     }
 
-    //TODO Implement new() and finish()
+    /**
+     * Creates new game upon user action.
+     * @param transformation Type of the transformation of the move
+     * @param boardSize Size of the game board
+     * @param figureSet Set of figures on the game board screen
+     */
+    public void newGame(Transformation transformation, int boardSize, FigureSet figureSet) {
+        this.currentGame = new GameLevel(transformation, boardSize);
+        this.setFigureSet(figureSet);
+        this.setStartTime(System.currentTimeMillis());
+        this.stopWatch.reset();
+    }
+
+    /**
+     * Finishes game. Stops timer and writes out statistics.
+     */
+    private void finishGame() {
+        this.stopWatch.stop();
+        this.setGameStopped(true);
+        this.logGame();
+    }
+
+    /**
+     * Handles moves of the player. Checks if the game is finished (the end state is reached).
+     * @param move Specifies the direction of the move.
+     * @param id Specifies affected row/column.
+     */
+    public void handleMove(Move move, int id) {
+        if(!this.isGameStopped)
+        {
+            this.currentGame.handleMove(move, id);
+        }
+        if(this.currentGame.isFinished())
+        {
+            this.finishGame();
+        }
+    }
+
+    /* Logging */
+    //TODO Implement logging
+    public void logGame() {
+
+    }
 }

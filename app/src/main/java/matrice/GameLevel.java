@@ -3,7 +3,7 @@ package matrice;
 import java.util.ArrayList;
 
 /**
- * Class handling a Game Level, start and end states, current state, moves and move history
+ * Class handling a Game Level, start and end states, current state, moves and history
  */
 public class GameLevel {
 
@@ -21,8 +21,8 @@ public class GameLevel {
      * @param transformation Type of the transformation used to evolve the game table.
      * @param boardSize Size of the game board.
      */
-    public GameLevel(Transformation transformation, int boardSize) {
-        this.transformation = transformation;
+    GameLevel(Transformation transformation, int boardSize) {
+        this.setTransformation(transformation);
 
         this.startState = new GameState(boardSize);
         this.endState = new GameState(boardSize);
@@ -66,7 +66,7 @@ public class GameLevel {
 
     /**
      * Calculating the Inversion type transformation of the game table
-     * @param move Specifies the moves direction.
+     * @param move Specifies the direction of the move.
      * @param id Specifies affected row / column.
      * @throws IllegalArgumentException Throws exception when finding invalid id.
      */
@@ -95,7 +95,7 @@ public class GameLevel {
 
     /**
      * Calculates the rotation type transformation of the game table. NOT IMPLEMENTED IN THIS VERSION.
-     * @param move Specifies the moves direction.
+     * @param move Specifies the direction of the move.
      * @param id Specifies affected row / column.
      */
     private void calculateRotation(Move move, int id) {
@@ -105,11 +105,10 @@ public class GameLevel {
     /**
      * Handles the players move. Available outside of the class.
      * @param move Direction of the move.
-     * @param transform Type of the transformation to be executed.
      * @param id Specifies the affected row / column.
      */
-    public void handleMove (Move move, Transformation transform, int id) {
-        switch (transform) {
+    public void handleMove (Move move, int id) {
+        switch (this.transformation) {
             case INVERT:
                 calculateInversion(move, id);
                 break;
@@ -124,16 +123,17 @@ public class GameLevel {
     /**
      * Restarts the current Level.
      */
-    public void restart() {
+    void restart() {
         this.setCurrentState(this.getStartState());
         this.sequence.clear();
+        this.sequence.add(this.getCurrentState());
     }
 
     /**
      * Tells if the player won the game.
      * @return Returns true if current state equals the end state.
      */
-    public boolean finished() {
+    boolean isFinished() {
         return this.currentState.equals(this.endState);
     }
 
