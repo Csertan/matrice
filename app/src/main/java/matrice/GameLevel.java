@@ -1,5 +1,7 @@
 package matrice;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 
 /**
@@ -17,7 +19,7 @@ public class GameLevel {
     /* Constructors */
 
     /**
-     * Basic constructor for GameLevel objects
+     * Basic constructor for GameLevel objects. Generates random start and end states.
      * @param transformation Type of the transformation used to evolve the game table.
      * @param boardSize Size of the game board.
      */
@@ -28,8 +30,13 @@ public class GameLevel {
         this.endState = new GameState(boardSize);
         this.currentState = new GameState(this.startState);
 
-        this.sequence = new ArrayList<GameState>();
+        this.sequence = new ArrayList<>();
         sequence.add(this.startState);
+    }
+
+    //TODO Implement String based creation of Game Level to be able to continue saved game
+    GameLevel(Transformation transformation, int boardSize, String savedState) {
+
     }
 
     /* Getters and Setters */
@@ -107,7 +114,7 @@ public class GameLevel {
      * @param move Direction of the move.
      * @param id Specifies the affected row / column.
      */
-    public void handleMove (Move move, int id) {
+    void handleMove(Move move, int id) {
         switch (this.transformation) {
             case INVERT:
                 calculateInversion(move, id);
@@ -142,4 +149,12 @@ public class GameLevel {
     public void logLevel() {
 
     }
+
+    //TODO Implement to String function
+    @NonNull
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
 }

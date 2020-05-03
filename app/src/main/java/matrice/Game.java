@@ -27,10 +27,14 @@ public class Game {
     public Game(Transformation transformation, int boardSize, FigureSet figureSet) {
         this.currentGame = new GameLevel(transformation, boardSize);
         this.setFigureSet(figureSet);
-        this.setGameStopped(false);
-        this.setStartTime(System.currentTimeMillis());
+        this.setGameStopped(true);
+        this.setStartTime(0);
         this.stopWatch = new StopWatch();
-        stopWatch.start();
+    }
+
+    //TODO Implement String based creation of Game to be able to continue saved game
+    public Game(Transformation transformation, int boardSize, FigureSet figureSet, String savedState) {
+
     }
 
     /* Getters and Setters */
@@ -47,6 +51,17 @@ public class Game {
     public long getDuration() {
         return stopWatch.getTime(TimeUnit.SECONDS);
     }
+    public String getFormattedTime() {
+        String formattedTime = "";
+        long unformatted = stopWatch.getTime(TimeUnit.SECONDS);
+        if(unformatted > 59)
+        {
+            formattedTime += unformatted/60 + ":" + unformatted%60;
+        }
+        else
+            formattedTime += unformatted;
+        return formattedTime;
+    }
 
     public void setCurrentGame(GameLevel currentGame) {
         this.currentGame = currentGame;
@@ -62,6 +77,12 @@ public class Game {
     }
 
     /* Game Control */
+
+    public void start() {
+        this.setGameStopped(false);
+        this.setStartTime(System.currentTimeMillis());
+        stopWatch.start();
+    }
 
     /**
      * Pauses game, halts timers. When game is stopped players can not make moves.

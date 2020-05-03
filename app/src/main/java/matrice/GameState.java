@@ -1,5 +1,6 @@
 package matrice;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Random;
@@ -56,6 +57,16 @@ public class GameState {
         this.setState(other.getState());
     }
 
+    /**
+     * Constructor for String based creation. Used in Activity management.
+     * @param stateString String that stores the state.
+     * @param boardSize Size of the game board.
+     */
+    GameState(String stateString, int boardSize) {
+        this.setBoardSize(boardSize);
+        this.setState(this.stringToState(stateString));
+    }
+
     /* Getters and Setters */
 
     int getBoardSize() {
@@ -108,7 +119,7 @@ public class GameState {
      * @param row Row of the cell to be inverted.
      * @param col Column of the cell to be inverted.
      */
-    public void invertCell (int row, int col) {
+    void invertCell(int row, int col) {
         this.state[row][col] = !this.state[row][col];
     }
 
@@ -170,8 +181,37 @@ public class GameState {
     }
 
     /* Logging */
-    //TODO Implement logging
-    public void logState() {
+    //TODO Write documentation
+    public String logState() {
+        return "State id= " + this.getStateId() + ", boardSize= " + this.getBoardSize() + ", pattern=" + this.toString();
+    }
 
+    @NonNull
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        for(int i = 0; i < this.boardSize; i++)
+        {
+            for(int j = 0; j < this.boardSize; j++)
+            {
+                output.append(this.state[i][j]).append(" ");
+            }
+        }
+        return output.toString();
+    }
+
+    //TODO Input validation
+    //TODO Write documentation
+    private Boolean[][] stringToState(String input) {
+        Boolean[][] state = new Boolean[this.boardSize][this.boardSize];
+        String[] tokens = input.split(" ");
+        int index = 0;
+        for(int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                state[i][j] = tokens[index].equals("true");
+                index++;
+            }
+        }
+        return state;
     }
 }
