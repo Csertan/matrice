@@ -1,10 +1,30 @@
 <resources>
     <string name="app_name">Matrice</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Strings on BootScreenFragment -->
+    <string name="studio_logo_description">studioLogo</string>
+    <string name="gotomain_description">goToMain</string>
+    <!-- App Logo Description -->
+    <string name="applogomain_description">appLogoMain</string>
+    <!-- Strings on MainScreenFragment -->
+    <string name="play_text">Play</string>
+    <string name="campaign_text">Campaign</string>
+    <string name="settings_text">Settings</string>
+    <string name="authors_text">Authors</string>
+    <!-- Strings on NavBarFragment -->
+    <string name="gotosettings_description">goToSettings</string>
+    <string name="gotolevels_description">goToLevels</string>
+    <string name="gotohome_description">goToHome</string>
+
+    <!-- Strings on AuthorsScreenFragment -->
+    <string name="research_text_title">Research</string>
+    <string name="research_text">This is the description of the research...</string>
+    <string name="designer_name_text">Designed by nosebite Studios</string>
+    <string name="programmer_name">Flow by Tamas Csertan</string>
+    <string name="copyright_notice">(C)2020 nosebite Studios</string>
+    <string name="copyright_warning">All rights reserved!</string>
+
     <!-- Strings used for fragments for navigation -->
 
-    <!-- TODO: Remove or change this placeholder text -->
 
 </resources>
