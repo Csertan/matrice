@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
         android:contentDescription="@string/gotomain_description"
-        android:src="@android:drawable/ic_media_play"
+        android:src="@drawable/ic_play_icon"
         app:layout_constraintBottom_toBottomOf="@+id/studioLogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
