@@ -77,6 +77,8 @@
     <string name="privacy_policy">Privacy Policy</string>
     <string name="url_privacy">https://csertan.github.io/</string>
 
+    <string name="choose_email_client">Choose email client</string>
+
     <!-- Strings used for fragments for navigation -->
 
 
