@@ -37,9 +37,15 @@ public class MainScreenFragment extends Fragment {
             public void onClick(View view) {
                 Navigation.findNavController(view)
                         .navigate(MainScreenFragmentDirections.actionMainScreenFragmentToAuthorsScreenFragment());
+            }
+        });
 
-                /*NavHostFragment.findNavController(MainScreenFragment.this)
-                        .navigate(R.id.action_mainScreenFragment_to_authorsScreenFragment);*/
+        Button playButton = (Button) view.findViewById(R.id.playButtonMain);
+        playButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view)
+                        .navigate(MainScreenFragmentDirections.actionMainScreenFragmentToGameScreenFragment());
             }
         });
     }

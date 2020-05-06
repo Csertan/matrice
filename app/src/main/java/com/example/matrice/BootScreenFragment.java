@@ -36,10 +36,7 @@ public class BootScreenFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view)
-                        .navigate(BootScreenFragmentDirections.actionGlobalMainScreenFragment());
-
-                /*NavHostFragment.findNavController(BootScreenFragment.this)
-                        .navigate(R.id.action_global_mainScreenFragment);*/
+                        .navigate(BootScreenFragmentDirections.actionBootScreenFragmentToMainScreenFragment());
             }
         });
     }

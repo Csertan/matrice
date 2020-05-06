@@ -31,15 +31,12 @@ public class NavBarFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Setup any handles to view objects here
-        ImageButton toMainButton = (ImageButton) view.findViewById(R.id.navBarHomeButton);
-        toMainButton.setOnClickListener(new View.OnClickListener() {
+        ImageButton toHomeButton = (ImageButton) view.findViewById(R.id.navBarHomeButton);
+        toHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view)
-                        .navigate(NavBarFragmentDirections.actionGlobalMainScreenFragment());
-
-                /*NavHostFragment.findNavController(NavBarFragment.this)
-                        .navigate(R.id.action_global_mainScreenFragment);*/
+                        .navigate(MainNavGraphDirections.actionPopUpToMainScreenFragment());
             }
         });
     }

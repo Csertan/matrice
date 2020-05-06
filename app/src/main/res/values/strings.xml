@@ -35,6 +35,9 @@
     <string name="pauseplay_description">pausePlayControl</string>
     <string name="stop_description">stopGameControl</string>
     <string name="retry_description">retryGameControl</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Strings used for fragments for navigation -->
 
 
