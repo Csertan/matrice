@@ -41,6 +41,15 @@
         android:id="@+id/gameScreenFragment"
         android:name="com.example.matrice.GameScreenFragment"
         android:label="game_screen_fragment"
-        tools:layout="@layout/game_screen_fragment" />
+        tools:layout="@layout/game_screen_fragment" >
+        <action
+            android:id="@+id/action_gameScreenFragment_to_successScreenFragment"
+            app:destination="@id/successScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/successScreenFragment"
+        android:name="com.example.matrice.SuccessScreenFragment"
+        android:label="fragment_success_screen"
+        tools:layout="@layout/fragment_success_screen" />
 
 </navigation>
