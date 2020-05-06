@@ -76,6 +76,7 @@
             app:summary="@string/summary_support"
             app:title="@string/title_send_feedback"/>
 
+        <!--TODO Not working yet! -->
         <Preference app:title="@string/privacy_policy">
             <intent
                 app:action="android.intent.action.VIEW"

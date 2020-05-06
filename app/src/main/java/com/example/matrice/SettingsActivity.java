@@ -35,23 +35,28 @@ public class SettingsActivity extends AppCompatActivity {
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
 
+            //Summary provider for Figure Set Preferences
             ListPreference figureSetPreferences = findPreference(getString(R.string.key_figure_set));
             if(figureSetPreferences != null) {
                 figureSetPreferences.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
             }
 
+            //Summary provider for Transition Type Preferences
             ListPreference transitionTypePreferences = findPreference(getString(R.string.key_transition_type));
             if(transitionTypePreferences != null) {
                 transitionTypePreferences.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
             }
 
+            //Summary provider for Language Preferences
             ListPreference languagePreferences = findPreference(getString(R.string.key_app_language));
             if(languagePreferences != null) {
                 languagePreferences.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
 
             }
 
+            //On Click Listener for Send Feedback Preference
             Preference sendFeedbackPreference = findPreference(getString(R.string.key_send_feedback));
+            assert sendFeedbackPreference != null;
             sendFeedbackPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
