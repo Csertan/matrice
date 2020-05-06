@@ -9,11 +9,7 @@
         android:id="@+id/bootScreenFragment"
         android:name="com.example.matrice.BootScreenFragment"
         android:label="fragment_boot_screen"
-        tools:layout="@layout/fragment_boot_screen" >
-        <action
-            android:id="@+id/action_bootScreenFragment_to_mainScreenFragment"
-            app:destination="@id/mainScreenFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_boot_screen" />
     <fragment
         android:id="@+id/mainScreenFragment"
         android:name="com.example.matrice.MainScreenFragment"
@@ -28,4 +24,15 @@
         android:name="com.example.matrice.AuthorsScreenFragment"
         android:label="fragment_authors_screen"
         tools:layout="@layout/fragment_authors_screen" />
+
+    <action
+        android:id="@+id/action_global_mainScreenFragment"
+        app:destination="@id/mainScreenFragment"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/mainScreenFragment" />
+    <fragment
+        android:id="@+id/navBarFragment"
+        android:name="com.example.matrice.NavBarFragment"
+        android:label="fragment_nav_bar"
+        tools:layout="@layout/fragment_nav_bar" />
 </navigation>
