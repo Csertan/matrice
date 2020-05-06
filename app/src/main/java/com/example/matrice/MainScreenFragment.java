@@ -1,5 +1,6 @@
 package com.example.matrice;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,15 @@ public class MainScreenFragment extends Fragment {
             public void onClick(View view) {
                 Navigation.findNavController(view)
                         .navigate(MainScreenFragmentDirections.actionMainScreenFragmentToGameScreenFragment());
+            }
+        });
+
+        Button settingsButton = view.findViewById(R.id.settingsButtonMain);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                startActivity(intent);
             }
         });
     }
