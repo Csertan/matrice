@@ -1,0 +1,87 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Game Settings -->
+    <PreferenceCategory
+        app:key="@string/key_game_category"
+        app:title="@string/title_game_category" >
+
+        <SeekBarPreference
+            app:key="@string/key_game_boardsize"
+            app:title="@string/title_game_boardsize"
+            app:summary="@string/summary_game_boardsize"
+            app:defaultValue="3"
+            app:enabled="false"
+            app:min="3"
+            app:showSeekBarValue="true"
+             />
+    </PreferenceCategory>
+
+    <ListPreference
+        app:key="@string/key_figure_set"
+        app:title="@string/title_figure_set"
+        app:summary="@string/summary_figure_set"
+        app:dialogTitle="@string/title_figure_set"
+        app:defaultValue="0"
+        app:entries="@array/pref_figure_set_entries"
+        app:entryValues="@array/pref_figure_set_values"
+        app:enabled="false"/>
+
+    <ListPreference
+        app:key="@string/key_transition_type"
+        app:title="@string/title_transition_type"
+        app:summary="@string/summary_transition_type"
+        app:dialogTitle="@string/title_transition_type"
+        app:defaultValue="0"
+        app:entries="@array/pref_action_type_entries"
+        app:entryValues="@array/pref_action_type_values"
+        app:enabled="false"/>
+
+    <!-- General Settings -->
+    <PreferenceCategory
+        app:key="@string/key_general_category"
+        app:title="@string/title_general_category" >
+
+        <ListPreference
+            app:key="@string/key_app_language"
+            app:title="@string/title_app_language"
+            app:summary="@string/summary_app_language"
+            app:dialogTitle="@string/title_app_language"
+            app:defaultValue="0"
+            app:entries="@array/pref_app_language_entries"
+            app:entryValues="@array/pref_app_language_values" />
+
+        <SwitchPreference
+            app:key="@string/key_enable_dark_mode"
+            app:title="@string/title_enable_dark_mode"
+            app:summary="@string/summary_enable_dark_mode"
+            app:defaultValue="false" />
+
+    </PreferenceCategory>
+
+    <!-- About and Feedback -->
+    <PreferenceCategory
+        app:key="@string/key_about_category"
+        app:title="@string/title_about_category">
+
+        <Preference
+            app:selectable="false"
+            app:summary="@string/summary_about" />
+
+        <Preference
+            app:summary="@string/app_version"
+            app:title="@string/title_version" />
+
+        <Preference
+            app:key="@string/key_send_feedback"
+            app:summary="@string/summary_support"
+            app:title="@string/title_send_feedback"/>
+
+        <Preference app:title="@string/privacy_policy">
+            <intent
+                app:action="android.intent.action.VIEW"
+                app:data="@string/url_privacy" />
+        </Preference>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

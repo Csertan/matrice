@@ -1,0 +1,33 @@
+<resources>
+    <!-- Language Preferences -->
+    <string-array name="pref_app_language_entries">
+        <item>English</item>
+        <item>Hungarian</item>
+    </string-array>
+    <string-array name="pref_app_language_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- Figure Set Preferences -->
+    <string-array name="pref_figure_set_entries">
+        <item>O+</item>
+        <item>OX</item>
+        <item>+-</item>
+    </string-array>
+    <string-array name="pref_figure_set_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Transformation Type Preferences -->
+    <string-array name="pref_action_type_entries">
+        <item>Inversion</item>
+        <item>Circulation</item>
+    </string-array>
+    <string-array name="pref_action_type_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+</resources>

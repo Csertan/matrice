@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Matrice</string>
+    <string name="app_version">1.1.0</string>
+    <string name="url_github">https://github.com/Csertan/matrice</string>
 
     <!-- Strings on BootScreenFragment -->
     <string name="studio_logo_description">studioLogo</string>
@@ -40,6 +42,41 @@
     <string name="score_text">Replace it with Score!</string>
     <string name="score_details">Replace it with Score details!</string>
     <string name="success_picture_description">Picture displayed at success</string>
+
+<!-- Settings Activity -->
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="title_game_category">Game</string>
+    <string name="key_game_category">game_category</string>
+    <string name="title_game_boardsize">Board Size</string>
+    <string name="key_game_boardsize">game_boardsize</string>
+    <string name="summary_game_boardsize">Size of the game board. Coming Soon!</string>
+    <string name="key_figure_set">figure_set</string>
+    <string name="title_figure_set">Figure Set</string>
+    <string name="summary_figure_set">Set of figures you would like to play with</string>
+    <string name="key_transition_type">transition_type</string>
+    <string name="title_transition_type">Transition</string>
+    <string name="summary_transition_type">Type of trensition you would like to play with</string>
+    <string name="key_general_category">general_category</string>
+    <string name="title_general_category">General</string>
+    <string name="key_app_language">app_language</string>
+    <string name="title_app_language">Language</string>
+    <string name="summary_app_language">Choose the language of the app</string>
+    <string name="key_enable_dark_mode">enable_dark_mode</string>
+    <string name="title_enable_dark_mode">Dark Mode</string>
+    <string name="summary_enable_dark_mode">Enable dark mode in app</string>
+    <string name="key_about_category">about_category</string>
+    <string name="title_about_category">About &amp; Feedback</string>
+    <string name="summary_about">TODO Write Summary</string>
+    <string name="title_version">App Version</string>
+    <string name="key_send_feedback">send_feedback</string>
+    <string name="title_send_feedback">Send Feedback</string>
+    <string name="summary_support">Got any queries? We are happy to help!</string>
+
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="url_privacy">https://csertan.github.io/</string>
+
     <!-- Strings used for fragments for navigation -->
 
 
