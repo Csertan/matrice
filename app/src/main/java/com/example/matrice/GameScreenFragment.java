@@ -37,6 +37,7 @@ public class GameScreenFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //TODO Write documentation
+        initGameUponPreferences();
 
         ImageButton toHomeButton = (ImageButton) view.findViewById(R.id.leftControlsHomeButton);
         toHomeButton.setOnClickListener(new View.OnClickListener() {
@@ -55,11 +56,13 @@ public class GameScreenFragment extends Fragment {
     }
 
     private void initGameUponPreferences() {
+        //TODO Write documentation
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireActivity());
         int boardsize = preferences.getInt(getString(R.string.key_game_boardsize), 3);
-        int transformation = preferences.getInt(getString(R.string.key_transition_type), 0);
+        int transformationId = preferences.getInt(getString(R.string.key_transition_type), 0);
+        int figureSetId = preferences.getInt(getString(R.string.key_figure_set), 0);
 
-        this.game = new Game(Transformation.INVERT, boardsize, FigureSet.PLUSMINUS);
+        this.game = new Game(Transformation.fromId(transformationId), boardsize, FigureSet.fromId(figureSetId));
     }
 
 }
