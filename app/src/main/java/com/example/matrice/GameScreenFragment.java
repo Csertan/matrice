@@ -1,5 +1,6 @@
 package com.example.matrice;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +12,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.preference.PreferenceManager;
+
+import matrice.FigureSet;
+import matrice.Game;
+import matrice.Transformation;
 
 public class GameScreenFragment extends Fragment {
 
     private GameScreenViewModel mViewModel;
+    private Game game;
 
     public static GameScreenFragment newInstance() {
         return new GameScreenFragment();
@@ -29,7 +36,8 @@ public class GameScreenFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Setup any handles to view objects here
+        //TODO Write documentation
+
         ImageButton toHomeButton = (ImageButton) view.findViewById(R.id.leftControlsHomeButton);
         toHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +52,14 @@ public class GameScreenFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(requireActivity()).get(GameScreenViewModel.class);
         // TODO: Use the ViewModel
+    }
+
+    private void initGameUponPreferences() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireActivity());
+        int boardsize = preferences.getInt(getString(R.string.key_game_boardsize), 3);
+        int transformation = preferences.getInt(getString(R.string.key_transition_type), 0);
+
+        this.game = new Game(Transformation.INVERT, boardsize, FigureSet.PLUSMINUS);
     }
 
 }
