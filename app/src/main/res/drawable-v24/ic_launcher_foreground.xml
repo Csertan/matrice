@@ -2,10 +2,10 @@
     xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
-    android:viewportWidth="342.85715"
-    android:viewportHeight="342.85718">
-  <group android:translateX="51.42857"
-      android:translateY="51.428577">
+    android:viewportWidth="380.9524"
+    android:viewportHeight="380.95242">
+  <group android:translateX="70.47619"
+      android:translateY="70.4762">
     <path
         android:pathData="m183.35,30a18.436,19.824 0,0 0,-18.436 19.824,18.436 19.824,0 0,0 0.271,3.38h-0.141v134.71a18.436,19.824 0,0 0,-0.132 2.263,18.436 19.824,0 0,0 18.436,19.824 18.436,19.824 0,0 0,18.436 -19.824,18.436 19.824,0 0,0 -0.085,-1.747h0.126L201.825,53.203h-0.328a18.436,19.824 0,0 0,0.289 -3.38,18.436 19.824,0 0,0 -18.436,-19.824z"
         android:strokeWidth="0.18931603">
