@@ -55,7 +55,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginEnd="20dp"
         android:contentDescription="@string/gotosettings_description"
-        android:src="@android:drawable/btn_star_big_on"
+        android:src="@drawable/ic_settings_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/navBarLevelsButton"
