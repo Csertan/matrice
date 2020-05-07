@@ -103,6 +103,8 @@ public class GameState {
     public void setCell(int row, int col, Boolean value) throws IllegalArgumentException {
         if(value == null)
             throw new IllegalArgumentException("Value of a field cell can not be null.");
+        if(row >= this.boardSize || col >= this.boardSize || row < 0 || col < 0)
+            throw new IllegalArgumentException("Invalid field identifier (row or column).");
         this.state[row][col] = value;
     }
 
@@ -123,12 +125,14 @@ public class GameState {
      * @param row Row of the cell to be inverted.
      * @param col Column of the cell to be inverted.
      */
-    void invertCell(int row, int col) {
+    void invertCell(int row, int col) throws IllegalArgumentException {
+        if(row < 0 || col < 0 || row >= this.boardSize || col >= this.boardSize)
+            throw new IllegalArgumentException("Invalid field identifier (row or column)");
         this.state[row][col] = !this.state[row][col];
     }
 
     /**
-     * Calculates the integer format of the given current state. Used for logging user path
+     * Calculates the integer format of the given current state. Used for logging user path.
      * @return Id of the current State.
      */
     public int getStateId() {
@@ -199,7 +203,7 @@ public class GameState {
         {
             for(int j = 0; j < this.boardSize; j++)
             {
-                output.append(this.state[i][j]).append(" ");
+                output.append(this.state[i][j].toString()).append(" ");
             }
         }
         return output.toString();
@@ -208,9 +212,11 @@ public class GameState {
     //TODO Input validation
     //TODO Write documentation
     @NotNull
-    private Boolean[][] stringToState(@NotNull String input) {
+    private Boolean[][] stringToState(@NotNull String input) throws IllegalArgumentException {
         Boolean[][] state = new Boolean[this.boardSize][this.boardSize];
         String[] tokens = input.split(" ");
+        if(tokens.length != boardSize*boardSize)
+            throw new IllegalArgumentException("Not enough field values to initialise state.");
         int index = 0;
         for(int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {

@@ -2,6 +2,8 @@ package matrice;
 
 import androidx.annotation.NonNull;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 /**
@@ -26,17 +28,28 @@ public class GameLevel {
     GameLevel(Transformation transformation, int boardSize) {
         this.setTransformation(transformation);
 
+        //Initialising Level with random start-end states
         this.startState = new GameState(boardSize);
         this.endState = new GameState(boardSize);
+        //Copying start state to current state
         this.currentState = new GameState(this.startState);
 
         this.sequence = new ArrayList<>();
         sequence.add(this.startState);
     }
 
-    //TODO Implement String based creation of Game Level to be able to continue saved game
-    GameLevel(Transformation transformation, int boardSize, String savedState) {
+    //TODO Write documentation
+    GameLevel(Transformation transformation, int boardSize, @NotNull String savedLevel) throws IllegalArgumentException {
+        this.setTransformation(transformation);
+        String[] tokens = savedLevel.split(":");
+        if(tokens.length != 3)
+            throw new IllegalArgumentException("Not enough states to initialise level.");
+        this.startState = new GameState(tokens[0], boardSize);
+        this.endState = new GameState(tokens[1], boardSize);
+        this.currentState = new GameState(tokens[2], boardSize);
 
+        this.sequence = new ArrayList<>();
+        sequence.add(this.startState);
     }
 
     /* Getters and Setters */
@@ -69,6 +82,7 @@ public class GameLevel {
     public void setTransformation(Transformation transformation) {
         this.transformation = transformation;
     }
+
     /* Handling moves */
 
     /**
@@ -133,7 +147,7 @@ public class GameLevel {
     void restart() {
         this.setCurrentState(this.getStartState());
         this.sequence.clear();
-        this.sequence.add(this.getCurrentState());
+        this.sequence.add(this.getStartState());
     }
 
     /**
@@ -150,11 +164,13 @@ public class GameLevel {
 
     }
 
-    //TODO Implement to String function
+    //TODO Write documentation
     @NonNull
     @Override
     public String toString() {
-        return super.toString();
+        return this.startState.toString() + ":" +
+                this.endState.toString() + ":" +
+                this.currentState.toString();
     }
 
 }

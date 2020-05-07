@@ -9,7 +9,7 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 public class GameScreenFragment extends Fragment {
@@ -42,7 +42,7 @@ public class GameScreenFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(GameScreenViewModel.class);
+        mViewModel = new ViewModelProvider(requireActivity()).get(GameScreenViewModel.class);
         // TODO: Use the ViewModel
     }
 

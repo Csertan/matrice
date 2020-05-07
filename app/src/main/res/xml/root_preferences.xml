@@ -14,27 +14,28 @@
             app:min="3"
             app:showSeekBarValue="true"
              />
+
+        <ListPreference
+            app:key="@string/key_figure_set"
+            app:title="@string/title_figure_set"
+            app:summary="@string/summary_figure_set"
+            app:dialogTitle="@string/title_figure_set"
+            app:defaultValue="0"
+            app:entries="@array/pref_figure_set_entries"
+            app:entryValues="@array/pref_figure_set_values"
+            app:enabled="false"/>
+
+        <ListPreference
+            app:key="@string/key_transition_type"
+            app:title="@string/title_transition_type"
+            app:summary="@string/summary_transition_type"
+            app:dialogTitle="@string/title_transition_type"
+            app:defaultValue="0"
+            app:entries="@array/pref_action_type_entries"
+            app:entryValues="@array/pref_action_type_values"
+            app:enabled="false"/>
+
     </PreferenceCategory>
-
-    <ListPreference
-        app:key="@string/key_figure_set"
-        app:title="@string/title_figure_set"
-        app:summary="@string/summary_figure_set"
-        app:dialogTitle="@string/title_figure_set"
-        app:defaultValue="0"
-        app:entries="@array/pref_figure_set_entries"
-        app:entryValues="@array/pref_figure_set_values"
-        app:enabled="false"/>
-
-    <ListPreference
-        app:key="@string/key_transition_type"
-        app:title="@string/title_transition_type"
-        app:summary="@string/summary_transition_type"
-        app:dialogTitle="@string/title_transition_type"
-        app:defaultValue="0"
-        app:entries="@array/pref_action_type_entries"
-        app:entryValues="@array/pref_action_type_values"
-        app:enabled="false"/>
 
     <!-- General Settings -->
     <PreferenceCategory

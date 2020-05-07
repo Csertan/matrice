@@ -14,7 +14,8 @@ public class Game {
     private FigureSet figureSet;
     private long startTime;
     private StopWatch stopWatch;
-    private boolean isGameStopped;
+    private boolean isGameStarted;
+    private boolean isGamePaused;
 
     /* Constructors */
 
@@ -25,9 +26,11 @@ public class Game {
      * @param figureSet Set of figures on the game board screen
      */
     public Game(Transformation transformation, int boardSize, FigureSet figureSet) {
+        //Initialises GameLevel with random start-end states
         this.currentGame = new GameLevel(transformation, boardSize);
         this.setFigureSet(figureSet);
-        this.setGameStopped(true);
+        this.setGameStarted(false);
+        this.setGamePaused(true);
         this.setStartTime(0);
         this.stopWatch = new StopWatch();
     }
@@ -42,8 +45,11 @@ public class Game {
     public FigureSet getFigureSet() {
         return figureSet;
     }
-    public boolean isGameStopped() {
-        return isGameStopped;
+    public boolean isGameStarted() {
+        return isGameStarted;
+    }
+    public boolean isGamePaused() {
+        return isGamePaused;
     }
     public long getStartTime() {
         return startTime;
@@ -51,12 +57,12 @@ public class Game {
     public long getDuration() {
         return stopWatch.getTime(TimeUnit.SECONDS);
     }
-    public String getFormattedTime() {
+    public String getFormattedDuration() {
         String formattedTime = "";
         long unformatted = stopWatch.getTime(TimeUnit.SECONDS);
         if(unformatted > 59)
         {
-            formattedTime += unformatted/60 + ":" + unformatted%60;
+            formattedTime += (unformatted / 60) + ":" + (unformatted % 60);
         }
         else
             formattedTime += unformatted;
@@ -69,8 +75,11 @@ public class Game {
     private void setFigureSet(FigureSet figureSet) {
         this.figureSet = figureSet;
     }
-    private void setGameStopped(boolean gameStopped) {
-        isGameStopped = gameStopped;
+    public void setGameStarted(boolean gameStarted) {
+        isGameStarted = gameStarted;
+    }
+    private void setGamePaused(boolean gamePaused) {
+        isGamePaused = gamePaused;
     }
     private void setStartTime(long startTime) {
         this.startTime = startTime;
@@ -78,8 +87,12 @@ public class Game {
 
     /* Game Control */
 
+    /**
+     * Starts the game. Starts timers.
+     */
     public void start() {
-        this.setGameStopped(false);
+        this.setGameStarted(true);
+        this.setGamePaused(false);
         this.setStartTime(System.currentTimeMillis());
         stopWatch.start();
     }
@@ -88,22 +101,22 @@ public class Game {
      * Pauses game, halts timers. When game is stopped players can not make moves.
      */
     public void pause() {
-        if(!this.isGameStopped)
+        if(!this.isGamePaused)
         {
             this.stopWatch.suspend();
         }
-        this.setGameStopped(true);
+        this.setGamePaused(true);
     }
 
     /**
      * Resumes game, continues timers.
      */
     public void resume() {
-        if(this.isGameStopped)
+        if(this.isGamePaused)
         {
             this.stopWatch.resume();
         }
-        this.setGameStopped(false);
+        this.setGamePaused(false);
     }
 
     /**
@@ -136,7 +149,7 @@ public class Game {
      */
     private void finishGame() {
         this.stopWatch.stop();
-        this.setGameStopped(true);
+        this.setGamePaused(true);
         this.logGame();
     }
 
@@ -146,7 +159,7 @@ public class Game {
      * @param id Specifies affected row/column.
      */
     public void handleMove(Move move, int id) {
-        if(!this.isGameStopped)
+        if(!this.isGamePaused && isGameStarted)
         {
             this.currentGame.handleMove(move, id);
         }
