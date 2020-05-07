@@ -131,6 +131,10 @@ public class Game {
         }
     }
 
+    public void stop() {
+        this.finishGame();
+    }
+
     /**
      * Creates new game upon user action.
      * @param transformation Type of the transformation of the move

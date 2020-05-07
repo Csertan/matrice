@@ -55,6 +55,56 @@ public class GameScreenFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    /* Handling Fragment Lifecycle Changes */
+    @Override
+    public void onStart() {
+        super.onStart();
+        this.game.start();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        this.game.pause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.game.resume();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        this.game.stop();
+    }
+
+    /* Handling User Commands*/
+
+    //TODO Write documentation
+    public void onPausePlayButtonPressed(View view) {
+        if(!this.game.isGamePaused()) {
+            this.game.pause();
+            //TODO update Button image
+        }
+        else {
+            this.game.resume();
+            //update Button image
+        }
+    }
+
+    public void onStopButtonPressed(View view) {
+        if(this.game.isGameStarted())
+            this.game.stop();
+    }
+
+    public void onRetryButtonPresse(View view) {
+        if(this.game.isGameStarted())
+            this.game.restart();
+    }
+
+
     private void initGameUponPreferences() {
         //TODO Write documentation
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireActivity());
