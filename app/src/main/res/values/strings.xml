@@ -37,6 +37,9 @@
     <string name="pauseplay_description">pausePlayControl</string>
     <string name="stop_description">stopGameControl</string>
     <string name="retry_description">retryGameControl</string>
+    <string name="clock_icon_description">clockIcon</string>
+    <string name="steps_icon_description">stepsIcon</string>
+    <string name="steps_text">Steps</string>
 
     <!-- Strings on SuccessScreenFragment -->
     <string name="score_text">Replace it with Score!</string>

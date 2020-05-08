@@ -278,10 +278,10 @@ public class GameScreenFragment extends Fragment {
             //Gets the value of the appropriate board Cell and sets the Figure
             value = state.getCell((i / boardSize), (i % boardSize));
             if(value) {
-                field.setImageResource(R.drawable.ic_play_icon);
+                field.setImageResource(R.drawable.ic_figure_o);
             }
             else
-                field.setImageResource(R.drawable.ic_pause_icon);
+                field.setImageResource(R.drawable.ic_figure_x);
         }
     }
 
@@ -296,5 +296,7 @@ public class GameScreenFragment extends Fragment {
         result.putString("stepSize", String.valueOf(this.game.getCurrentGame().getStepSize()));
         getParentFragmentManager().setFragmentResult("gameData", result);
     }
+
+    //TODO Implement function that displays stepSize on the screen
 
 }
