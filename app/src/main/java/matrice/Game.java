@@ -136,6 +136,9 @@ public class Game {
         }
     }
 
+    /**
+     * Stops the game. Available publicly in contrast with finishGame() function.
+     */
     public void stop() {
         this.finishGame();
     }

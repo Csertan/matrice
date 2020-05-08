@@ -72,7 +72,7 @@ public class GameState {
 
     /* Getters and Setters */
 
-    int getBoardSize() {
+    public int getBoardSize() {
         return boardSize;
     }
 
