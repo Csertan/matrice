@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.gridlayout.widget.GridLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
@@ -26,6 +26,8 @@ import matrice.GameState;
 import matrice.Transformation;
 
 public class GameScreenFragment extends Fragment {
+
+    private static final String TAG = GameScreenFragment.class.getSimpleName();
 
     private GameScreenViewModel mViewModel;
     private Game game;
@@ -61,6 +63,30 @@ public class GameScreenFragment extends Fragment {
             }
         });
 
+        ImageButton pausePlayButton = (ImageButton) view.findViewById(R.id.rightControlsPausePlayButton);
+        pausePlayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onPausePlayButtonPressed(view);
+            }
+        });
+
+        ImageButton stopButton = (ImageButton) view.findViewById(R.id.rightControlsStopButton);
+        stopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onStopButtonPressed(view);
+            }
+        });
+
+        ImageButton retryButton = (ImageButton) view.findViewById(R.id.rightControlsRetryButton);
+        retryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onRetryButtonPressed(view);
+            }
+        });
+
         timer = (TextView) view.findViewById(R.id.rightControlsGameDuration);
         timer.setText(this.game.getFormattedDuration());
 
@@ -85,6 +111,7 @@ public class GameScreenFragment extends Fragment {
     }
 
     /* Handling Fragment Lifecycle Changes */
+
     @Override
     public void onStart() {
         super.onStart();
@@ -116,7 +143,7 @@ public class GameScreenFragment extends Fragment {
     /* Handling User Commands*/
 
     //TODO Write documentation
-    public void onPausePlayButtonPressed(@NotNull View view) {
+    public void onPausePlayButtonPressed(View view) {
         ImageButton button = (ImageButton) view.findViewById(R.id.rightControlsPausePlayButton);
         if(!this.game.isGamePaused()) {
             this.game.pause();
@@ -146,8 +173,8 @@ public class GameScreenFragment extends Fragment {
         //TODO Write documentation
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireActivity());
         int boardSize = preferences.getInt(getString(R.string.key_game_boardsize), 3);
-        int transformationId = preferences.getInt(getString(R.string.key_transition_type), 0);
-        int figureSetId = preferences.getInt(getString(R.string.key_figure_set), 0);
+        int transformationId = Integer.parseInt(preferences.getString(getString(R.string.key_transition_type), "0"));
+        int figureSetId = Integer.parseInt(preferences.getString(getString(R.string.key_figure_set), "0"));
 
         this.game = new Game(Transformation.fromId(transformationId), boardSize, FigureSet.fromId(figureSetId));
     }
