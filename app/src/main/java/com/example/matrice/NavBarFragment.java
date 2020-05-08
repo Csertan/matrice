@@ -12,7 +12,8 @@ import androidx.navigation.Navigation;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link Fragment} subclass that displays the NavBar to the User.
+ * It is included in other Fragments.
  */
 public class NavBarFragment extends Fragment {
 
@@ -30,11 +31,15 @@ public class NavBarFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Setup any handles to view objects here
+
+        /**
+         * Adds callback to the Home Button to navigate the user to the Main Screen.
+         */
         ImageButton toHomeButton = (ImageButton) view.findViewById(R.id.navBarHomeButton);
         toHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Uses popUpTo global action to remove Fragment instances from backstack
                 Navigation.findNavController(view)
                         .navigate(MainNavGraphDirections.actionPopUpToMainScreenFragment());
             }

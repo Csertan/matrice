@@ -12,7 +12,7 @@ import androidx.navigation.Navigation;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link Fragment} subclass that is displayed at the right start of the Application.
  */
 public class BootScreenFragment extends Fragment {
 
@@ -30,7 +30,10 @@ public class BootScreenFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Setup any handles to view objects here
+
+        /**
+         * Adds callback to the launcher Button to navigate the user to the Main Screen
+         */
         ImageButton toMainButton = (ImageButton) view.findViewById(R.id.goToMainButton);
         toMainButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link Fragment} subclass that displays the Authors and Copyright information.
  */
 public class AuthorsScreenFragment extends Fragment {
 

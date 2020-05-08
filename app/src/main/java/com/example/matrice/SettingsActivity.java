@@ -14,6 +14,9 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Settings Activity that helps the User adjust his/her Preferences.
+ */
 public class SettingsActivity extends AppCompatActivity {
 
     @Override
@@ -67,6 +70,10 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Sends Feedback with device specifications to the developer.
+     * @param context Actual context from the function is called.
+     */
     public static void sendFeedback(@NotNull Context context) {
         String body = null;
         try {

@@ -4,6 +4,10 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Main Activity of the Application.
+ * Contains most of the Fragments via a NavHostFragment.
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override

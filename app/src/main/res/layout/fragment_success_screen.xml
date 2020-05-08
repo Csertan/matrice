@@ -61,7 +61,7 @@
             android:layout_marginStart="3dp"
             android:layout_marginEnd="3dp"
             android:contentDescription="@string/retry_description"
-            android:src="@android:drawable/ic_menu_rotate"
+            android:src="@drawable/ic_retry_icon"
             app:layout_column="0"
             app:layout_gravity="center_vertical"
             app:layout_row="0" />
