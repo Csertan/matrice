@@ -32,7 +32,7 @@
 
     <!-- Strings on GameScreenFragment -->
     <string name="figure_description">basic figure</string>
-    <string name="game_duration">Replace with current game duration.</string>
+    <string name="game_duration">0 s</string>
 
     <string name="pauseplay_description">pausePlayControl</string>
     <string name="stop_description">stopGameControl</string>

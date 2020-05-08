@@ -339,7 +339,8 @@
             android:layout_marginTop="3dp"
             android:layout_marginBottom="3dp"
             android:text="@string/game_duration"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_column="0"
             app:layout_gravity="center_horizontal"
             app:layout_row="0" />
@@ -377,7 +378,7 @@
             android:layout_marginTop="3dp"
             android:layout_marginBottom="3dp"
             android:contentDescription="@string/retry_description"
-            android:onClick="onRetryButtonPresse"
+            android:onClick="onPausePlayButtonPressed"
             android:src="@drawable/ic_retry_icon"
             app:layout_column="0"
             app:layout_gravity="center_horizontal"

@@ -42,6 +42,9 @@ public class Game {
 
     /* Getters and Setters */
 
+    public GameLevel getCurrentGame() {
+        return currentGame;
+    }
     public FigureSet getFigureSet() {
         return figureSet;
     }
@@ -55,7 +58,9 @@ public class Game {
         return startTime;
     }
     public long getDuration() {
-        return stopWatch.getTime(TimeUnit.SECONDS);
+        if(this.stopWatch.isStarted())
+            return stopWatch.getTime(TimeUnit.SECONDS);
+        return 0;
     }
     public String getFormattedDuration() {
         String formattedTime = "";
