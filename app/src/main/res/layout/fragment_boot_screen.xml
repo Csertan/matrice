@@ -22,7 +22,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_nosebite_logo_gray" />
+        android:src="@drawable/ic_nosebite_logo_gray" />
 
     <ImageButton
         android:id="@+id/goToMainButton"
