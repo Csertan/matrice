@@ -42,6 +42,7 @@ public class Game {
 
     /* Getters and Setters */
 
+    //TODO Write documentation
     public GameLevel getCurrentGame() {
         return currentGame;
     }
@@ -72,6 +73,11 @@ public class Game {
         else
             formattedTime += unformatted;
         return formattedTime;
+    }
+    //TODO Implement function that returns score
+    public int getScore() {
+
+        return 0;
     }
 
     public void setCurrentGame(GameLevel currentGame) {

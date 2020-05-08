@@ -67,13 +67,13 @@ public class GameScreenFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        /**
-         * Initialising Game Object upon saved Preferences
+        /*
+          Initialising Game Object upon saved Preferences
          */
         initGameUponPreferences();
 
-        /**
-         * Adds callback to Home Button which navigates the user to the Main Screen
+        /*
+          Adds callback to Home Button which navigates the user to the Main Screen
          */
         ImageButton toHomeButton = (ImageButton) view.findViewById(R.id.leftControlsHomeButton);
         toHomeButton.setOnClickListener(new View.OnClickListener() {
@@ -84,8 +84,8 @@ public class GameScreenFragment extends Fragment {
             }
         });
 
-        /**
-         * Adds callback to Play/Pause Button to suspend/resume measuring elapsed time
+        /*
+          Adds callback to Play/Pause Button to suspend/resume measuring elapsed time
          */
         ImageButton pausePlayButton = (ImageButton) view.findViewById(R.id.rightControlsPausePlayButton);
         pausePlayButton.setOnClickListener(new View.OnClickListener() {
@@ -95,8 +95,8 @@ public class GameScreenFragment extends Fragment {
             }
         });
 
-        /**
-         * Adds callback to Stop/New Game Button to let the user stop the game or create new game
+        /*
+          Adds callback to Stop/New Game Button to let the user stop the game or create new game
          */
         ImageButton stopButton = (ImageButton) view.findViewById(R.id.rightControlsStopButton);
         stopButton.setOnClickListener(new View.OnClickListener() {
@@ -106,9 +106,9 @@ public class GameScreenFragment extends Fragment {
             }
         });
 
-        /**
-         * Adds callback to Retry Button in order to let the user go back to the start
-         * states of the level
+        /*
+          Adds callback to Retry Button in order to let the user go back to the start
+          states of the level
          */
         ImageButton retryButton = (ImageButton) view.findViewById(R.id.rightControlsRetryButton);
         retryButton.setOnClickListener(new View.OnClickListener() {
@@ -118,8 +118,8 @@ public class GameScreenFragment extends Fragment {
             }
         });
 
-        /**
-         * Handling TextView to displaying elapsed time in every second
+        /*
+          Handling TextView to displaying elapsed time in every second
          */
         timer = (TextView) view.findViewById(R.id.rightControlsGameDuration);
         timer.setText(this.game.getFormattedDuration());
@@ -133,8 +133,8 @@ public class GameScreenFragment extends Fragment {
             }
         };
 
-        /**
-         * Initialising local variables that store grid layouts
+        /*
+          Initialising local variables that store grid layouts
          */
         gameLayout = (GridLayout) view.findViewById(R.id.startStateLayout);
         endLayout = (GridLayout) view.findViewById(R.id.endStateLayout);
@@ -283,6 +283,18 @@ public class GameScreenFragment extends Fragment {
             else
                 field.setImageResource(R.drawable.ic_pause_icon);
         }
+    }
+
+    //TODO Use score getter function that needs to be implemented in Game Class
+    //TODO Use this function in handleMove
+    //TODO Call SuccessScreenFragment
+    //TODO Write documentation
+    private void setScoreDetails() {
+        Bundle result = new Bundle();
+        result.putString("elapsedTime", this.game.getFormattedDuration());
+        result.putString("score", "");
+        result.putString("stepSize", String.valueOf(this.game.getCurrentGame().getStepSize()));
+        getParentFragmentManager().setFragmentResult("gameData", result);
     }
 
 }
