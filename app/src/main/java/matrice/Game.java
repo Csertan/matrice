@@ -134,11 +134,15 @@ public class Game {
      * Restarts game upon user action.
      */
     public void restart() {
-        this.startTime = System.currentTimeMillis();
-        this.stopWatch.reset();
-        if(this.currentGame.getStepSize() > 1)
-        {
-            this.currentGame.restart();
+        if(this.isGameStarted) {
+            this.startTime = System.currentTimeMillis();
+            this.stopWatch.reset();
+            this.stopWatch.start();
+            this.setGamePaused(false);
+            this.setGameStarted(true);
+            if (this.currentGame.getStepSize() > 1) {
+                this.currentGame.restart();
+            }
         }
     }
 
@@ -160,6 +164,8 @@ public class Game {
         this.setFigureSet(figureSet);
         this.setStartTime(System.currentTimeMillis());
         this.stopWatch.reset();
+        this.setGamePaused(true);
+        this.setGameStarted(false);
     }
 
     /**

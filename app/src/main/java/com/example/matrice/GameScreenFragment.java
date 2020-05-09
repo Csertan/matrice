@@ -202,13 +202,14 @@ public class GameScreenFragment extends Fragment {
      */
     public void onPausePlayButtonPressed(@NotNull View view) {
         ImageButton button = (ImageButton) view.findViewById(R.id.rightControlsPausePlayButton);
-        if(!this.game.isGamePaused()) {
-            this.game.pause();
-            button.setImageResource(R.drawable.ic_play_icon);
-        }
-        else {
-            this.game.resume();
-            button.setImageResource(R.drawable.ic_pause_icon);
+        if(!this.isGameStopped) {
+            if (!this.game.isGamePaused()) {
+                this.game.pause();
+                button.setImageResource(R.drawable.ic_play_icon);
+            } else {
+                this.game.resume();
+                button.setImageResource(R.drawable.ic_pause_icon);
+            }
         }
     }
 
@@ -217,21 +218,22 @@ public class GameScreenFragment extends Fragment {
      * @param view View which the click happened in. Default parameter of onCLick callbacks.
      */
     public void onStopButtonPressed(@NotNull View view) {
-        ImageButton button = (ImageButton) view.findViewById(R.id.rightControlsStopButton);
+        ImageButton stopButton = (ImageButton) view.findViewById(R.id.rightControlsStopButton);
         if(this.game.isGameStarted()) {
             if(!this.isGameStopped) {
                 //Stops current Game
                 this.game.stop();
                 this.isGameStopped = true;
-                button.setImageResource(R.drawable.ic_new_game_icon);
+                stopButton.setImageResource(R.drawable.ic_new_game_icon);
             }
             else {
                 //Initialises New Game
                 initGameUponPreferences();
                 updateLayout(endLayout, this.game.getCurrentGame().getEndState());
                 updateLayout(gameLayout, this.game.getCurrentGame().getStartState());
+                this.game.start();
                 this.isGameStopped = false;
-                button.setImageResource(R.drawable.ic_stop_icon);
+                stopButton.setImageResource(R.drawable.ic_stop_icon);
             }
         }
     }
@@ -243,6 +245,7 @@ public class GameScreenFragment extends Fragment {
     public void onRetryButtonPressed(View view) {
         if(this.game.isGameStarted()) {
             this.game.restart();
+            this.isGameStopped = false;
             updateLayout(gameLayout, this.game.getCurrentGame().getCurrentState());
         }
     }
@@ -259,7 +262,6 @@ public class GameScreenFragment extends Fragment {
 
         //To pass correct instances of the Enum types we need to cast ints with .fromInt()
         this.game = new Game(Transformation.fromId(transformationId), boardSize, FigureSet.fromId(figureSetId));
-        this.game.start();
     }
 
     /**
