@@ -18,6 +18,13 @@
         <item name="buttonStyle">@style/Widget.AppCompat.Button.Borderless</item>
     </style>
 
+    <style name="MainFragmentFont" parent="Widget.AppCompat.Light.ActionButton">
+        <item name="android:fontFamily">@font/titillium_web_semibold</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
+        <item name="android:textSize">32dp</item>
+    </style>
+
+    <!-- Settings Activity Theme -->
     <style name="AppSettingsTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>

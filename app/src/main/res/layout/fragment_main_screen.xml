@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainScreenFragmentLayout"
+    style="@style/MainFragmentFont"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainScreenFragment"
-    android:background="@drawable/ic_game_surface3">
+    android:background="@drawable/ic_game_surface3"
+    tools:context=".MainScreenFragment">
 
     <ImageView
         android:id="@+id/appLogoMain"
@@ -15,7 +16,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="8dp"
         android:contentDescription="@string/applogomain_description"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintBottom_toTopOf="@+id/appNameMain"
@@ -26,10 +27,11 @@
 
     <TextView
         android:id="@+id/appNameMain"
+        style="@style/Base.Widget.MaterialComponents.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/app_name"
@@ -42,6 +44,7 @@
 
     <Button
         android:id="@+id/playButtonMain"
+        style="@style/MainFragmentFont"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
@@ -54,6 +57,7 @@
 
     <Button
         android:id="@+id/campaignButtonMain"
+        style="@style/MainFragmentFont"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
@@ -66,6 +70,7 @@
 
     <Button
         android:id="@+id/settingsButtonMain"
+        style="@style/MainFragmentFont"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
@@ -79,6 +84,7 @@
 
     <Button
         android:id="@+id/authorsButtonMain"
+        style="@style/MainFragmentFont"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
