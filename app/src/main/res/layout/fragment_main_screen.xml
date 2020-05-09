@@ -5,7 +5,8 @@
     android:id="@+id/mainScreenFragmentLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainScreenFragment">
+    tools:context=".MainScreenFragment"
+    android:background="@drawable/ic_game_surface3">
 
     <ImageView
         android:id="@+id/appLogoMain"
@@ -14,7 +15,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="32dp"
         android:contentDescription="@string/applogomain_description"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintBottom_toTopOf="@+id/appNameMain"
@@ -30,7 +31,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/app_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toTopOf="@+id/playButtonMain"
@@ -41,10 +42,10 @@
 
     <Button
         android:id="@+id/playButtonMain"
-        android:layout_width="160dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/play_text"
         app:layout_constraintBottom_toTopOf="@+id/campaignButtonMain"
         app:layout_constraintEnd_toEndOf="@+id/campaignButtonMain"
@@ -53,10 +54,10 @@
 
     <Button
         android:id="@+id/campaignButtonMain"
-        android:layout_width="160dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/campaign_text"
         app:layout_constraintBottom_toTopOf="@+id/settingsButtonMain"
         app:layout_constraintEnd_toEndOf="@+id/settingsButtonMain"
@@ -65,10 +66,10 @@
 
     <Button
         android:id="@+id/settingsButtonMain"
-        android:layout_width="160dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/settings_text"
         app:layout_constraintBottom_toTopOf="@+id/authorsButtonMain"
         app:layout_constraintEnd_toEndOf="@+id/authorsButtonMain"
@@ -78,10 +79,10 @@
 
     <Button
         android:id="@+id/authorsButtonMain"
-        android:layout_width="160dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="60dp"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="160dp"
         android:text="@string/authors_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

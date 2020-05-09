@@ -22,8 +22,8 @@
 
     <ImageButton
         android:id="@+id/navBarHomeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginEnd="5dp"
         android:contentDescription="@string/gotohome_description"
         android:src="@drawable/ic_home_icon"
@@ -36,8 +36,8 @@
 
     <ImageButton
         android:id="@+id/navBarLevelsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:contentDescription="@string/gotolevels_description"
@@ -50,8 +50,8 @@
 
     <ImageButton
         android:id="@+id/navBarSettingsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="20dp"
         android:contentDescription="@string/gotosettings_description"

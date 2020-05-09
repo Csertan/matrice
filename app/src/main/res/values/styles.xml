@@ -6,6 +6,16 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:fontFamily">@font/titillium_web_light</item>
+        
+        <item name="android:background">@android:color/transparent</item>
+        <item name="imageButtonStyle">@style/CommonButton</item>
+    </style>
+    
+    <style name="CommonButton" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="buttonStyle">@style/Widget.AppCompat.Button.Borderless</item>
     </style>
 
 </resources>

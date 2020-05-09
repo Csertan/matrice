@@ -259,6 +259,7 @@ public class GameScreenFragment extends Fragment {
 
         //To pass correct instances of the Enum types we need to cast ints with .fromInt()
         this.game = new Game(Transformation.fromId(transformationId), boardSize, FigureSet.fromId(figureSetId));
+        this.game.start();
     }
 
     /**
