@@ -190,11 +190,19 @@ public class GameState {
     }
 
     /* Logging */
-    //TODO Write documentation
+
+    /**
+     * Returns the data of the current State.
+     * @return String that stores data in a formatted way.
+     */
     public String logState() {
         return "State id= " + this.getStateId() + ", boardSize= " + this.getBoardSize() + ", pattern=" + this.toString();
     }
 
+    /**
+     * Writes the essential data of the state to a String. Used to save a state.
+     * @return String in <boolean value><whitespace><boolean value>... format.
+     */
     @NotNull
     @Override
     public String toString() {
@@ -209,8 +217,14 @@ public class GameState {
         return output.toString();
     }
 
-    //TODO Input validation
-    //TODO Write documentation
+    /**
+     * Restores a state upon given formatted String. Used in constructor of string based creation.
+     * @param input String that stores the state in
+     * <boolean value><whitespace><boolean value>... format.
+     * @return GameState state.
+     * @throws IllegalArgumentException If input does not contains all boardsize*boardsize values
+     * throws an exception.
+     */
     @NotNull
     private Boolean[][] stringToState(@NotNull String input) throws IllegalArgumentException {
         Boolean[][] state = new Boolean[this.boardSize][this.boardSize];

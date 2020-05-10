@@ -38,12 +38,20 @@ public class GameLevel {
         sequence.add(this.startState);
     }
 
-    //TODO Write documentation
+    /**
+     * String based constructor for restoring saved game level in order to continue it.
+     * @param transformation Type of the transformation used to evolve the game table.
+     * @param boardSize Size of the game board.
+     * @param savedLevel String that stores the start, end and current states in this order.
+     * @throws IllegalArgumentException If savedLevel does not contains all three states throws
+     * exception.
+     */
     GameLevel(Transformation transformation, int boardSize, @NotNull String savedLevel) throws IllegalArgumentException {
         this.setTransformation(transformation);
         String[] tokens = savedLevel.split(":");
         if(tokens.length != 3)
             throw new IllegalArgumentException("Not enough states to initialise level.");
+        //Initialises States with the appropriate state strings
         this.startState = new GameState(tokens[0], boardSize);
         this.endState = new GameState(tokens[1], boardSize);
         this.currentState = new GameState(tokens[2], boardSize);
@@ -159,12 +167,31 @@ public class GameLevel {
     }
 
     /* Logging */
-    //TODO Implement logging
-    public void logLevel() {
 
+    /**
+     * Creates a formatted String from the Game Level object data.
+     * @return JSON formatted string that stores the start and end states, the state chain,
+     * the length of the chain and the board size of the game.
+     */
+    String levelToJson() {
+        StringBuilder output = new StringBuilder();
+        output.append("\"startState\" : ").append(getStartState().getStateId()).append(", ");
+        output.append("\"endState\" : ").append(getEndState().getStateId()).append(", ");
+        output.append("\"stateChain\" : [ ");
+        for(int i = 0; i < sequence.size(); i++) {
+            output.append(sequence.get(i).getStateId()).append(", ");
+        }
+        output.append("], ");
+        output.append("\"chainLength\" : ").append(getStepSize()).append(", ");
+        output.append("\"boardSize\" : ").append(getStartState().getBoardSize()).append(", ");
+        return output.toString();
     }
 
-    //TODO Write documentation
+    /**
+     * Writes the essential data of the game to a String. Used to save a game to be able to
+     * continue it.
+     * @return String in startState:endState:currentState format.
+     */
     @NonNull
     @Override
     public String toString() {

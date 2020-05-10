@@ -63,12 +63,23 @@ public class Game {
             return stopWatch.getTime(TimeUnit.SECONDS);
         return 0;
     }
+
+    /**
+     * Function that gives the elapsed time as a formatted String.
+     * @return Returns a MM:SS formatted value
+     */
     public String getFormattedDuration() {
         String formattedTime = "";
         long unformatted = stopWatch.getTime(TimeUnit.SECONDS);
         if(unformatted > 59)
         {
-            formattedTime += (unformatted / 60) + ":" + (unformatted % 60);
+            formattedTime += (unformatted / 60) + ":";
+            if((unformatted % 60) < 10 )
+            {
+                formattedTime += "0" + (unformatted % 60);
+            }
+            else
+                formattedTime += (unformatted % 60);
         }
         else
             formattedTime += unformatted;
@@ -147,10 +158,11 @@ public class Game {
     }
 
     /**
-     * Stops the game. Available publicly in contrast with finishGame() function.
+     * Stops the game.
      */
     public void stop() {
-        this.finishGame();
+        this.stopWatch.stop();
+        this.setGamePaused(true);
     }
 
     /**
@@ -169,15 +181,6 @@ public class Game {
     }
 
     /**
-     * Finishes game. Stops timer and writes out statistics.
-     */
-    private void finishGame() {
-        this.stopWatch.stop();
-        this.setGamePaused(true);
-        this.logGame();
-    }
-
-    /**
      * Handles moves of the player. Checks if the game is finished (the end state is reached).
      * @param move Specifies the direction of the move.
      * @param id Specifies affected row/column.
@@ -189,13 +192,22 @@ public class Game {
         }
         if(this.currentGame.isFinished())
         {
-            this.finishGame();
+            this.stop();
         }
     }
 
     /* Logging */
-    //TODO Implement logging
-    public void logGame() {
 
+    /**
+     * Creates a JSON formatted String from the Game data.
+     * @return JSON formatted String, used when Game finishes.
+     */
+    public String gameToJson() {
+        StringBuilder output = new StringBuilder();
+        output.append("{ ");
+        output.append(getCurrentGame().levelToJson());
+        output.append("\"startTime\" : \"").append(getStartTime()).append("\", ");
+        output.append("\"gameDuration\" : ").append(getDuration()).append(" }");
+        return output.toString();
     }
 }
