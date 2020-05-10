@@ -37,6 +37,31 @@
 
     </PreferenceCategory>
 
+    <!-- Player Information -->
+    <PreferenceCategory
+        app:key="@string/key_data_category"
+        app:title="@string/title_data_category">
+
+        <Preference
+            app:selectable="false"
+            app:summary="@string/summary_data_category" />
+
+        <ListPreference
+            app:key="@string/key_gender_info"
+            app:title="@string/title_gender_info"
+            app:summary="@string/summary_gender_info"
+            app:dialogTitle="@string/title_gender_info"
+            app:defaultValue="0"
+            app:entries="@array/pref_gender_entries"
+            app:entryValues="@array/pref_gender_values"/>
+
+        <EditTextPreference
+            app:key="@string/key_age_info"
+            app:title="@string/title_age_info"
+            app:summary="@string/summary_age_info" />
+
+    </PreferenceCategory>
+
     <!-- General Settings -->
     <PreferenceCategory
         app:key="@string/key_general_category"
@@ -79,9 +104,6 @@
 
         <!--TODO Not working yet! -->
         <Preference app:title="@string/privacy_policy">
-            <intent
-                app:action="android.intent.action.VIEW"
-                app:data="@string/url_privacy" />
         </Preference>
 
     </PreferenceCategory>

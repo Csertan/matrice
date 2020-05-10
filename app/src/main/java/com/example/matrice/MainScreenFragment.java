@@ -32,8 +32,8 @@ public class MainScreenFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /**
-         * On Click Listener for the navigation to Authors Screen
+        /*
+          On Click Listener for the navigation to Authors Screen
          */
         Button toAuthorsButton = (Button) view.findViewById(R.id.authorsButtonMain);
         toAuthorsButton.setOnClickListener(new View.OnClickListener() {
@@ -44,8 +44,8 @@ public class MainScreenFragment extends Fragment {
             }
         });
 
-        /**
-         * On Click Listener for the navigation to Game Screen
+        /*
+          On Click Listener for the navigation to Game Screen
          */
         Button playButton = (Button) view.findViewById(R.id.playButtonMain);
         playButton.setOnClickListener(new View.OnClickListener(){
@@ -56,8 +56,8 @@ public class MainScreenFragment extends Fragment {
             }
         });
 
-        /**
-         * On Click Listener for starting Settings Activity to adjust Preferences
+        /*
+          On Click Listener for starting Settings Activity to adjust Preferences
          */
         Button settingsButton = (Button) view.findViewById(R.id.settingsButtonMain);
         settingsButton.setOnClickListener(new View.OnClickListener() {

@@ -64,6 +64,15 @@
     <string name="key_transition_type">transition_type</string>
     <string name="title_transition_type">Transition</string>
     <string name="summary_transition_type">Type of trensition you would like to play with</string>
+    <string name="key_data_category">data_category</string>
+    <string name="title_data_category">Player Information</string>
+    <string name="summary_data_category">To contribute to our research please kindly provide us general information about you.</string>
+    <string name="key_gender_info">gender_info</string>
+    <string name="title_gender_info">Gender</string>
+    <string name="summary_gender_info">Add your gender to promote our research</string>
+    <string name="key_age_info">age_info</string>
+    <string name="title_age_info">Age</string>
+    <string name="summary_age_info">Add your age to contribute more</string>
     <string name="key_general_category">general_category</string>
     <string name="title_general_category">General</string>
     <string name="key_app_language">app_language</string>

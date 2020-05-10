@@ -3,6 +3,7 @@ package com.example.matrice;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -57,6 +58,12 @@ public class SettingsActivity extends AppCompatActivity {
 
             }
 
+            //Summary provider for Gender Preferences
+            ListPreference genderPreferences = findPreference(getString(R.string.key_gender_info));
+            if(genderPreferences != null) {
+                genderPreferences.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
+            }
+
             //On Click Listener for Send Feedback Preference
             Preference sendFeedbackPreference = findPreference(getString(R.string.key_send_feedback));
             assert sendFeedbackPreference != null;
@@ -67,6 +74,26 @@ public class SettingsActivity extends AppCompatActivity {
                     return true;
                 }
             });
+
+            Preference privacyPolicy = findPreference(getString(R.string.privacy_policy));
+            if(privacyPolicy != null) {
+                privacyPolicy.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        openWebPage(getString(R.string.url_privacy));
+                        return true;
+                    }
+                });
+            }
+        }
+
+        void openWebPage(String url) {
+            Uri webpage = Uri.parse(url);
+            Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
+            if(webIntent.resolveActivity(getActivity().getPackageManager()) != null)
+            {
+                startActivity(webIntent);
+            }
         }
     }
 

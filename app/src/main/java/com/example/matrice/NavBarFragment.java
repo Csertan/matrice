@@ -1,5 +1,6 @@
 package com.example.matrice;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,8 +33,8 @@ public class NavBarFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /**
-         * Adds callback to the Home Button to navigate the user to the Main Screen.
+        /*
+          Adds callback to the Home Button to navigate the user to the Main Screen.
          */
         ImageButton toHomeButton = (ImageButton) view.findViewById(R.id.navBarHomeButton);
         toHomeButton.setOnClickListener(new View.OnClickListener() {
@@ -42,6 +43,19 @@ public class NavBarFragment extends Fragment {
                 //Uses popUpTo global action to remove Fragment instances from backstack
                 Navigation.findNavController(view)
                         .navigate(MainNavGraphDirections.actionPopUpToMainScreenFragment());
+            }
+        });
+
+        /*
+          On Click Listener for starting Settings Activity to adjust Preferences
+         */
+        ImageButton settingsButton = (ImageButton) view.findViewById(R.id.navBarSettingsButton);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Since it's another Activity we have to use an Intent
+                Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                startActivity(intent);
             }
         });
     }
