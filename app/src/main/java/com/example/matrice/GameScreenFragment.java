@@ -3,7 +3,10 @@ package com.example.matrice;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -12,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.Fragment;
 import androidx.gridlayout.widget.GridLayout;
 import androidx.lifecycle.ViewModelProvider;
@@ -53,6 +57,8 @@ public class GameScreenFragment extends Fragment {
      */
     private GridLayout gameLayout;
     private GridLayout endLayout;
+
+    private GestureDetectorCompat mDetector;
 
     public static GameScreenFragment newInstance() {
         return new GameScreenFragment();
@@ -138,6 +144,9 @@ public class GameScreenFragment extends Fragment {
          */
         gameLayout = (GridLayout) view.findViewById(R.id.startStateLayout);
         endLayout = (GridLayout) view.findViewById(R.id.endStateLayout);
+
+        /* Apply Gesture listener */
+        mDetector = new GestureDetectorCompat(getActivity(), new FlingGestureListener());
     }
 
     @Override
@@ -269,7 +278,6 @@ public class GameScreenFragment extends Fragment {
      * @param layout Layout to be updated (GridLayout)
      * @param state State with which the layout will be updated (GameState)
      * TODO Implement functionality to switch between Figure Sets and update icons accordingly
-     * TODO Change figures from that icons to the real ones
      */
     private void updateLayout(@NotNull GridLayout layout, @NotNull GameState state) {
         int count = layout.getChildCount();
@@ -301,5 +309,24 @@ public class GameScreenFragment extends Fragment {
     }
 
     //TODO Implement function that displays stepSize on the screen
+    
+    //TODO Write documentation
+    //TODO Track movements
+    class FlingGestureListener extends GestureDetector.SimpleOnGestureListener {
+        private static final String DEBUG_TAG = "Gestures";
+
+        @Override
+        public boolean onDown(@NotNull MotionEvent event) {
+            Log.d(DEBUG_TAG, "onDown: " + event.toString());
+            return true;
+        }
+
+        @Override
+        public boolean onFling(@NotNull MotionEvent event1, @NotNull MotionEvent event2,
+                               float velocityX, float velocityY) {
+            Log.d(DEBUG_TAG, "onFLing: " + event1.toString() + event2.toString());
+            return true;
+        }
+    }
 
 }
