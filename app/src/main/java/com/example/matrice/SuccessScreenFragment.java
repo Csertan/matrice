@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -42,6 +43,36 @@ public class SuccessScreenFragment extends Fragment {
                 //Uses popUpTo global action to remove Fragment instances from backstack
                 Navigation.findNavController(view)
                         .navigate(MainNavGraphDirections.actionPopUpToMainScreenFragment());
+            }
+        });
+
+        /* Adds callback to Replay Button to navigate the user back and restart previous game */
+        ImageButton replayButton = (ImageButton) view.findViewById(R.id.successControlsReplayButton);
+        replayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO Navigate back and restart previous game - probably using Fragment Results
+            }
+        });
+
+        /* Adds callback to Levels Button to navigate the user to the level chooser screen */
+        ImageButton levelsButton = (ImageButton) view.findViewById(R.id.successControlsLevelsButton);
+        levelsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO Navigate to Levels Screen
+                Toast.makeText(getContext(), "This feature is coming soon!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        /* Adds callback to Play Button to navigate the user back and start new game */
+        ImageButton playButton = (ImageButton) view.findViewById(R.id.successControlsPlayButton);
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO When levels will be implemented jump to next level instead
+                Navigation.findNavController(view)
+                        .navigate(SuccessScreenFragmentDirections.actionSuccessScreenFragmentToGameScreenFragment());
             }
         });
 

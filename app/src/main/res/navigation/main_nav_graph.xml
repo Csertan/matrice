@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_mainScreenFragment_to_gameScreenFragment"
             app:destination="@id/gameScreenFragment" />
+        <action
+            android:id="@+id/action_mainScreenFragment_to_levelsFragment"
+            app:destination="@id/levelsFragment" />
     </fragment>
     <fragment
         android:id="@+id/authorsScreenFragment"
@@ -50,6 +53,17 @@
         android:id="@+id/successScreenFragment"
         android:name="com.example.matrice.SuccessScreenFragment"
         android:label="fragment_success_screen"
-        tools:layout="@layout/fragment_success_screen" />
+        tools:layout="@layout/fragment_success_screen" >
+        <action
+            android:id="@+id/action_successScreenFragment_to_gameScreenFragment"
+            app:destination="@id/gameScreenFragment"
+            app:popUpTo="@id/gameScreenFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/levelsFragment"
+        android:name="com.example.matrice.LevelsFragment"
+        android:label="fragment_levels"
+        tools:layout="@layout/fragment_levels" />
 
 </navigation>
