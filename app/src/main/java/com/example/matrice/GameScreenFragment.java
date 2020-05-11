@@ -1,5 +1,6 @@
 package com.example.matrice;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import matrice.FigureSet;
 import matrice.Game;
 import matrice.GameState;
+import matrice.Move;
 import matrice.Transformation;
 
 /**
@@ -70,6 +72,7 @@ public class GameScreenFragment extends Fragment {
         return inflater.inflate(R.layout.game_screen_fragment, container, false);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -147,6 +150,14 @@ public class GameScreenFragment extends Fragment {
 
         /* Apply Gesture listener */
         mDetector = new GestureDetectorCompat(getActivity(), new FlingGestureListener());
+
+        /* Setting on touch listener to the Game Board */
+        gameLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                return mDetector.onTouchEvent(event);
+            }
+        });
     }
 
     @Override
@@ -259,6 +270,16 @@ public class GameScreenFragment extends Fragment {
         }
     }
 
+    //TODO Implement function that displays stepSize on the screen
+    //TODO Call handleMove
+    //TODO CHeck if game is finished + Call SuccessScreenFragment
+    //TODO call setScoreDetails
+    public void onSwipe(Move move, int id) {
+
+    }
+
+    /* Helper functions and Classes */
+
     /**
      * Creates and initialises a Game Object upon User Preferences stored in Shared Preferences.
      */
@@ -297,8 +318,6 @@ public class GameScreenFragment extends Fragment {
     }
 
     //TODO Use score getter function that needs to be implemented in Game Class
-    //TODO Use this function in handleMove
-    //TODO Call SuccessScreenFragment
     //TODO Write documentation
     private void setScoreDetails() {
         Bundle result = new Bundle();
@@ -308,12 +327,13 @@ public class GameScreenFragment extends Fragment {
         getParentFragmentManager().setFragmentResult("gameData", result);
     }
 
-    //TODO Implement function that displays stepSize on the screen
-    
     //TODO Write documentation
     //TODO Track movements
     class FlingGestureListener extends GestureDetector.SimpleOnGestureListener {
         private static final String DEBUG_TAG = "Gestures";
+
+        private static final int SWIPE_MIN_DISTANCE = 100;
+        private static final int SWIPE_THRESHOLD_VELOCITY = 100;
 
         @Override
         public boolean onDown(@NotNull MotionEvent event) {
@@ -325,7 +345,28 @@ public class GameScreenFragment extends Fragment {
         public boolean onFling(@NotNull MotionEvent event1, @NotNull MotionEvent event2,
                                float velocityX, float velocityY) {
             Log.d(DEBUG_TAG, "onFLing: " + event1.toString() + event2.toString());
+
+            float x1 = event1.getX();
+            float y1 = event1.getY();
+            float x2 = event2.getX();
+            float y2 = event2.getY();
+
+            if(Math.abs(x1 - x2) < SWIPE_MIN_DISTANCE || Math.abs(y1 - y2) < SWIPE_MIN_DISTANCE
+                    || Math.abs(velocityX) < SWIPE_THRESHOLD_VELOCITY
+                    || Math.abs(velocityY) < SWIPE_THRESHOLD_VELOCITY)
+                return false;
+
+            double angle = getAngle(x1, y1, x2, y2);
+            Move move = Move.fromAngle(angle);
+
+            //TODO Get id of move
+            onSwipe(move, 0);
             return true;
+        }
+
+        private double getAngle(float x1, float y1, float x2, float y2) {
+            double angleInRad = Math.atan2(y1 - y2, x1 - x2) + Math.PI;
+            return (angleInRad * 180 / Math.PI + 180) % 360;
         }
     }
 
