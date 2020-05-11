@@ -22,6 +22,7 @@ import androidx.gridlayout.widget.GridLayout;
 import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import matrice.FigureSet;
@@ -381,15 +382,46 @@ public class GameScreenFragment extends Fragment {
 
             double angle = getAngle(x1, y1, x2, y2);
             Move move = Move.fromAngle(angle);
-
-            //TODO Get id of move
-            onSwipe(move, 0);
+            int id = getMoveId(move, x1, y1);
+            onSwipe(move, id);
             return true;
         }
 
+        /**
+         * Calculates the angle of the motion.
+         * @param x1 x coordinate of the start event
+         * @param y1 y coordinate of the start event
+         * @param x2 x coordinate of the end event
+         * @param y2 y coordinate of the end event
+         * @return (double) angle of the motion
+         */
         private double getAngle(float x1, float y1, float x2, float y2) {
             double angleInRad = Math.atan2(y1 - y2, x1 - x2) + Math.PI;
             return (angleInRad * 180 / Math.PI + 180) % 360;
+        }
+
+        /**
+         * Calculates the id of the row or column on which the motion started
+         * @param move Type of the move
+         * @param x1 x coordinate of the start event
+         * @param y1 y coordinate of the start event
+         * @return (int) id of the row/column
+         * TODO This method ties the sizes of the game board. Need to rewrite it to be able to play on a changeable sized board.
+         */
+        @Contract(pure = true)
+        private int getMoveId(@NotNull Move move, float x1, float y1) {
+            switch (move) {
+                case HORIZONTAL:
+                    if(x1 > 200) return 2;
+                    else if (x1 > 100) return 1;
+                    else return 0;
+                case VERTICAL:
+                    if(y1 > 200) return 2;
+                    else if(y1 > 100) return 1;
+                    else return 0;
+                default:
+                    return 0;
+            }
         }
     }
 
