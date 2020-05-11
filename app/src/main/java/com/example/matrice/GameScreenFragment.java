@@ -19,7 +19,6 @@ import androidx.annotation.Nullable;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.Fragment;
 import androidx.gridlayout.widget.GridLayout;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
 
@@ -54,12 +53,19 @@ public class GameScreenFragment extends Fragment {
     private Handler timerHandler;
     private Runnable timerRunnable;
 
+    /* Local variable to display stepCount to the screen */
+    private TextView stepCounter;
+
     /**
      * Storing the gridLayouts to not have to look up them in every function call
      */
     private GridLayout gameLayout;
     private GridLayout endLayout;
 
+    /**
+     * Detector for detecting common user gestures. Used on the Game Board where users can swipe to
+     * move.
+     */
     private GestureDetectorCompat mDetector;
 
     public static GameScreenFragment newInstance() {
@@ -142,6 +148,10 @@ public class GameScreenFragment extends Fragment {
             }
         };
 
+        /* Displaying stepCount */
+        stepCounter = (TextView) view.findViewById(R.id.topDetailsStepCount);
+        stepCounter.setText(this.game.getCurrentGame().getStepSize());
+
         /*
           Initialising local variables that store grid layouts
          */
@@ -158,13 +168,6 @@ public class GameScreenFragment extends Fragment {
                 return mDetector.onTouchEvent(event);
             }
         });
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(requireActivity()).get(GameScreenViewModel.class);
-        // TODO: Use the ViewModel
     }
 
     /* Handling Fragment Lifecycle Changes */
@@ -270,12 +273,24 @@ public class GameScreenFragment extends Fragment {
         }
     }
 
-    //TODO Implement function that displays stepSize on the screen
-    //TODO Call handleMove
-    //TODO CHeck if game is finished + Call SuccessScreenFragment
-    //TODO call setScoreDetails
+    /**
+     * Handles user swipes.
+     * @param move Direction of the swipe. Types specified in {@link Move} class.
+     * @param id Identity of the row or column on which the swipe occurs.
+     */
     public void onSwipe(Move move, int id) {
-
+        //Handles swipe
+        boolean finished = this.game.handleMove(move, id);
+        updateLayout(gameLayout, this.game.getCurrentGame().getCurrentState());
+        stepCounter.setText(this.game.getCurrentGame().getStepSize());
+        //If the game is finished stops it and navigates the user to the Success Screen
+        if(finished) {
+            this.game.stop();
+            this.isGameStopped = true;
+            setScoreDetails();
+            Navigation.findNavController(this.getView())
+                    .navigate(GameScreenFragmentDirections.actionGameScreenFragmentToSuccessScreenFragment());
+        }
     }
 
     /* Helper functions and Classes */
@@ -317,30 +332,38 @@ public class GameScreenFragment extends Fragment {
         }
     }
 
-    //TODO Use score getter function that needs to be implemented in Game Class
-    //TODO Write documentation
+    /**
+     * Upon finishing game the function sets the score details needed to be sent to
+     * {@link SuccessScreenFragment}.
+     * FragmentResult is a feature in androidx.fragment:1.3.0-alpha04 version. Might be not stable.
+     */
     private void setScoreDetails() {
         Bundle result = new Bundle();
         result.putString("elapsedTime", this.game.getFormattedDuration());
-        result.putString("score", "");
+        result.putString("score", String.valueOf(this.game.getScore()));
         result.putString("stepSize", String.valueOf(this.game.getCurrentGame().getStepSize()));
         getParentFragmentManager().setFragmentResult("gameData", result);
     }
 
-    //TODO Write documentation
     //TODO Track movements
+    /**
+     * Gesture Listener class used to handle common user gestures such as swipes.
+     */
     class FlingGestureListener extends GestureDetector.SimpleOnGestureListener {
         private static final String DEBUG_TAG = "Gestures";
 
+        // Constants that help decide whether the Motion has to be handled
         private static final int SWIPE_MIN_DISTANCE = 100;
         private static final int SWIPE_THRESHOLD_VELOCITY = 100;
 
+        // Needed to Override onDown() method to listen to any motion
         @Override
         public boolean onDown(@NotNull MotionEvent event) {
             Log.d(DEBUG_TAG, "onDown: " + event.toString());
             return true;
         }
 
+        // Overrides default onFling method
         @Override
         public boolean onFling(@NotNull MotionEvent event1, @NotNull MotionEvent event2,
                                float velocityX, float velocityY) {
