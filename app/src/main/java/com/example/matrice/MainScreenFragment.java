@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -53,6 +54,16 @@ public class MainScreenFragment extends Fragment {
             public void onClick(View view) {
                 Navigation.findNavController(view)
                         .navigate(MainScreenFragmentDirections.actionMainScreenFragmentToGameScreenFragment());
+            }
+        });
+
+        /* On Click listener for the navigation to Levels Screen */
+        Button levelsButton = (Button) view.findViewById(R.id.campaignButtonMain);
+        levelsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO Navigate to LevelsScreen
+                Toast.makeText(getContext(), "This feature is coming soon!", Toast.LENGTH_SHORT).show();
             }
         });
 

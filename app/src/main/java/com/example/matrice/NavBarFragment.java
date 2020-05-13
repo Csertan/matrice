@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,8 @@ import androidx.navigation.Navigation;
  * It is included in other Fragments.
  */
 public class NavBarFragment extends Fragment {
+
+    private String parentFragmentName;
 
     public NavBarFragment() {
         // Required empty public constructor
@@ -32,6 +35,8 @@ public class NavBarFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        assert getParentFragment() != null;
+        parentFragmentName = getParentFragment().getClass().getSimpleName();
 
         /*
           Adds callback to the Home Button to navigate the user to the Main Screen.
@@ -43,6 +48,27 @@ public class NavBarFragment extends Fragment {
                 //Uses popUpTo global action to remove Fragment instances from backstack
                 Navigation.findNavController(view)
                         .navigate(MainNavGraphDirections.actionPopUpToMainScreenFragment());
+            }
+        });
+
+        ImageButton levelsButton = (ImageButton) view.findViewById(R.id.navBarLevelsButton);
+        if(parentFragmentName.equals("LevelsFragment"))
+        {
+            levelsButton.setImageResource(R.drawable.ic_play_icon);
+        }
+        else {
+            levelsButton.setImageResource(R.drawable.ic_levels_icon);
+        }
+        levelsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(parentFragmentName.equals("LevelsFragment")) {
+                    //TODO Navigate to GameScreen
+                }
+                else {
+                    //TODO Navigate to LevelsScreen
+                }
+                Toast.makeText(getContext(), "This feature is coming soon!", Toast.LENGTH_SHORT).show();
             }
         });
 
