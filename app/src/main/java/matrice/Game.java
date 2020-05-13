@@ -35,14 +35,24 @@ public class Game {
         this.stopWatch = new StopWatch();
     }
 
-    //TODO Implement String based creation of Game to be able to continue saved game
+    /**
+     * String based creation of a Game to be able to continue saved game
+     * @param transformation Type of the transformation of the move
+     * @param boardSize Size of the game board
+     * @param figureSet Set of figures on the game board screen
+     * @param savedState String that stores the start, end and current states
+     */
     public Game(Transformation transformation, int boardSize, FigureSet figureSet, String savedState) {
-
+        this.currentGame = new GameLevel(transformation, boardSize, savedState);
+        this.setFigureSet(figureSet);
+        this.setGameStarted(false);
+        this.setGamePaused(true);
+        this.setStartTime(0);
+        this.stopWatch = new StopWatch();
     }
 
     /* Getters and Setters */
 
-    //TODO Write documentation
     public GameLevel getCurrentGame() {
         return currentGame;
     }
@@ -85,10 +95,14 @@ public class Game {
             formattedTime += unformatted;
         return formattedTime;
     }
-    //TODO Implement function that returns score
-    public int getScore() {
 
-        return 0;
+    /**
+     * Calculates score earned by the current game.
+     * @return integer value from 50 to 6050
+     */
+    public int getScore() {
+        double score = 50 + 1000.0 / this.getCurrentGame().getStepSize() + 5000.0 / this.getDuration();
+        return (int)score;
     }
 
     public void setCurrentGame(GameLevel currentGame) {
@@ -161,8 +175,10 @@ public class Game {
      * Stops the game.
      */
     public void stop() {
-        this.stopWatch.stop();
-        this.setGamePaused(true);
+        if(!this.isGamePaused()) {
+            this.stopWatch.stop();
+            this.setGamePaused(true);
+        }
     }
 
     /**
@@ -184,16 +200,14 @@ public class Game {
      * Handles moves of the player. Checks if the game is finished (the end state is reached).
      * @param move Specifies the direction of the move.
      * @param id Specifies affected row/column.
+     * @return Returns true when game is finished, false otherwise.
      */
-    public void handleMove(Move move, int id) {
+    public boolean handleMove(Move move, int id) {
         if(!this.isGamePaused && isGameStarted)
         {
             this.currentGame.handleMove(move, id);
         }
-        if(this.currentGame.isFinished())
-        {
-            this.stop();
-        }
+        return this.currentGame.isFinished();
     }
 
     /* Logging */

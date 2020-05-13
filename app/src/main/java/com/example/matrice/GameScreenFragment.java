@@ -1,9 +1,13 @@
 package com.example.matrice;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -12,17 +16,19 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.Fragment;
 import androidx.gridlayout.widget.GridLayout;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import matrice.FigureSet;
 import matrice.Game;
 import matrice.GameState;
+import matrice.Move;
 import matrice.Transformation;
 
 /**
@@ -48,11 +54,21 @@ public class GameScreenFragment extends Fragment {
     private Handler timerHandler;
     private Runnable timerRunnable;
 
+    /* Local variable to display stepCount to the screen */
+    private TextView stepCounter;
+
     /**
      * Storing the gridLayouts to not have to look up them in every function call
      */
     private GridLayout gameLayout;
     private GridLayout endLayout;
+
+    /**
+     * Detector for detecting common user gestures. Used on the Game Board where users can swipe to
+     * move.
+     */
+    private GestureDetectorCompat mDetector;
+    private int gameLayoutSize;
 
     public static GameScreenFragment newInstance() {
         return new GameScreenFragment();
@@ -64,6 +80,7 @@ public class GameScreenFragment extends Fragment {
         return inflater.inflate(R.layout.game_screen_fragment, container, false);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -133,18 +150,26 @@ public class GameScreenFragment extends Fragment {
             }
         };
 
+        /* Displaying stepCount */
+        stepCounter = (TextView) view.findViewById(R.id.topDetailsStepCount);
+        stepCounter.setText(Integer.toString(this.game.getCurrentGame().getStepSize()));
+
         /*
           Initialising local variables that store grid layouts
          */
         gameLayout = (GridLayout) view.findViewById(R.id.startStateLayout);
         endLayout = (GridLayout) view.findViewById(R.id.endStateLayout);
-    }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(requireActivity()).get(GameScreenViewModel.class);
-        // TODO: Use the ViewModel
+        /* Apply Gesture listener */
+        mDetector = new GestureDetectorCompat(getActivity(), new FlingGestureListener());
+
+        /* Setting on touch listener to the Game Board */
+        gameLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                return mDetector.onTouchEvent(event);
+            }
+        });
     }
 
     /* Handling Fragment Lifecycle Changes */
@@ -251,6 +276,28 @@ public class GameScreenFragment extends Fragment {
     }
 
     /**
+     * Handles user swipes.
+     * @param move Direction of the swipe. Types specified in {@link Move} class.
+     * @param id Identity of the row or column on which the swipe occurs.
+     */
+    private void onSwipe(Move move, int id) {
+        //Handles swipe
+        boolean finished = this.game.handleMove(move, id);
+        updateLayout(gameLayout, this.game.getCurrentGame().getCurrentState());
+        stepCounter.setText(Integer.toString(this.game.getCurrentGame().getStepSize()));
+        //If the game is finished stops it and navigates the user to the Success Screen
+        if(finished) {
+            this.game.stop();
+            this.isGameStopped = true;
+            setScoreDetails();
+            Navigation.findNavController(this.getView())
+                    .navigate(GameScreenFragmentDirections.actionGameScreenFragmentToSuccessScreenFragment());
+        }
+    }
+
+    /* Helper functions and Classes */
+
+    /**
      * Creates and initialises a Game Object upon User Preferences stored in Shared Preferences.
      */
     private void initGameUponPreferences() {
@@ -260,7 +307,7 @@ public class GameScreenFragment extends Fragment {
         int transformationId = Integer.parseInt(preferences.getString(getString(R.string.key_transition_type), "0"));
         int figureSetId = Integer.parseInt(preferences.getString(getString(R.string.key_figure_set), "0"));
 
-        //To pass correct instances of the Enum types we need to cast ints with .fromInt()
+        //To pass correct instances of the Enum types we need to cast ints with .fromId()
         this.game = new Game(Transformation.fromId(transformationId), boardSize, FigureSet.fromId(figureSetId));
     }
 
@@ -269,7 +316,6 @@ public class GameScreenFragment extends Fragment {
      * @param layout Layout to be updated (GridLayout)
      * @param state State with which the layout will be updated (GameState)
      * TODO Implement functionality to switch between Figure Sets and update icons accordingly
-     * TODO Change figures from that icons to the real ones
      */
     private void updateLayout(@NotNull GridLayout layout, @NotNull GameState state) {
         int count = layout.getChildCount();
@@ -288,18 +334,98 @@ public class GameScreenFragment extends Fragment {
         }
     }
 
-    //TODO Use score getter function that needs to be implemented in Game Class
-    //TODO Use this function in handleMove
-    //TODO Call SuccessScreenFragment
-    //TODO Write documentation
+    /**
+     * Upon finishing game the function sets the score details needed to be sent to
+     * {@link SuccessScreenFragment}.
+     * FragmentResult is a feature in androidx.fragment:1.3.0-alpha04 version. Might be not stable.
+     */
     private void setScoreDetails() {
         Bundle result = new Bundle();
         result.putString("elapsedTime", this.game.getFormattedDuration());
-        result.putString("score", "");
+        result.putString("score", String.valueOf(this.game.getScore()));
         result.putString("stepSize", String.valueOf(this.game.getCurrentGame().getStepSize()));
         getParentFragmentManager().setFragmentResult("gameData", result);
     }
 
-    //TODO Implement function that displays stepSize on the screen
+    /**
+     * Gesture Listener class used to handle common user gestures such as swipes.
+     */
+    class FlingGestureListener extends GestureDetector.SimpleOnGestureListener {
+        private static final String DEBUG_TAG = "Gestures";
+
+        // Constants that help decide whether the Motion has to be handled
+        private static final int SWIPE_MIN_DISTANCE = 20;
+        private static final int SWIPE_THRESHOLD_VELOCITY = 10;
+
+        // Needed to Override onDown() method to listen to any motion
+        @Override
+        public boolean onDown(@NotNull MotionEvent event) {
+            Log.d(DEBUG_TAG, "onDown: " + event.toString());
+            return true;
+        }
+
+        // Overrides default onFling method
+        @Override
+        public boolean onFling(@NotNull MotionEvent event1, @NotNull MotionEvent event2,
+                               float velocityX, float velocityY) {
+            Log.d(DEBUG_TAG, "onFLing: " + event1.toString() + event2.toString());
+
+            float x1 = event1.getX();
+            float y1 = event1.getY();
+            float x2 = event2.getX();
+            float y2 = event2.getY();
+
+            if(Math.abs(x1 - x2) < SWIPE_MIN_DISTANCE || Math.abs(y1 - y2) < SWIPE_MIN_DISTANCE
+                    || Math.abs(velocityX) < SWIPE_THRESHOLD_VELOCITY
+                    || Math.abs(velocityY) < SWIPE_THRESHOLD_VELOCITY)
+            {
+                return false;
+            }
+
+            double angle = getAngle(x1, y1, x2, y2);
+            Move move = Move.fromAngle(angle);
+            int id = getMoveId(move, x1, y1);
+            onSwipe(move, id);
+            return true;
+        }
+
+        /**
+         * Calculates the angle of the motion.
+         * @param x1 x coordinate of the start event
+         * @param y1 y coordinate of the start event
+         * @param x2 x coordinate of the end event
+         * @param y2 y coordinate of the end event
+         * @return (double) angle of the motion
+         */
+        private double getAngle(float x1, float y1, float x2, float y2) {
+            double angleInDegrees = Math.toDegrees(Math.atan2(y1 - y2, x2 - x1));
+            if(angleInDegrees < 0) {
+                return 360 + angleInDegrees;
+            }
+            else return angleInDegrees;
+        }
+
+        /**
+         * Calculates the id of the row or column on which the motion started
+         * @param move Type of the move
+         * @param x1 x coordinate of the start event
+         * @param y1 y coordinate of the start event
+         * @return (int) id of the row/column
+         */
+        @Contract(pure = true)
+        private int getMoveId(@NotNull Move move, float x1, float y1) {
+            int gameLayoutSize = getParentFragment().getView().findViewById(R.id.startStateLayout).getWidth();
+            int boardSize = game.getCurrentGame().getCurrentState().getBoardSize();
+            int scale = gameLayoutSize / boardSize;
+            switch (move) {
+                case HORIZONTAL:
+                    return (int) (y1 / scale);
+                case VERTICAL:
+                    return (int) (x1 / scale);
+                default:
+                    return 0;
+            }
+        }
+    }
 
 }
