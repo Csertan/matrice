@@ -68,6 +68,7 @@ public class GameScreenFragment extends Fragment {
      * move.
      */
     private GestureDetectorCompat mDetector;
+    private int gameLayoutSize;
 
     public static GameScreenFragment newInstance() {
         return new GameScreenFragment();
@@ -151,7 +152,7 @@ public class GameScreenFragment extends Fragment {
 
         /* Displaying stepCount */
         stepCounter = (TextView) view.findViewById(R.id.topDetailsStepCount);
-        stepCounter.setText(this.game.getCurrentGame().getStepSize());
+        stepCounter.setText(Integer.toString(this.game.getCurrentGame().getStepSize()));
 
         /*
           Initialising local variables that store grid layouts
@@ -279,11 +280,11 @@ public class GameScreenFragment extends Fragment {
      * @param move Direction of the swipe. Types specified in {@link Move} class.
      * @param id Identity of the row or column on which the swipe occurs.
      */
-    public void onSwipe(Move move, int id) {
+    private void onSwipe(Move move, int id) {
         //Handles swipe
         boolean finished = this.game.handleMove(move, id);
         updateLayout(gameLayout, this.game.getCurrentGame().getCurrentState());
-        stepCounter.setText(this.game.getCurrentGame().getStepSize());
+        stepCounter.setText(Integer.toString(this.game.getCurrentGame().getStepSize()));
         //If the game is finished stops it and navigates the user to the Success Screen
         if(finished) {
             this.game.stop();
@@ -306,7 +307,7 @@ public class GameScreenFragment extends Fragment {
         int transformationId = Integer.parseInt(preferences.getString(getString(R.string.key_transition_type), "0"));
         int figureSetId = Integer.parseInt(preferences.getString(getString(R.string.key_figure_set), "0"));
 
-        //To pass correct instances of the Enum types we need to cast ints with .fromInt()
+        //To pass correct instances of the Enum types we need to cast ints with .fromId()
         this.game = new Game(Transformation.fromId(transformationId), boardSize, FigureSet.fromId(figureSetId));
     }
 
@@ -346,7 +347,6 @@ public class GameScreenFragment extends Fragment {
         getParentFragmentManager().setFragmentResult("gameData", result);
     }
 
-    //TODO Track movements
     /**
      * Gesture Listener class used to handle common user gestures such as swipes.
      */
@@ -354,8 +354,8 @@ public class GameScreenFragment extends Fragment {
         private static final String DEBUG_TAG = "Gestures";
 
         // Constants that help decide whether the Motion has to be handled
-        private static final int SWIPE_MIN_DISTANCE = 100;
-        private static final int SWIPE_THRESHOLD_VELOCITY = 100;
+        private static final int SWIPE_MIN_DISTANCE = 20;
+        private static final int SWIPE_THRESHOLD_VELOCITY = 10;
 
         // Needed to Override onDown() method to listen to any motion
         @Override
@@ -378,7 +378,9 @@ public class GameScreenFragment extends Fragment {
             if(Math.abs(x1 - x2) < SWIPE_MIN_DISTANCE || Math.abs(y1 - y2) < SWIPE_MIN_DISTANCE
                     || Math.abs(velocityX) < SWIPE_THRESHOLD_VELOCITY
                     || Math.abs(velocityY) < SWIPE_THRESHOLD_VELOCITY)
+            {
                 return false;
+            }
 
             double angle = getAngle(x1, y1, x2, y2);
             Move move = Move.fromAngle(angle);
@@ -396,8 +398,11 @@ public class GameScreenFragment extends Fragment {
          * @return (double) angle of the motion
          */
         private double getAngle(float x1, float y1, float x2, float y2) {
-            double angleInRad = Math.atan2(y1 - y2, x1 - x2) + Math.PI;
-            return (angleInRad * 180 / Math.PI + 180) % 360;
+            double angleInDegrees = Math.toDegrees(Math.atan2(y1 - y2, x2 - x1));
+            if(angleInDegrees < 0) {
+                return 360 + angleInDegrees;
+            }
+            else return angleInDegrees;
         }
 
         /**
@@ -406,19 +411,17 @@ public class GameScreenFragment extends Fragment {
          * @param x1 x coordinate of the start event
          * @param y1 y coordinate of the start event
          * @return (int) id of the row/column
-         * TODO This method ties the sizes of the game board. Need to rewrite it to be able to play on a changeable sized board.
          */
         @Contract(pure = true)
         private int getMoveId(@NotNull Move move, float x1, float y1) {
+            int gameLayoutSize = getParentFragment().getView().findViewById(R.id.startStateLayout).getWidth();
+            int boardSize = game.getCurrentGame().getCurrentState().getBoardSize();
+            int scale = gameLayoutSize / boardSize;
             switch (move) {
                 case HORIZONTAL:
-                    if(x1 > 200) return 2;
-                    else if (x1 > 100) return 1;
-                    else return 0;
+                    return (int) (y1 / scale);
                 case VERTICAL:
-                    if(y1 > 200) return 2;
-                    else if(y1 > 100) return 1;
-                    else return 0;
+                    return (int) (x1 / scale);
                 default:
                     return 0;
             }

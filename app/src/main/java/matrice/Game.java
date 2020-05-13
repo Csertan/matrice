@@ -175,8 +175,10 @@ public class Game {
      * Stops the game.
      */
     public void stop() {
-        this.stopWatch.stop();
-        this.setGamePaused(true);
+        if(!this.isGamePaused()) {
+            this.stopWatch.stop();
+            this.setGamePaused(true);
+        }
     }
 
     /**
