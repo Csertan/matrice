@@ -46,7 +46,7 @@ public enum Move {
      * From left top to right bottom: [120°, 150°] & [300°, 330°]
      * From left bottom to right top: [210°, 240°] & [30°, 60°]
      *
-     * @param angle of the move from 0° to 360°
+     * @param angle Angle of the move from 0° to 360°
      * @return Move corresponding to the direction of the angle
      */
     public static Move fromAngle(double angle) {

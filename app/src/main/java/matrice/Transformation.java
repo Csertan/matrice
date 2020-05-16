@@ -36,4 +36,33 @@ public enum Transformation {
     public int getId() {
         return this.id;
     }
+
+    /**
+     * Function for getting Transformation type given an angle
+     * Transformation are defined as follows:
+     *
+     * If the user swipes from left or from top the move is handled with an inversion,
+     * else when the user swipes from right or from bottom the move is handled with a rotation.
+     *
+     * @param angle Angle of the move from 0° to 360°
+     * @return Type corresponding the direction of the move
+     */
+    public static Transformation fromAngle(double angle) {
+        if(inRange(angle, 60.0, 120.0) || inRange(angle, 150, 210))
+            return Transformation.ROTATE;
+        else
+            return Transformation.INVERT;
+    }
+
+    /**
+     * Helper function for fromAngle() method
+     * @param angle from 0° to 360°
+     * @param lower lower bound of the interval
+     * @param upper upper bound of the interval
+     * @return whether the given angle is in the specified interval
+     */
+    @Contract(pure = true)
+    private static boolean inRange(double angle, double lower, double upper) {
+        return (angle >= lower) && (angle < upper);
+    }
 }

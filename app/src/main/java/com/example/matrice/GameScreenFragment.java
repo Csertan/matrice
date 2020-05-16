@@ -280,9 +280,9 @@ public class GameScreenFragment extends Fragment {
      * @param move Direction of the swipe. Types specified in {@link Move} class.
      * @param id Identity of the row or column on which the swipe occurs.
      */
-    private void onSwipe(Move move, int id) {
+    private void onSwipe(Move move, Transformation transformation, int id) {
         //Handles swipe
-        boolean finished = this.game.handleMove(move, id);
+        boolean finished = this.game.handleMove(move, transformation, id);
         updateLayout(gameLayout, this.game.getCurrentGame().getCurrentState());
         stepCounter.setText(Integer.toString(this.game.getCurrentGame().getStepSize()));
         //If the game is finished stops it and navigates the user to the Success Screen
@@ -304,11 +304,10 @@ public class GameScreenFragment extends Fragment {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireActivity());
         int boardSize = preferences.getInt(getString(R.string.key_game_boardsize), 3);
         //ListPreference items are stored as Strings. To get int values we need to cast with Integer.parseInt()
-        int transformationId = Integer.parseInt(preferences.getString(getString(R.string.key_transition_type), "0"));
         int figureSetId = Integer.parseInt(preferences.getString(getString(R.string.key_figure_set), "0"));
 
         //To pass correct instances of the Enum types we need to cast ints with .fromId()
-        this.game = new Game(Transformation.fromId(transformationId), boardSize, FigureSet.fromId(figureSetId));
+        this.game = new Game(boardSize, FigureSet.fromId(figureSetId));
     }
 
     /**
@@ -384,8 +383,9 @@ public class GameScreenFragment extends Fragment {
 
             double angle = getAngle(x1, y1, x2, y2);
             Move move = Move.fromAngle(angle);
+            Transformation transformation = Transformation.fromAngle(angle);
             int id = getMoveId(move, x1, y1);
-            onSwipe(move, id);
+            onSwipe(move, transformation, id);
             return true;
         }
 
