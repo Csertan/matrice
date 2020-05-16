@@ -16,17 +16,13 @@ public class GameLevel {
     private GameState currentState;
     private ArrayList<GameState> sequence;
 
-    private Transformation transformation;
-
     /* Constructors */
 
     /**
      * Basic constructor for GameLevel objects. Generates random start and end states.
-     * @param transformation Type of the transformation used to evolve the game table.
      * @param boardSize Size of the game board.
      */
-    GameLevel(Transformation transformation, int boardSize) {
-        this.setTransformation(transformation);
+    GameLevel(int boardSize) {
 
         //Initialising Level with random start-end states
         this.startState = new GameState(boardSize);
@@ -40,14 +36,12 @@ public class GameLevel {
 
     /**
      * String based constructor for restoring saved game level in order to continue it.
-     * @param transformation Type of the transformation used to evolve the game table.
      * @param boardSize Size of the game board.
      * @param savedLevel String that stores the start, end and current states in this order.
      * @throws IllegalArgumentException If savedLevel does not contains all three states throws
      * exception.
      */
-    GameLevel(Transformation transformation, int boardSize, @NotNull String savedLevel) throws IllegalArgumentException {
-        this.setTransformation(transformation);
+    GameLevel(int boardSize, @NotNull String savedLevel) throws IllegalArgumentException {
         String[] tokens = savedLevel.split(":");
         if(tokens.length != 3)
             throw new IllegalArgumentException("Not enough states to initialise level.");
@@ -71,9 +65,6 @@ public class GameLevel {
     public GameState getStartState() {
         return startState;
     }
-    public Transformation getTransformation() {
-        return transformation;
-    }
     public int getStepSize() {
         return sequence.size();
     }
@@ -87,21 +78,18 @@ public class GameLevel {
     private void setStartState(GameState state) {
         this.startState = state;
     }
-    public void setTransformation(Transformation transformation) {
-        this.transformation = transformation;
-    }
 
     /* Handling moves */
 
     /**
-     * Calculating the Inversion type transformation of the game table
+     * Calculating the Inversion type transformation of the game table.
      * @param move Specifies the direction of the move.
      * @param id Specifies affected row / column.
      * @throws IllegalArgumentException Throws exception when finding invalid id.
      */
     private void calculateInversion(Move move, int id) throws IllegalArgumentException {
         if(id < 0 || id > this.currentState.getBoardSize()-1)
-            throw new IllegalArgumentException("Invalid selector for move.");
+            throw new IllegalArgumentException("Invalid selector for row/column.");
         switch (move) {
             case VERTICAL:
                 for(int i = 0; i < this.currentState.getBoardSize(); i++)
@@ -123,12 +111,23 @@ public class GameLevel {
     }
 
     /**
-     * Calculates the rotation type transformation of the game table. NOT IMPLEMENTED IN THIS VERSION.
+     * Calculates the rotation type transformation of the game table.
      * @param move Specifies the direction of the move.
      * @param id Specifies affected row / column.
+     * @throws IllegalArgumentException Throws exception when finding invalid id.
      */
-    private void calculateRotation(Move move, int id) {
-
+    private void calculateRotation(Move move, int id) throws IllegalArgumentException {
+        if(id < 0 || id > this.getCurrentState().getBoardSize()-1)
+            throw new IllegalArgumentException("Invalid selector for row/column.");
+        switch (move) {
+            case VERTICAL:
+                this.currentState.rotateColumn(id);
+                break;
+            case HORIZONTAL:
+                this.currentState.rotateRow(id);
+                break;
+                // No diagonal rotation as its effect can be achieved by rotating rows and columns
+        }
     }
 
     /**
@@ -136,8 +135,8 @@ public class GameLevel {
      * @param move Direction of the move.
      * @param id Specifies the affected row / column.
      */
-    void handleMove(Move move, int id) {
-        switch (this.transformation) {
+    void handleMove(Move move, @NotNull Transformation transformation, int id) {
+        switch (transformation) {
             case INVERT:
                 calculateInversion(move, id);
                 break;

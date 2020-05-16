@@ -132,6 +132,38 @@ public class GameState {
     }
 
     /**
+     * Rotates the given row of the state by one towards left.
+     * @param row Number of row to be rotated.
+     * @throws IllegalArgumentException Throws exception when id is out of the range of the board
+     * size.
+     */
+    void rotateRow(int row) throws IllegalArgumentException {
+        if(row < 0 || row >= this.boardSize)
+            throw new IllegalArgumentException("Invalid field identifier (row or column)");
+        Boolean tempCell = this.state[row][0];
+        for(int i = 0; i < this.boardSize-1; i++) {
+            this.state[row][i] = this.state[row][i+1];
+        }
+        this.state[row][boardSize-1] = tempCell;
+    }
+
+    /**
+     * Rotates the given column of the state by one upwards.
+     * @param col Number of column to be rotated.
+     * @throws IllegalArgumentException Throws exception when id is out of the range of the board
+     * size.
+     */
+    void rotateColumn(int col) throws IllegalArgumentException {
+        if(col < 0 || col >= this.boardSize)
+            throw new IllegalArgumentException("Invalid field identifier (row or column)");
+        Boolean tempCell = this.state[0][col];
+        for(int i = 0; i < this.boardSize-1; i++) {
+            this.state[i][col] = this.state[i+1][col];
+        }
+        this.state[boardSize-1][col] = tempCell;
+    }
+
+    /**
      * Calculates the integer format of the given current state. Used for logging user path.
      * @return Id of the current State.
      */

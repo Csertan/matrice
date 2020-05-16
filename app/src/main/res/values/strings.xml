@@ -45,9 +45,9 @@
     <string name="score_text">Replace it with Score!</string>
     <string name="score_details">Replace it with Score details!</string>
     <string name="success_picture_description">Picture displayed at success</string>
-    <string name="score_details_start">Congratulations! You won in</string>
-    <string name="score_details_middle">steps, and</string>
-    <string name="score_details_end">seconds! Wanna play a new game?</string>
+    <string name="score_details_start">Congratulations! You won in </string>
+    <string name="score_details_middle"> steps, and </string>
+    <string name="score_details_end"> seconds! Wanna play a new game?</string>
 
     <!-- Settings Activity -->
     <string name="title_activity_settings">Settings</string>

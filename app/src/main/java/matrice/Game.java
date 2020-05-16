@@ -21,13 +21,12 @@ public class Game {
 
     /**
      * Basic constructor for a Game object
-     * @param transformation Type of the transformation of the move
      * @param boardSize Size of the game board
      * @param figureSet Set of figures on the game board screen
      */
-    public Game(Transformation transformation, int boardSize, FigureSet figureSet) {
+    public Game(int boardSize, FigureSet figureSet) {
         //Initialises GameLevel with random start-end states
-        this.currentGame = new GameLevel(transformation, boardSize);
+        this.currentGame = new GameLevel(boardSize);
         this.setFigureSet(figureSet);
         this.setGameStarted(false);
         this.setGamePaused(true);
@@ -37,13 +36,12 @@ public class Game {
 
     /**
      * String based creation of a Game to be able to continue saved game
-     * @param transformation Type of the transformation of the move
      * @param boardSize Size of the game board
      * @param figureSet Set of figures on the game board screen
      * @param savedState String that stores the start, end and current states
      */
-    public Game(Transformation transformation, int boardSize, FigureSet figureSet, String savedState) {
-        this.currentGame = new GameLevel(transformation, boardSize, savedState);
+    public Game(int boardSize, FigureSet figureSet, String savedState) {
+        this.currentGame = new GameLevel(boardSize, savedState);
         this.setFigureSet(figureSet);
         this.setGameStarted(false);
         this.setGamePaused(true);
@@ -183,12 +181,11 @@ public class Game {
 
     /**
      * Creates new game upon user action.
-     * @param transformation Type of the transformation of the move
      * @param boardSize Size of the game board
      * @param figureSet Set of figures on the game board screen
      */
-    public void newGame(Transformation transformation, int boardSize, FigureSet figureSet) {
-        this.currentGame = new GameLevel(transformation, boardSize);
+    public void newGame(int boardSize, FigureSet figureSet) {
+        this.currentGame = new GameLevel(boardSize);
         this.setFigureSet(figureSet);
         this.setStartTime(System.currentTimeMillis());
         this.stopWatch.reset();
@@ -199,13 +196,14 @@ public class Game {
     /**
      * Handles moves of the player. Checks if the game is finished (the end state is reached).
      * @param move Specifies the direction of the move.
+     * @param transformation Specifies the type of the transformation of the move.
      * @param id Specifies affected row/column.
      * @return Returns true when game is finished, false otherwise.
      */
-    public boolean handleMove(Move move, int id) {
+    public boolean handleMove(Move move, Transformation transformation, int id) {
         if(!this.isGamePaused && isGameStarted)
         {
-            this.currentGame.handleMove(move, id);
+            this.currentGame.handleMove(move, transformation, id);
         }
         return this.currentGame.isFinished();
     }
