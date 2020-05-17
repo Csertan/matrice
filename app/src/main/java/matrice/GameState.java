@@ -57,7 +57,12 @@ public class GameState {
      */
     GameState(@NotNull GameState other) {
         this.setBoardSize(other.getBoardSize());
-        this.setState(other.getState());
+        this.state = new Boolean[boardSize][boardSize];
+        for(int i = 0; i < boardSize; i++) {
+            for(int j = 0; j < boardSize; j++) {
+                this.state[i][j] = other.getCell(i, j);
+            }
+        }
     }
 
     /**
