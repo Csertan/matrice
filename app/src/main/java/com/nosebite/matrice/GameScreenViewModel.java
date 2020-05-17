@@ -1,4 +1,4 @@
-package com.example.matrice;
+package com.nosebite.matrice;
 
 import androidx.lifecycle.ViewModel;
 

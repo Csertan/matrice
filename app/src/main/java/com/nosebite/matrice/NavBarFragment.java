@@ -1,11 +1,11 @@
-package com.example.matrice;
+package com.nosebite.matrice;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,11 +14,14 @@ import androidx.navigation.Navigation;
 
 
 /**
- * A simple {@link Fragment} subclass that displays the Main Screen for the User.
+ * A simple {@link Fragment} subclass that displays the NavBar to the User.
+ * It is included in other Fragments.
  */
-public class MainScreenFragment extends Fragment {
+public class NavBarFragment extends Fragment {
 
-    public MainScreenFragment() {
+    private String parentFragmentName;
+
+    public NavBarFragment() {
         // Required empty public constructor
     }
 
@@ -27,42 +30,44 @@ public class MainScreenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_screen, container, false);
+        return inflater.inflate(R.layout.fragment_nav_bar, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        assert getParentFragment() != null;
+        parentFragmentName = getParentFragment().getClass().getSimpleName();
 
         /*
-          On Click Listener for the navigation to Authors Screen
+          Adds callback to the Home Button to navigate the user to the Main Screen.
          */
-        Button toAuthorsButton = (Button) view.findViewById(R.id.authorsButtonMain);
-        toAuthorsButton.setOnClickListener(new View.OnClickListener() {
+        ImageButton toHomeButton = (ImageButton) view.findViewById(R.id.navBarHomeButton);
+        toHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Uses popUpTo global action to remove Fragment instances from backstack
                 Navigation.findNavController(view)
-                        .navigate(MainScreenFragmentDirections.actionMainScreenFragmentToAuthorsScreenFragment());
+                        .navigate(MainNavGraphDirections.actionPopUpToMainScreenFragment());
             }
         });
 
-        /*
-          On Click Listener for the navigation to Game Screen
-         */
-        Button playButton = (Button) view.findViewById(R.id.playButtonMain);
-        playButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view)
-                        .navigate(MainScreenFragmentDirections.actionMainScreenFragmentToGameScreenFragment());
-            }
-        });
-
-        /* On Click listener for the navigation to Levels Screen */
-        Button levelsButton = (Button) view.findViewById(R.id.campaignButtonMain);
+        ImageButton levelsButton = (ImageButton) view.findViewById(R.id.navBarLevelsButton);
+        if(parentFragmentName.equals("LevelsFragment"))
+        {
+            levelsButton.setImageResource(R.drawable.ic_play_icon);
+        }
+        else {
+            levelsButton.setImageResource(R.drawable.ic_levels_icon);
+        }
         levelsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO Navigate to LevelsScreen
+                if(parentFragmentName.equals("LevelsFragment")) {
+                    //TODO Navigate to GameScreen
+                }
+                else {
+                    //TODO Navigate to LevelsScreen
+                }
                 Toast.makeText(getContext(), "This feature is coming soon!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -70,7 +75,7 @@ public class MainScreenFragment extends Fragment {
         /*
           On Click Listener for starting Settings Activity to adjust Preferences
          */
-        Button settingsButton = (Button) view.findViewById(R.id.settingsButtonMain);
+        ImageButton settingsButton = (ImageButton) view.findViewById(R.id.navBarSettingsButton);
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -10,7 +10,7 @@
 
     <fragment
         android:id="@+id/navBarFragmentAuthors"
-        android:name="com.example.matrice.NavBarFragment"
+        android:name="com.nosebite.matrice.NavBarFragment"
         android:layout_width="0dp"
         android:layout_height="80dp"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"

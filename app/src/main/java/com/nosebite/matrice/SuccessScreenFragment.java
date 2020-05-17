@@ -1,4 +1,4 @@
-package com.example.matrice;
+package com.nosebite.matrice;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
