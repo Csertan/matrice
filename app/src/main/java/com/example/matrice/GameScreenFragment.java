@@ -13,11 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.gridlayout.widget.GridLayout;
 import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
@@ -87,7 +89,7 @@ public class GameScreenFragment extends Fragment {
         /*
           Initialising Game Object upon saved Preferences
          */
-        initGameUponPreferences();
+        initGameUponPreferences(null);
 
         /*
           Adds callback to Home Button which navigates the user to the Main Screen
@@ -135,6 +137,16 @@ public class GameScreenFragment extends Fragment {
             }
         });
 
+        /* Adds callback to Levels Button to navigate the user to the Level choser Screen */
+        ImageButton levelsButton = (ImageButton) view.findViewById(R.id.leftControlsLevelsButton);
+        levelsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO Navigate to Levels Screen
+                Toast.makeText(getContext(), "This feature is coming soon!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         /*
           Handling TextView to displaying elapsed time in every second
          */
@@ -168,6 +180,19 @@ public class GameScreenFragment extends Fragment {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 return mDetector.onTouchEvent(event);
+            }
+        });
+
+        getParentFragmentManager()
+                .setFragmentResultListener("replayGameData", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                String previousGame = result.getString("previousGame");
+                initGameUponPreferences(previousGame);
+                updateLayout(endLayout, game.getCurrentGame().getEndState());
+                updateLayout(gameLayout, game.getCurrentGame().getStartState());
+                game.start();
+                timerHandler.postDelayed(timerRunnable, 1000);
             }
         });
     }
@@ -253,7 +278,7 @@ public class GameScreenFragment extends Fragment {
             }
             else {
                 //Initialises New Game
-                initGameUponPreferences();
+                initGameUponPreferences(null);
                 updateLayout(endLayout, this.game.getCurrentGame().getEndState());
                 updateLayout(gameLayout, this.game.getCurrentGame().getStartState());
                 this.game.start();
@@ -300,14 +325,22 @@ public class GameScreenFragment extends Fragment {
     /**
      * Creates and initialises a Game Object upon User Preferences stored in Shared Preferences.
      */
-    private void initGameUponPreferences() {
+    private void initGameUponPreferences(@Nullable String savedState) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireActivity());
         int boardSize = preferences.getInt(getString(R.string.key_game_boardsize), 3);
         //ListPreference items are stored as Strings. To get int values we need to cast with Integer.parseInt()
         int figureSetId = Integer.parseInt(preferences.getString(getString(R.string.key_figure_set), "0"));
 
-        //To pass correct instances of the Enum types we need to cast ints with .fromId()
-        this.game = new Game(boardSize, FigureSet.fromId(figureSetId));
+        //If there is a saved state start from there, else start new random game
+        if(savedState != null)
+        {
+            //To pass correct instances of the Enum types we need to cast ints with .fromId()
+            this.game = new Game(boardSize, FigureSet.fromId(figureSetId), savedState);
+        }
+        else {
+            //To pass correct instances of the Enum types we need to cast ints with .fromId()
+            this.game = new Game(boardSize, FigureSet.fromId(figureSetId));
+        }
     }
 
     /**
@@ -343,6 +376,13 @@ public class GameScreenFragment extends Fragment {
         result.putString("elapsedTime", this.game.getFormattedDuration());
         result.putString("score", String.valueOf(this.game.getScore()));
         result.putString("stepSize", String.valueOf(this.game.getCurrentGame().getStepSize()));
+
+        /* Deleting current state (that equals to end state) from Previous Game and replacing
+         it with start state */
+        String[] previousGameTemp = this.game.getCurrentGame().toString().split(":");
+        String previousGame = previousGameTemp[0] + ":" + previousGameTemp[1] + ":" + previousGameTemp[0];
+        result.putString("previousGame", previousGame);
+
         getParentFragmentManager().setFragmentResult("gameData", result);
     }
 
@@ -410,7 +450,7 @@ public class GameScreenFragment extends Fragment {
          * @param move Type of the move
          * @param x1 x coordinate of the start event
          * @param y1 y coordinate of the start event
-         * @return (int) id of the row/column
+         * @return (int) id of the row/column affected by user swipe
          */
         @Contract(pure = true)
         private int getMoveId(@NotNull Move move, float x1, float y1) {

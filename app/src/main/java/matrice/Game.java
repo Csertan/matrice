@@ -1,5 +1,7 @@
 package matrice;
 
+import android.util.Log;
+
 import org.apache.commons.lang3.time.StopWatch;
 
 import java.util.concurrent.TimeUnit;
@@ -67,9 +69,10 @@ public class Game {
         return startTime;
     }
     public long getDuration() {
-        if(this.stopWatch.isStarted())
+        if(this.stopWatch.isStopped())
             return stopWatch.getTime(TimeUnit.SECONDS);
-        return 0;
+        else
+            return 0;
     }
 
     /**
@@ -99,8 +102,12 @@ public class Game {
      * @return integer value from 50 to 6050
      */
     public int getScore() {
-        double score = 50 + 1000.0 / this.getCurrentGame().getStepSize() + 5000.0 / this.getDuration();
-        return (int)score;
+        double score = 50;
+        double stepScore = 1000.0 / this.getCurrentGame().getStepSize();
+        double timeScore = 5000.0 / this.getDuration();
+        double duration = this.getDuration();
+        Log.d("Score", "stepScore: " + stepScore + " duration: " + duration + " timeScore: "+timeScore);
+        return (int)(score + stepScore + timeScore);
     }
 
     public void setCurrentGame(GameLevel currentGame) {

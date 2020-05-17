@@ -19,6 +19,8 @@ import androidx.navigation.Navigation;
  */
 public class SuccessScreenFragment extends Fragment {
 
+    private String previousGame;
+
     public SuccessScreenFragment() {
         // Required empty public constructor
     }
@@ -51,7 +53,13 @@ public class SuccessScreenFragment extends Fragment {
         replayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO Navigate back and restart previous game - probably using Fragment Results
+                //Sets the data of the previous game as a result for GameScreenFragment
+                Bundle previousGameData = new Bundle();
+                previousGameData.putString("previousGame", previousGame);
+                getParentFragmentManager().setFragmentResult("replayGameData", previousGameData);
+
+                Navigation.findNavController(view)
+                        .navigate(SuccessScreenFragmentDirections.actionSuccessScreenFragmentToGameScreenFragment());
             }
         });
 
@@ -87,12 +95,14 @@ public class SuccessScreenFragment extends Fragment {
                 String score = result.getString("score");
                 String stepSize = result.getString("stepSize");
 
+                previousGame = result.getString("previousGame");
+
                 TextView scoreView = (TextView) view.findViewById(R.id.scoreText);
                 scoreView.setText(score);
 
                 TextView scoreDetailView = (TextView) view.findViewById(R.id.scoreDetail);
-                String scoreDetails = getString(R.string.score_details_start) + stepSize
-                        + getString(R.string.score_details_middle) + elapsedTime
+                String scoreDetails = getString(R.string.score_details_start) + " " + stepSize + " "
+                        + getString(R.string.score_details_middle) + " " + elapsedTime + " "
                         + getString(R.string.score_details_end);
                 scoreDetailView.setText(scoreDetails);
             }
