@@ -135,6 +135,7 @@ public class Game {
         this.setGameStarted(true);
         this.setGamePaused(false);
         this.setStartTime(System.currentTimeMillis());
+        stopWatch.reset();
         stopWatch.start();
     }
 
@@ -180,9 +181,11 @@ public class Game {
      * Stops the game.
      */
     public void stop() {
-        if(!this.isGamePaused()) {
-            this.stopWatch.stop();
+        if(!this.isGamePaused) {
             this.setGamePaused(true);
+        }
+        if(!stopWatch.isStopped()) {
+            stopWatch.stop();
         }
     }
 
