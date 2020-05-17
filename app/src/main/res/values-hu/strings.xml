@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Matrice</string>
+    <string name="play_text">Új játék</string>
+    <string name="campaign_text">Pályák</string>
+    <string name="settings_text">Beállítások</string>
+    <string name="authors_text">Készítők</string>
+    <string name="research_text_title">A kutatásról</string>
+    <string name="research_text">Ide jön a kutatás leírása...</string>
+    <string name="copyright_warning">Minden jog fenntartva!</string>
+    <string name="game_duration">0 mp</string>
+    <string name="steps_text">Lépésszám</string>
+    <string name="score_details_start">Gratulálunk! Győztél</string>
+    <string name="score_details_middle">lépésben,</string>
+    <string name="score_details_end">idő alatt! Szeretnél játszani még egyet?</string>
+    <string name="title_activity_settings">Beállítások</string>
+    <string name="title_game_category">Játék</string>
+    <string name="title_game_boardsize">Táblaméret</string>
+    <string name="summary_game_boardsize">Itt adhatod meg a játéktábla méretét. Ez a funkció hamarosan elérhetővé válik!</string>
+    <string name="title_figure_set">Figurakészlet</string>
+    <string name="summary_figure_set">Megadhatod, hogy melyik készlettel szeretnél játszani</string>
+    <string name="title_transition_type">Áttűnés</string>
+    <string name="summary_transition_type">Beállíthatod mi történjen a tábla mezőivel egy lépés megtételénél</string>
+    <string name="title_data_category">Játékos információk</string>
+    <string name="summary_data_category">Járulj hozzá a kutatás sikerességéhez azáltal, hogy megadod az alapvető demográfiai adataidat!</string>
+    <string name="title_gender_info">Nem</string>
+    <string name="summary_gender_info">Add meg a nemed, hogy így járulj hozzá a kutatásunkhoz</string>
+    <string name="title_age_info">Kor</string>
+    <string name="summary_age_info">A korod is sokat segítene nekünk</string>
+    <string name="title_general_category">Általános</string>
+    <string name="title_app_language">Nyelv</string>
+    <string name="summary_app_language">Kiválaszthatod az alkalmazás nyelvét</string>
+    <string name="title_enable_dark_mode">Sötét mód</string>
+    <string name="summary_enable_dark_mode">Bekapcsolhatod a sötét módot az appban</string>
+    <string name="title_about_category">Rólunk</string>
+    <string name="title_version">App verzió</string>
+    <string name="title_send_feedback">Visszajelzés küldése</string>
+    <string name="summary_support">Ha bármi kérdésed van, szívesen állunk rendelkezésedre!</string>
+    <string name="privacy_policy">Adatvédelmi irányelvek</string>
+    <string name="choose_email_client">Válassz levelező klienst</string>
+</resources>

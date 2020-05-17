@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">Matrice</string>
-    <string name="app_version">1.1.0</string>
-    <string name="url_github">https://github.com/Csertan/matrice</string>
+    <string name="app_version" translatable="false">1.1.0</string>
+    <string name="url_github" translatable="false">https://github.com/Csertan/matrice</string>
 
     <!-- Strings on BootScreenFragment -->
-    <string name="studio_logo_description">studioLogo</string>
-    <string name="gotomain_description">goToMain</string>
+    <string name="studio_logo_description" translatable="false">studioLogo</string>
+    <string name="gotomain_description" translatable="false">goToMain</string>
 
     <!-- App Logo Description -->
-    <string name="applogomain_description">appLogoMain</string>
+    <string name="applogomain_description" translatable="false">appLogoMain</string>
 
     <!-- Strings on MainScreenFragment -->
     <string name="play_text">Play</string>
@@ -17,34 +17,34 @@
     <string name="authors_text">Authors</string>
 
     <!-- Strings on NavButtons -->
-    <string name="gotosettings_description">goToSettings</string>
-    <string name="gotolevels_description">goToLevels</string>
-    <string name="gotohome_description">goToHome</string>
-    <string name="goback_description">goBack</string>
+    <string name="gotosettings_description" translatable="false">goToSettings</string>
+    <string name="gotolevels_description" translatable="false">goToLevels</string>
+    <string name="gotohome_description" translatable="false">goToHome</string>
+    <string name="goback_description" translatable="false">goBack</string>
 
     <!-- Strings on AuthorsScreenFragment -->
     <string name="research_text_title">Research</string>
     <string name="research_text">This is the description of the research…</string>
-    <string name="designer_name_text">Designed by nosebite Studios</string>
-    <string name="programmer_name">Flow by Tamas Csertan</string>
-    <string name="copyright_notice">©2020 nosebite Studios</string>
+    <string name="designer_name_text" translatable="false">Designed by nosebite Studios</string>
+    <string name="programmer_name" translatable="false">Flow by Tamas Csertan</string>
+    <string name="copyright_notice" translatable="false">©2020 nosebite Studios</string>
     <string name="copyright_warning">All rights reserved!</string>
 
     <!-- Strings on GameScreenFragment -->
-    <string name="figure_description">basic figure</string>
+    <string name="figure_description" translatable="false">basic figure</string>
     <string name="game_duration">0 s</string>
 
-    <string name="pauseplay_description">pausePlayControl</string>
-    <string name="stop_description">stopGameControl</string>
-    <string name="retry_description">retryGameControl</string>
-    <string name="clock_icon_description">clockIcon</string>
-    <string name="steps_icon_description">stepsIcon</string>
+    <string name="pauseplay_description" translatable="false">pausePlayControl</string>
+    <string name="stop_description" translatable="false">stopGameControl</string>
+    <string name="retry_description" translatable="false">retryGameControl</string>
+    <string name="clock_icon_description" translatable="false">clockIcon</string>
+    <string name="steps_icon_description" translatable="false">stepsIcon</string>
     <string name="steps_text">Steps</string>
 
     <!-- Strings on SuccessScreenFragment -->
-    <string name="score_text">Replace it with Score!</string>
-    <string name="score_details">Replace it with Score details!</string>
-    <string name="success_picture_description">Picture displayed at success</string>
+    <string name="score_text" translatable="false">Replace it with Score!</string>
+    <string name="score_details" translatable="false">Replace it with Score details!</string>
+    <string name="success_picture_description" translatable="false">Picture displayed at success</string>
     <string name="score_details_start">Congratulations! You won in </string>
     <string name="score_details_middle"> steps, and </string>
     <string name="score_details_end"> seconds! Wanna play a new game?</string>
@@ -54,48 +54,47 @@
 
     <!-- Preference Titles -->
     <string name="title_game_category">Game</string>
-    <string name="key_game_category">game_category</string>
+    <string name="key_game_category" translatable="false">game_category</string>
     <string name="title_game_boardsize">Board Size</string>
-    <string name="key_game_boardsize">game_boardsize</string>
+    <string name="key_game_boardsize" translatable="false">game_boardsize</string>
     <string name="summary_game_boardsize">Size of the game board. Coming Soon!</string>
-    <string name="key_figure_set">figure_set</string>
+    <string name="key_figure_set" translatable="false">figure_set</string>
     <string name="title_figure_set">Figure Set</string>
     <string name="summary_figure_set">Set of figures you would like to play with</string>
-    <string name="key_transition_type">transition_type</string>
+    <string name="key_transition_type" translatable="false">transition_type</string>
     <string name="title_transition_type">Transition</string>
-    <string name="summary_transition_type">Type of trensition you would like to play with</string>
-    <string name="key_data_category">data_category</string>
+    <string name="summary_transition_type">Type of transition you would like to play with</string>
+    <string name="key_data_category" translatable="false">data_category</string>
     <string name="title_data_category">Player Information</string>
     <string name="summary_data_category">To contribute to our research please kindly provide us general information about you.</string>
-    <string name="key_gender_info">gender_info</string>
+    <string name="key_gender_info" translatable="false">gender_info</string>
     <string name="title_gender_info">Gender</string>
     <string name="summary_gender_info">Add your gender to promote our research</string>
-    <string name="key_age_info">age_info</string>
+    <string name="key_age_info" translatable="false">age_info</string>
     <string name="title_age_info">Age</string>
     <string name="summary_age_info">Add your age to contribute more</string>
-    <string name="key_general_category">general_category</string>
+    <string name="key_general_category" translatable="false">general_category</string>
     <string name="title_general_category">General</string>
-    <string name="key_app_language">app_language</string>
+    <string name="key_app_language" translatable="false">app_language</string>
     <string name="title_app_language">Language</string>
     <string name="summary_app_language">Choose the language of the app</string>
-    <string name="key_enable_dark_mode">enable_dark_mode</string>
+    <string name="key_enable_dark_mode" translatable="false">enable_dark_mode</string>
     <string name="title_enable_dark_mode">Dark Mode</string>
     <string name="summary_enable_dark_mode">Enable dark mode in app</string>
-    <string name="key_about_category">about_category</string>
+    <string name="key_about_category" translatable="false">about_category</string>
     <string name="title_about_category">About &amp; Feedback</string>
     <string name="summary_about">TODO Write Summary</string>
     <string name="title_version">App Version</string>
-    <string name="key_send_feedback">send_feedback</string>
+    <string name="key_send_feedback" translatable="false">send_feedback</string>
     <string name="title_send_feedback">Send Feedback</string>
     <string name="summary_support">Got any queries? We are happy to help!</string>
 
     <string name="privacy_policy">Privacy Policy</string>
-    <string name="url_privacy">https://csertan.github.io/</string>
+    <string name="url_privacy" translatable="false">https://csertan.github.io/</string>
 
     <string name="choose_email_client">Choose email client</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Strings used for fragments for navigation -->
 
