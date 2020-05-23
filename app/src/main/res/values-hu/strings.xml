@@ -38,4 +38,7 @@
     <string name="summary_support">Ha bármi kérdésed van, szívesen állunk rendelkezésedre!</string>
     <string name="privacy_policy">Adatvédelmi irányelvek</string>
     <string name="choose_email_client">Válassz levelező klienst</string>
+    <string name="sign_in_other_error">Hiba történt a bejelentkezésnél.</string>
+    <string name="signed_out_message">Sikeres kijelentkezés!</string>
+    <string name="feature_coming_soon">Ez a funkció nemsokára elérhető lesz!</string>
 </resources>

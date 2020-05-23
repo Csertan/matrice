@@ -16,6 +16,9 @@ import androidx.navigation.Navigation;
  */
 public class BootScreenFragment extends Fragment {
 
+    private boolean isSignedIn;
+    private MainActivity mainActivity;
+
     public BootScreenFragment() {
         // Required empty public constructor
     }
@@ -31,15 +34,22 @@ public class BootScreenFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /**
-         * Adds callback to the launcher Button to navigate the user to the Main Screen
+        mainActivity = (MainActivity) getActivity();
+        isSignedIn = false;
+
+        /*
+          Adds callback to the launcher Button to navigate the user to the Main Screen
          */
         ImageButton toMainButton = (ImageButton) view.findViewById(R.id.goToMainButton);
         toMainButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view)
-                        .navigate(BootScreenFragmentDirections.actionBootScreenFragmentToMainScreenFragment());
+                if (mainActivity.getSignedInAccount() == null) {
+                    mainActivity.startSignInIntent();
+                } else {
+                    Navigation.findNavController(view)
+                            .navigate(BootScreenFragmentDirections.actionBootScreenFragmentToMainScreenFragment());
+                }
             }
         });
     }
