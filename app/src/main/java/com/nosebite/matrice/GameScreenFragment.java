@@ -41,6 +41,9 @@ public class GameScreenFragment extends Fragment {
     //TAG for Logging & Debugging
     private static final String TAG = GameScreenFragment.class.getSimpleName();
 
+    private MainActivity mainActivity;
+    private String playerId;
+
     private GameScreenViewModel mViewModel;
     private Game game;
 
@@ -91,6 +94,13 @@ public class GameScreenFragment extends Fragment {
          */
         initGameUponPreferences(null);
 
+        /*
+        * Requiring player id from Main Activity
+        */
+        mainActivity = (MainActivity) getActivity();
+        if(mainActivity != null) {
+            mainActivity.requirePlayerId();
+        }
         /*
           Adds callback to Home Button which navigates the user to the Main Screen
          */
@@ -314,6 +324,9 @@ public class GameScreenFragment extends Fragment {
         if(finished) {
             this.game.stop();
             this.isGameStopped = true;
+            playerId = mainActivity.getPlayerId();
+            //TODO Call toJSON function
+
             setScoreDetails();
             Navigation.findNavController(this.getView())
                     .navigate(GameScreenFragmentDirections.actionGameScreenFragmentToSuccessScreenFragment());

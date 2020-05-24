@@ -16,7 +16,6 @@ import androidx.navigation.Navigation;
  */
 public class BootScreenFragment extends Fragment {
 
-    private boolean isSignedIn;
     private MainActivity mainActivity;
 
     public BootScreenFragment() {
@@ -35,7 +34,6 @@ public class BootScreenFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mainActivity = (MainActivity) getActivity();
-        isSignedIn = false;
 
         /*
           Adds callback to the launcher Button to navigate the user to the Main Screen
