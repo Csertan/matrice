@@ -186,6 +186,16 @@ public class GameLevel {
         return output.toString();
     }
 
+    String sequenceToString() {
+        StringBuilder output = new StringBuilder();
+        output.append("[ ");
+        for(int i = 0; i < sequence.size(); i++) {
+            output.append(sequence.get(i).getStateId()).append(", ");
+        }
+        output.append("]");
+        return output.toString();
+    }
+
     /**
      * Writes the essential data of the game to a String. Used to save a game to be able to
      * continue it.
