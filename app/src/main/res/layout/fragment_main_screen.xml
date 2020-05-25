@@ -18,7 +18,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:contentDescription="@string/applogomain_description"
-        android:src="@drawable/ic_launcher_foreground"
+        android:src="@drawable/ic_matrice_logo_main"
         app:layout_constraintBottom_toTopOf="@+id/appNameMain"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
