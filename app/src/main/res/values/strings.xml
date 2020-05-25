@@ -92,8 +92,10 @@
     <string name="title_send_feedback">Send Feedback</string>
     <string name="summary_support">Got any queries? We are happy to help!</string>
 
+    <string name="key_privacy_policy" translatable="false">privacy_policy</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="url_privacy" translatable="false">https://csertan.github.io/nosebite-studios</string>
+    <string name="view_webpage_error">Can\'t find application for opening webpage.</string>
 
     <string name="choose_email_client">Choose email client</string>
     <string name="signed_out_message">Signed out successfully!</string>

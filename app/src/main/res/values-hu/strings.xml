@@ -41,4 +41,5 @@
     <string name="sign_in_other_error">Hiba történt a bejelentkezésnél.</string>
     <string name="signed_out_message">Sikeres kijelentkezés!</string>
     <string name="feature_coming_soon">Ez a funkció nemsokára elérhető lesz!</string>
+    <string name="view_webpage_error">Nincs olyan alkalmazás, ami kezelni tudná ezt a kérést.</string>
 </resources>
