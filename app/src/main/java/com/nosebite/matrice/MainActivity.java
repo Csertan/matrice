@@ -2,6 +2,7 @@ package com.nosebite.matrice;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,8 @@ import com.google.android.gms.tasks.Task;
  */
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
+
     private GoogleSignInAccount signedInAccount;
     private String playerId;
 
@@ -39,14 +42,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d(TAG, "Signing in silently on Resume()");
         signInSilently();
     }
 
     private void signInSilently() {
         GoogleSignInOptions signInOptions = GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN;
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        Log.d(TAG, "Last signed in account: " + account);
         if(GoogleSignIn.hasPermissions(account, signInOptions.getScopeArray())) {
             signedInAccount = account;
+            Log.d(TAG, "Found last signed account:" + account);
         }
         else {
             GoogleSignInClient signInClient = GoogleSignIn.getClient(this, signInOptions);
@@ -56,9 +62,11 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
                             if(task.isSuccessful()) {
                                 signedInAccount = task.getResult();
+                                Log.d(TAG, "Successfully signed in silently.");
                             }
                             else {
                                 signedInAccount = null;
+                                Log.d(TAG, "Failed silent sign in, calling Sign in Intent. Exception: " + task.getException().getMessage());
                                 startSignInIntent();
                             }
                         }
@@ -80,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if(result.isSuccess()) {
                 signedInAccount = result.getSignInAccount();
+                Log.d(TAG, "Succesfully signed in actively.");
             }
             else {
                 signedInAccount = null;
@@ -89,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 new AlertDialog.Builder(this).setMessage(message)
                         .setNeutralButton(android.R.string.ok, null).show();
+                Log.d(TAG, "Sign in failed.");
             }
         }
     }

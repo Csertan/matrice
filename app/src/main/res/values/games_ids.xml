@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app_id -->
+    <string name="app_id" translatable="false">677226608960</string>
+    <!-- package_name -->
+    <string name="package_name" translatable="false">com.nosebite.matrice</string>
+    <!-- achievement Novice Player -->
+    <string name="achievement_novice_player" translatable="false">CgkIwPLn7toTEAIQAQ</string>
+    <!-- achievement Experienced Player -->
+    <string name="achievement_experienced_player" translatable="false">CgkIwPLn7toTEAIQAg</string>
+    <!-- achievement Fellow Researcher -->
+    <string name="achievement_fellow_researcher" translatable="false">CgkIwPLn7toTEAIQAw</string>
+    <!-- achievement Doctor of Researching Things -->
+    <string name="achievement_doctor_of_researching_things" translatable="false">CgkIwPLn7toTEAIQBA</string>
+    <!-- leaderboard Best score ever -->
+    <string name="leaderboard_best_score_ever" translatable="false">CgkIwPLn7toTEAIQBQ</string>
+    <!-- leaderboard You are so fast -->
+    <string name="leaderboard_you_are_so_fast" translatable="false">CgkIwPLn7toTEAIQBg</string>
+</resources>

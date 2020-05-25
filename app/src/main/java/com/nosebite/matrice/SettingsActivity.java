@@ -88,8 +88,9 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         void openWebPage(String url) {
-            Uri webpage = Uri.parse(url);
-            Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
+            Uri webPage = Uri.parse(url);
+            Intent webIntent = new Intent(Intent.ACTION_VIEW);
+            webIntent.setData(webPage);
             if(webIntent.resolveActivity(getActivity().getPackageManager()) != null)
             {
                 startActivity(webIntent);
