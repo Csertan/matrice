@@ -48,7 +48,6 @@ public class GameScreenFragment extends Fragment {
 
     private GameScreenViewModel mViewModel;
     private Game game;
-    private String playerId;
 
     /**
      * Indicator used to switch between New Game / Stop Game buttons
@@ -195,6 +194,7 @@ public class GameScreenFragment extends Fragment {
             }
         });
 
+        /* Getting previous game when returning from success screen to replay level. */
         getParentFragmentManager()
                 .setFragmentResultListener("replayGameData", this, new FragmentResultListener() {
             @Override
@@ -262,7 +262,7 @@ public class GameScreenFragment extends Fragment {
      * Callback function firing when Pause/Play Button is clicked.
      * @param view View which the click happened in. Default parameter of onClick callbacks.
      */
-    public void onPausePlayButtonPressed(@NotNull View view) {
+    private void onPausePlayButtonPressed(@NotNull View view) {
         ImageButton button = (ImageButton) view.findViewById(R.id.rightControlsPausePlayButton);
         if(!this.isGameStopped) {
             if (!this.game.isGamePaused()) {
@@ -279,7 +279,7 @@ public class GameScreenFragment extends Fragment {
      * Callback function firing when Stop/New Game Button is clicked.
      * @param view View which the click happened in. Default parameter of onCLick callbacks.
      */
-    public void onStopButtonPressed(@NotNull View view) {
+    private void onStopButtonPressed(@NotNull View view) {
         ImageButton stopButton = (ImageButton) view.findViewById(R.id.rightControlsStopButton);
         if(this.game.isGameStarted()) {
             if(!this.isGameStopped) {
@@ -304,7 +304,7 @@ public class GameScreenFragment extends Fragment {
      * Callback function firing when Retry Button is clicked.
      * @param view View which the click happened in. Default parameter of onCLick callbacks.
      */
-    public void onRetryButtonPressed(View view) {
+    private void onRetryButtonPressed(View view) {
         if(this.game.isGameStarted()) {
             this.game.restart();
             this.isGameStopped = false;
@@ -327,6 +327,7 @@ public class GameScreenFragment extends Fragment {
             this.game.stop();
             this.isGameStopped = true;
             playerId = mainActivity.getPlayerId();
+            Log.d(TAG, "Player Id: " + playerId);
             //TODO Call toJSON function
 
             setScoreDetails();
@@ -401,6 +402,11 @@ public class GameScreenFragment extends Fragment {
         getParentFragmentManager().setFragmentResult("gameData", result);
     }
 
+    /**
+     * Writes the game into JSON format.
+     * @return JSON string
+     * @throws JSONException If some error occurs.
+     */
     @NotNull
     private String gameToJSON() throws JSONException {
         JSONObject gameObject = new JSONObject();

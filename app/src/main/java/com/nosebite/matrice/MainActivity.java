@@ -2,7 +2,7 @@ package com.nosebite.matrice;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Gravity;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.games.Games;
+import com.google.android.gms.games.GamesClient;
 import com.google.android.gms.games.PlayersClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,33 +27,42 @@ import com.google.android.gms.tasks.Task;
  */
 public class MainActivity extends AppCompatActivity {
 
+    /* TAG used for debugging */
     private static final String TAG = "MainActivity";
 
+    /* Stores the actual account which the user is signed in. */
     private GoogleSignInAccount signedInAccount;
     private String playerId;
 
+    /* Constant value for Sign In Intent */
     private static final int RC_SIGN_IN = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(GoogleSignIn.getLastSignedInAccount(this) != null) {
+            GamesClient gamesClient = Games.getGamesClient(this, GoogleSignIn.getLastSignedInAccount(this));
+            gamesClient.setViewForPopups(findViewById(android.R.id.content));
+            gamesClient.setGravityForPopups(Gravity.TOP | Gravity.CENTER_HORIZONTAL);
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(TAG, "Signing in silently on Resume()");
         signInSilently();
     }
 
+    /**
+     * Attempts to sign in the user silently.
+     * If this is not possible starts interactive sign in.
+     */
     private void signInSilently() {
         GoogleSignInOptions signInOptions = GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN;
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        Log.d(TAG, "Last signed in account: " + account);
         if(GoogleSignIn.hasPermissions(account, signInOptions.getScopeArray())) {
             signedInAccount = account;
-            Log.d(TAG, "Found last signed account:" + account);
         }
         else {
             GoogleSignInClient signInClient = GoogleSignIn.getClient(this, signInOptions);
@@ -62,11 +72,9 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
                             if(task.isSuccessful()) {
                                 signedInAccount = task.getResult();
-                                Log.d(TAG, "Successfully signed in silently.");
                             }
                             else {
                                 signedInAccount = null;
-                                Log.d(TAG, "Failed silent sign in, calling Sign in Intent. Exception: " + task.getException().getMessage());
                                 startSignInIntent();
                             }
                         }
@@ -74,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Starts interactive sign in.
+     */
     public void startSignInIntent() {
         GoogleSignInClient signInClient = GoogleSignIn
                 .getClient(this, GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
@@ -81,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, RC_SIGN_IN);
     }
 
+    /**
+     * Listens to Sign in Activity result.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -88,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if(result.isSuccess()) {
                 signedInAccount = result.getSignInAccount();
-                Log.d(TAG, "Succesfully signed in actively.");
             }
             else {
                 signedInAccount = null;
@@ -98,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 new AlertDialog.Builder(this).setMessage(message)
                         .setNeutralButton(android.R.string.ok, null).show();
-                Log.d(TAG, "Sign in failed.");
             }
         }
     }
@@ -106,11 +118,13 @@ public class MainActivity extends AppCompatActivity {
     public GoogleSignInAccount getSignedInAccount() {
         return signedInAccount;
     }
-
     public String getPlayerId() {
         return playerId;
     }
 
+    /**
+     * Runs asynchronous function to get the id of the currently signed in user.
+     */
     public void requirePlayerId() {
         PlayersClient playerClient = Games.getPlayersClient(this, signedInAccount);
         playerClient.getCurrentPlayerId().addOnCompleteListener(new OnCompleteListener<String>() {
@@ -126,6 +140,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Signs out current user.
+     */
     public void signOut() {
         GoogleSignInClient signInClient = GoogleSignIn
                 .getClient(this, GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
