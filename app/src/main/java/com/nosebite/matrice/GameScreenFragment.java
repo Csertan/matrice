@@ -26,6 +26,8 @@ import androidx.preference.PreferenceManager;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import matrice.FigureSet;
 import matrice.Game;
@@ -46,6 +48,7 @@ public class GameScreenFragment extends Fragment {
 
     private GameScreenViewModel mViewModel;
     private Game game;
+    private String playerId;
 
     /**
      * Indicator used to switch between New Game / Stop Game buttons
@@ -73,7 +76,6 @@ public class GameScreenFragment extends Fragment {
      * move.
      */
     private GestureDetectorCompat mDetector;
-    private int gameLayoutSize;
 
     public static GameScreenFragment newInstance() {
         return new GameScreenFragment();
@@ -397,6 +399,13 @@ public class GameScreenFragment extends Fragment {
         result.putString("previousGame", previousGame);
 
         getParentFragmentManager().setFragmentResult("gameData", result);
+    }
+
+    @NotNull
+    private String gameToJSON() throws JSONException {
+        JSONObject gameObject = new JSONObject();
+        gameObject.put(playerId, game.gameToJson());
+        return gameObject.toString();
     }
 
     /**
