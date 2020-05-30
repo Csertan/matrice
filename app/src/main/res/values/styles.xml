@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -21,11 +21,11 @@
     <style name="MainFragmentFont" parent="Widget.AppCompat.Light.ActionButton">
         <item name="android:fontFamily">@font/titillium_web_semibold</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
-        <item name="android:textSize">32dp</item>
+        <item name="android:textSize">32sp</item>
     </style>
 
     <!-- Settings Activity Theme -->
-    <style name="AppSettingsTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppSettingsTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>

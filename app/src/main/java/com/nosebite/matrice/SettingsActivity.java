@@ -9,9 +9,11 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreference;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -63,6 +65,22 @@ public class SettingsActivity extends AppCompatActivity {
             if(genderPreferences != null) {
                 genderPreferences.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
             }
+
+            //Switches between Day and Night UI modes
+            SwitchPreference darkModePreference = findPreference(getString(R.string.key_enable_dark_mode));
+            assert darkModePreference != null;
+            darkModePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    if(darkModePreference.isChecked()) {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    }
+                    else {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    }
+                    return true;
+                }
+            });
 
             //On Click Listener for Send Feedback Preference
             Preference sendFeedbackPreference = findPreference(getString(R.string.key_send_feedback));
