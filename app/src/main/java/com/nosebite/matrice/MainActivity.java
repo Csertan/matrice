@@ -121,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
     public String getPlayerId() {
         return playerId;
     }
+    public boolean playerIsSignedIn() {
+        return signedInAccount != null;
+    }
 
     /**
      * Runs asynchronous function to get the id of the currently signed in user.

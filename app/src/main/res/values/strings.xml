@@ -100,6 +100,7 @@
     <string name="choose_email_client">Choose email client</string>
     <string name="signed_out_message">Signed out successfully!</string>
     <string name="feature_coming_soon">This feature is coming soon!</string>
+    <string name="sign_out_text">Sign Out</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 
