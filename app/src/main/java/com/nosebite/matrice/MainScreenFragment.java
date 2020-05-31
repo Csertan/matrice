@@ -41,7 +41,6 @@ public class MainScreenFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mainActivity = (MainActivity) getActivity();
-        updateUI(mainActivity.playerIsSignedIn());
 
         /*
           On Click Listener for the navigation to Authors Screen
@@ -107,6 +106,8 @@ public class MainScreenFragment extends Fragment {
                         .navigate(MainScreenFragmentDirections.actionMainScreenFragmentToBootScreenFragment());
             }
         });
+
+        updateUI(mainActivity.playerIsSignedIn());
     }
 
     @Override

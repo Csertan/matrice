@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         GoogleSignInClient signInClient = GoogleSignIn
                 .getClient(this, GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
         Intent intent = signInClient.getSignInIntent();
+        Toast.makeText(getApplicationContext(), getString(R.string.sign_in_process), Toast.LENGTH_SHORT).show();
         startActivityForResult(intent, RC_SIGN_IN);
     }
 
@@ -160,5 +161,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), getString(R.string.signed_out_message), Toast.LENGTH_SHORT).show();
             }
         });
+        signedInAccount = null;
+        playerId = null;
     }
 }

@@ -43,4 +43,6 @@
     <string name="feature_coming_soon">Ez a funkció nemsokára elérhető lesz!</string>
     <string name="view_webpage_error">Nincs olyan alkalmazás, ami kezelni tudná ezt a kérést.</string>
     <string name="sign_out_text">Kijelentkezés</string>
+    <string name="sign_in_success">Sikeres bejelentkezés!</string>
+    <string name="sign_in_process">Bejelentkezés...</string>
 </resources>
