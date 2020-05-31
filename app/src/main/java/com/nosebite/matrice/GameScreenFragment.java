@@ -158,6 +158,14 @@ public class GameScreenFragment extends Fragment {
             }
         });
 
+        ImageButton backButton = (ImageButton) view.findViewById(R.id.leftControlsBackButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.onBackPressed();
+            }
+        });
+
         /*
           Handling TextView to displaying elapsed time in every second
          */

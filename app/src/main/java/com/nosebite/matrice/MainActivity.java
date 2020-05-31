@@ -54,6 +54,11 @@ public class MainActivity extends AppCompatActivity {
         signInSilently();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
     /**
      * Attempts to sign in the user silently.
      * If this is not possible starts interactive sign in.
