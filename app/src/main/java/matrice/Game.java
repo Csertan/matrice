@@ -213,19 +213,4 @@ public class Game {
         }
         return this.currentGame.isFinished();
     }
-
-    /* Logging */
-
-    /**
-     * Creates a JSON formatted String from the Game data.
-     * @return JSON formatted String, used when Game finishes.
-     */
-    public String gameToJson() {
-        StringBuilder output = new StringBuilder();
-        output.append("{ ");
-        output.append(getCurrentGame().levelToJson());
-        output.append("\"startTime\" : \"").append(getStartTime()).append("\", ");
-        output.append("\"gameDuration\" : ").append(getDuration()).append(" }");
-        return output.toString();
-    }
 }

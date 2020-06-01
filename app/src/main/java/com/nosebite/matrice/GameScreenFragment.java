@@ -38,6 +38,7 @@ import java.util.Map;
 
 import matrice.FigureSet;
 import matrice.Game;
+import matrice.GameData;
 import matrice.GameState;
 import matrice.Move;
 import matrice.Transformation;
@@ -413,7 +414,14 @@ public class GameScreenFragment extends Fragment {
      * Writes the game into the Firebase Realtime Database.
      */
     private void gameToDatabase() {
-        String playedGame = game.gameToJson();
+        GameData gameData = new GameData(game.getCurrentGame().getStartState().getStateId(),
+                game.getCurrentGame().getEndState().getStateId(),
+                game.getCurrentGame().sequenceToString(),
+                game.getCurrentGame().getStepSize(),
+                game.getCurrentGame().getStartState().getBoardSize(),
+                game.getStartTime(),
+                game.getDuration());
+        Map<String, Object> gameDataValues = gameData.toMap();
 
         DatabaseReference userReference = dataBase.child("users").child(userId);
         userReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -432,7 +440,7 @@ public class GameScreenFragment extends Fragment {
 
         String key = dataBase.child("games").child(userId).push().getKey();
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/games/" + userId + "/" + key, playedGame);
+        childUpdates.put("/games/" + userId + "/" + key, gameDataValues);
         dataBase.updateChildren(childUpdates);
     }
 

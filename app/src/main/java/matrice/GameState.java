@@ -95,8 +95,13 @@ public class GameState {
         return state;
     }
 
-    private void setState(Boolean[][] state) {
-        this.state = state;
+    private void setState(Boolean[][] other) {
+        this.state = new Boolean[boardSize][boardSize];
+        for(int i = 0; i < boardSize; i++) {
+            for(int j = 0; j < boardSize; j++) {
+                this.state[i][j] = other[i][j];
+            }
+        }
     }
 
     /**

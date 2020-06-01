@@ -11,8 +11,8 @@ import java.util.ArrayList;
  */
 public class GameLevel {
 
-    private GameState startState;
-    private GameState endState;
+    private final GameState startState;
+    private final GameState endState;
     private GameState currentState;
     private ArrayList<GameState> sequence;
 
@@ -59,6 +59,9 @@ public class GameLevel {
     public GameState getCurrentState() {
         return currentState;
     }
+    public GameState getCopyOfCurrentState() {
+        return new GameState(this.currentState);
+    }
     public GameState getEndState() {
         return endState;
     }
@@ -71,12 +74,6 @@ public class GameLevel {
 
     private void setCurrentState(GameState state) {
         this.currentState = state;
-    }
-    private void setEndState(GameState state) {
-        this.endState = state;
-    }
-    private void setStartState(GameState state) {
-        this.startState = state;
     }
 
     /* Handling moves */
@@ -143,7 +140,7 @@ public class GameLevel {
             case ROTATE:
                 calculateRotation(move, id);
         }
-        this.sequence.add(currentState);
+        this.sequence.add(this.getCopyOfCurrentState());
     }
 
     /* Game Control */
@@ -165,35 +162,15 @@ public class GameLevel {
         return this.currentState.equals(this.endState);
     }
 
-    /* Logging */
-
     /**
-     * Creates a formatted String from the Game Level object data.
-     * @return JSON formatted string that stores the start and end states, the state chain,
-     * the length of the chain and the board size of the game.
+     * Gives a String containing the state IDs of the game.
      */
-    String levelToJson() {
-        StringBuilder output = new StringBuilder();
-        output.append("\"startState\" : ").append(getStartState().getStateId()).append(", ");
-        output.append("\"endState\" : ").append(getEndState().getStateId()).append(", ");
-        output.append("\"stateChain\" : [ ");
+    public String sequenceToString() {
+        StringBuilder data = new StringBuilder();
         for(int i = 0; i < sequence.size(); i++) {
-            output.append(sequence.get(i).getStateId()).append(", ");
+            data.append(sequence.get(i).getStateId()).append(" ");
         }
-        output.append("], ");
-        output.append("\"chainLength\" : ").append(getStepSize()).append(", ");
-        output.append("\"boardSize\" : ").append(getStartState().getBoardSize()).append(", ");
-        return output.toString();
-    }
-
-    String sequenceToString() {
-        StringBuilder output = new StringBuilder();
-        output.append("[ ");
-        for(int i = 0; i < sequence.size(); i++) {
-            output.append(sequence.get(i).getStateId()).append(", ");
-        }
-        output.append("]");
-        return output.toString();
+        return data.toString();
     }
 
     /**
