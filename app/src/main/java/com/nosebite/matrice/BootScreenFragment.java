@@ -42,7 +42,7 @@ public class BootScreenFragment extends Fragment {
         toMainButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mainActivity.getSignedInAccount() == null) {
+                if (!mainActivity.playerIsSignedIn()) {
                     mainActivity.startSignInIntent();
                 } else {
                     Navigation.findNavController(view)

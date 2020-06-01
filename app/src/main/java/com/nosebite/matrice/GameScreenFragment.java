@@ -24,10 +24,17 @@ import androidx.gridlayout.widget.GridLayout;
 import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import matrice.FigureSet;
 import matrice.Game;
@@ -44,7 +51,7 @@ public class GameScreenFragment extends Fragment {
     private static final String TAG = GameScreenFragment.class.getSimpleName();
 
     private MainActivity mainActivity;
-    private String playerId;
+    private String userId;
 
     private GameScreenViewModel mViewModel;
     private Game game;
@@ -61,7 +68,9 @@ public class GameScreenFragment extends Fragment {
     private Handler timerHandler;
     private Runnable timerRunnable;
 
-    /* Local variable to display stepCount to the screen */
+    /**
+     *  Local variable to display stepCount to the screen
+     */
     private TextView stepCounter;
 
     /**
@@ -75,6 +84,8 @@ public class GameScreenFragment extends Fragment {
      * move.
      */
     private GestureDetectorCompat mDetector;
+
+    private DatabaseReference dataBase;
 
     public static GameScreenFragment newInstance() {
         return new GameScreenFragment();
@@ -90,21 +101,19 @@ public class GameScreenFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        /*
-          Initialising Game Object upon saved Preferences
-         */
+        /* Initialising Game Object upon saved Preferences */
         initGameUponPreferences(null);
 
-        /*
-        * Requiring player id from Main Activity
-        */
+        /* Requiring player id from Main Activity */
         mainActivity = (MainActivity) getActivity();
         if(mainActivity != null) {
-            mainActivity.requirePlayerId();
+            userId = mainActivity.getUserID();
         }
-        /*
-          Adds callback to Home Button which navigates the user to the Main Screen
-         */
+
+        /* Get Instance of Firebase Database Reference */
+        dataBase = FirebaseDatabase.getInstance().getReference();
+
+        /* Adds callback to Home Button which navigates the user to the Main Screen */
         ImageButton toHomeButton = (ImageButton) view.findViewById(R.id.leftControlsHomeButton);
         toHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,9 +123,7 @@ public class GameScreenFragment extends Fragment {
             }
         });
 
-        /*
-          Adds callback to Play/Pause Button to suspend/resume measuring elapsed time
-         */
+        /* Adds callback to Play/Pause Button to suspend/resume measuring elapsed time */
         ImageButton pausePlayButton = (ImageButton) view.findViewById(R.id.rightControlsPausePlayButton);
         pausePlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,9 +132,7 @@ public class GameScreenFragment extends Fragment {
             }
         });
 
-        /*
-          Adds callback to Stop/New Game Button to let the user stop the game or create new game
-         */
+        /* Adds callback to Stop/New Game Button to let the user stop the game or create new game */
         ImageButton stopButton = (ImageButton) view.findViewById(R.id.rightControlsStopButton);
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,10 +141,8 @@ public class GameScreenFragment extends Fragment {
             }
         });
 
-        /*
-          Adds callback to Retry Button in order to let the user go back to the start
-          states of the level
-         */
+        /* Adds callback to Retry Button in order to let the user go back to the start
+          states of the level */
         ImageButton retryButton = (ImageButton) view.findViewById(R.id.rightControlsRetryButton);
         retryButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,6 +161,7 @@ public class GameScreenFragment extends Fragment {
             }
         });
 
+        /* Adds callback to Back Button to navigate the user down in the back stack */
         ImageButton backButton = (ImageButton) view.findViewById(R.id.leftControlsBackButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,9 +170,7 @@ public class GameScreenFragment extends Fragment {
             }
         });
 
-        /*
-          Handling TextView to displaying elapsed time in every second
-         */
+        /* Handling TextView to displaying elapsed time in every second */
         timer = (TextView) view.findViewById(R.id.rightControlsGameDuration);
         timer.setText(this.game.getFormattedDuration());
 
@@ -185,9 +187,7 @@ public class GameScreenFragment extends Fragment {
         stepCounter = (TextView) view.findViewById(R.id.topDetailsStepCount);
         stepCounter.setText(Integer.toString(this.game.getCurrentGame().getStepSize()));
 
-        /*
-          Initialising local variables that store grid layouts
-         */
+        /* Initialising local variables that store grid layouts */
         gameLayout = (GridLayout) view.findViewById(R.id.startStateLayout);
         endLayout = (GridLayout) view.findViewById(R.id.endStateLayout);
 
@@ -334,9 +334,8 @@ public class GameScreenFragment extends Fragment {
         if(finished) {
             this.game.stop();
             this.isGameStopped = true;
-            playerId = mainActivity.getPlayerId();
-            Log.d(TAG, "Player Id: " + playerId);
-            //TODO Call toJSON function
+
+            gameToDatabase();
 
             setScoreDetails();
             Navigation.findNavController(this.getView())
@@ -411,15 +410,30 @@ public class GameScreenFragment extends Fragment {
     }
 
     /**
-     * Writes the game into JSON format.
-     * @return JSON string
-     * @throws JSONException If some error occurs.
+     * Writes the game into the Firebase Realtime Database.
      */
-    @NotNull
-    private String gameToJSON() throws JSONException {
-        JSONObject gameObject = new JSONObject();
-        gameObject.put(playerId, game.gameToJson());
-        return gameObject.toString();
+    private void gameToDatabase() {
+        String playedGame = game.gameToJson();
+
+        DatabaseReference userReference = dataBase.child("users").child(userId);
+        userReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists()) {
+                    dataBase.child("users").child(userId).setValue(true);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "loadUser:onCancelled", databaseError.toException());
+            }
+        });
+
+        String key = dataBase.child("games").child(userId).push().getKey();
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/games/" + userId + "/" + key, playedGame);
+        dataBase.updateChildren(childUpdates);
     }
 
     /**
@@ -428,22 +442,22 @@ public class GameScreenFragment extends Fragment {
     class FlingGestureListener extends GestureDetector.SimpleOnGestureListener {
         private static final String DEBUG_TAG = "Gestures";
 
-        // Constants that help decide whether the Motion has to be handled
+        /* Constants that help decide whether the Motion has to be handled */
         private static final int SWIPE_MIN_DISTANCE = 20;
         private static final int SWIPE_THRESHOLD_VELOCITY = 10;
 
-        // Needed to Override onDown() method to listen to any motion
+        /* Needed to Override onDown() method to listen to any motion */
         @Override
         public boolean onDown(@NotNull MotionEvent event) {
             Log.d(DEBUG_TAG, "onDown: " + event.toString());
             return true;
         }
 
-        // Overrides default onFling method
+        /* Overrides default onFling method */
         @Override
         public boolean onFling(@NotNull MotionEvent event1, @NotNull MotionEvent event2,
                                float velocityX, float velocityY) {
-            Log.d(DEBUG_TAG, "onFLing: " + event1.toString() + event2.toString());
+            // Log.d(DEBUG_TAG, "onFLing: " + event1.toString() + event2.toString());
 
             float x1 = event1.getX();
             float y1 = event1.getY();

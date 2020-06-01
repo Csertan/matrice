@@ -2,6 +2,7 @@ package com.nosebite.matrice;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
 
@@ -17,9 +18,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.GamesClient;
-import com.google.android.gms.games.PlayersClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.PlayGamesAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Main Activity of the Application.
@@ -32,7 +40,11 @@ public class MainActivity extends AppCompatActivity {
 
     /* Stores the actual account which the user is signed in. */
     private GoogleSignInAccount signedInAccount;
-    private String playerId;
+
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser user;
+
+    private static FirebaseDatabase firebaseDatabase;
 
     /* Constant value for Sign In Intent */
     private static final int RC_SIGN_IN = 1;
@@ -46,6 +58,16 @@ public class MainActivity extends AppCompatActivity {
             gamesClient.setViewForPopups(findViewById(android.R.id.content));
             gamesClient.setGravityForPopups(Gravity.TOP | Gravity.CENTER_HORIZONTAL);
         }
+        firebaseAuth = FirebaseAuth.getInstance();
+        if(firebaseDatabase == null) {
+            firebaseDatabase = FirebaseDatabase.getInstance();
+            enablePersistence();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     @Override
@@ -64,10 +86,14 @@ public class MainActivity extends AppCompatActivity {
      * If this is not possible starts interactive sign in.
      */
     private void signInSilently() {
-        GoogleSignInOptions signInOptions = GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN;
+        GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN)
+                .requestServerAuthCode(getString(R.string.default_web_client_id))
+                .build();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if(GoogleSignIn.hasPermissions(account, signInOptions.getScopeArray())) {
             signedInAccount = account;
+            user = firebaseAuth.getCurrentUser();
+            Log.d(TAG, "Found last signed in accounts: " + account + user);
         }
         else {
             GoogleSignInClient signInClient = GoogleSignIn.getClient(this, signInOptions);
@@ -77,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
                             if(task.isSuccessful()) {
                                 signedInAccount = task.getResult();
+                                Log.d(TAG, "Logged in with Play Games: " + signedInAccount);
+                                firebaseAuthWithPlayGames(signedInAccount);
                             }
                             else {
                                 signedInAccount = null;
@@ -91,11 +119,33 @@ public class MainActivity extends AppCompatActivity {
      * Starts interactive sign in.
      */
     public void startSignInIntent() {
+        GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN)
+                .requestServerAuthCode(getString(R.string.default_web_client_id))
+                .build();
         GoogleSignInClient signInClient = GoogleSignIn
-                .getClient(this, GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
+                .getClient(this, signInOptions);
         Intent intent = signInClient.getSignInIntent();
         Toast.makeText(getApplicationContext(), getString(R.string.sign_in_process), Toast.LENGTH_SHORT).show();
         startActivityForResult(intent, RC_SIGN_IN);
+    }
+
+    private void firebaseAuthWithPlayGames(@NotNull GoogleSignInAccount account) {
+
+        AuthCredential credential = PlayGamesAuthProvider.getCredential(account.getServerAuthCode());
+        firebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()) {
+                            user = firebaseAuth.getCurrentUser();
+                            Log.d(TAG, "Logged in with Firebase: " + user);
+                        }
+                        else {
+                            user = null;
+                            Toast.makeText(getApplicationContext(), getString(R.string.sign_in_other_error), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     /**
@@ -108,6 +158,8 @@ public class MainActivity extends AppCompatActivity {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if(result.isSuccess()) {
                 signedInAccount = result.getSignInAccount();
+                Log.d(TAG, "Logged in with Play Games: " + signedInAccount);
+                firebaseAuthWithPlayGames(signedInAccount);
             }
             else {
                 signedInAccount = null;
@@ -124,29 +176,17 @@ public class MainActivity extends AppCompatActivity {
     public GoogleSignInAccount getSignedInAccount() {
         return signedInAccount;
     }
-    public String getPlayerId() {
-        return playerId;
+    public FirebaseUser getUser() {
+        return user;
+    }
+    public String getUserID() {
+        return user.getUid();
     }
     public boolean playerIsSignedIn() {
-        return signedInAccount != null;
+        return (signedInAccount != null) && (user != null);
     }
-
-    /**
-     * Runs asynchronous function to get the id of the currently signed in user.
-     */
-    public void requirePlayerId() {
-        PlayersClient playerClient = Games.getPlayersClient(this, signedInAccount);
-        playerClient.getCurrentPlayerId().addOnCompleteListener(new OnCompleteListener<String>() {
-            @Override
-            public void onComplete(@NonNull Task<String> task) {
-                if(task.isSuccessful()) {
-                    playerId = task.getResult();
-                }
-                else {
-                    playerId = null;
-                }
-            }
-        });
+    private void enablePersistence() {
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
     }
 
     /**
@@ -161,7 +201,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), getString(R.string.signed_out_message), Toast.LENGTH_SHORT).show();
             }
         });
+        firebaseAuth.signOut();
         signedInAccount = null;
-        playerId = null;
+        user = null;
     }
 }
