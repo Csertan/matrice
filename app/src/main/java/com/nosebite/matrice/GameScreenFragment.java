@@ -337,6 +337,8 @@ public class GameScreenFragment extends Fragment {
             this.isGameStopped = true;
 
             gameToDatabase();
+            incrementGameAchievements();
+            updateLeaderboardScores();
 
             setScoreDetails();
             Navigation.findNavController(this.getView())
@@ -442,6 +444,23 @@ public class GameScreenFragment extends Fragment {
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/games/" + userId + "/" + key, gameDataValues);
         dataBase.updateChildren(childUpdates);
+    }
+
+    /**
+     * Increments achievements that counts played games.
+     */
+    private void incrementGameAchievements() {
+        mainActivity.getAchievementsClient().increment(getString(R.string.achievement_novice_player), 1);
+        mainActivity.getAchievementsClient().increment(getString(R.string.achievement_experienced_player), 1);
+        mainActivity.getAchievementsClient().increment(getString(R.string.achievement_fellow_researcher), 1);
+        mainActivity.getAchievementsClient().increment(getString(R.string.achievement_doctor_of_researching_things), 1);
+    }
+
+    private void updateLeaderboardScores() {
+        mainActivity.getLeaderboardsClient()
+                .submitScore(getString(R.string.leaderboard_best_score_ever), game.getScore());
+        mainActivity.getLeaderboardsClient()
+                .submitScore(getString(R.string.leaderboard_you_are_so_fast), game.getDuration());
     }
 
     /**

@@ -103,6 +103,8 @@
     <string name="sign_out_text">Sign Out</string>
     <string name="sign_in_success">Signed in successfully!</string>
     <string name="sign_in_process">Signing in...</string>
+    <string name="open_achievements_description" translatable="false">openAchievements</string>
+    <string name="open_leaderboards_description" translatable="false">openLeaderboards</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 

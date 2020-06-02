@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 
 /**
@@ -89,6 +91,22 @@ public class MainScreenFragment extends Fragment {
             }
         });
 
+        ImageButton showAchievementsButton = (ImageButton) view.findViewById(R.id.achievementsButtonMain);
+        showAchievementsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAchievements();
+            }
+        });
+
+        ImageButton showLeaderboardsButton = (ImageButton) view.findViewById(R.id.leaderBoardsButtonMain);
+        showLeaderboardsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showLeaderboards();
+            }
+        });
+
         signInButton = (SignInButton) view.findViewById(R.id.sign_in_button);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,5 +143,32 @@ public class MainScreenFragment extends Fragment {
             signInButton.setVisibility(View.VISIBLE);
             signOutButton.setVisibility(View.GONE);
         }
+    }
+
+
+    /**
+     * Shows the Achievements List to the player.
+     */
+    private void showAchievements() {
+        mainActivity.getAchievementsClient().getAchievementsIntent()
+                .addOnSuccessListener(new OnSuccessListener<Intent>() {
+                    @Override
+                    public void onSuccess(Intent intent) {
+                        startActivityForResult(intent, MainActivity.RC_ACHIEVEMENTS_UI);
+                    }
+                });
+    }
+
+    /**
+     * Shows the Leaderboards List to the player.
+     */
+    private void showLeaderboards() {
+        mainActivity.getLeaderboardsClient().getAllLeaderboardsIntent()
+                .addOnSuccessListener(new OnSuccessListener<Intent>() {
+                    @Override
+                    public void onSuccess(Intent intent) {
+                        startActivityForResult(intent, MainActivity.RC_LEADERBOARD_UI);
+                    }
+                });
     }
 }

@@ -16,8 +16,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.games.AchievementsClient;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.GamesClient;
+import com.google.android.gms.games.LeaderboardsClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -41,13 +43,21 @@ public class MainActivity extends AppCompatActivity {
     /* Stores the actual account which the user is signed in. */
     private GoogleSignInAccount signedInAccount;
 
+    /* Authenctication with Firebase */
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
 
+    /* The Firebase Realtime Database to save the game data */
     private static FirebaseDatabase firebaseDatabase;
 
+    /* Game Clients for Play Games administration */
+    private AchievementsClient achievementsClient;
+    private LeaderboardsClient leaderboardsClient;
+
     /* Constant value for Sign In Intent */
-    private static final int RC_SIGN_IN = 1;
+    public static final int RC_SIGN_IN = 1000;
+    public static final int RC_ACHIEVEMENTS_UI = 2000;
+    public static final int RC_LEADERBOARD_UI = 2001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             gamesClient.setViewForPopups(findViewById(android.R.id.content));
             gamesClient.setGravityForPopups(Gravity.TOP | Gravity.CENTER_HORIZONTAL);
         }
+        /* Get Instance of Firebase Realtime Database and sets offline persistence */
         firebaseAuth = FirebaseAuth.getInstance();
         if(firebaseDatabase == null) {
             firebaseDatabase = FirebaseDatabase.getInstance();
@@ -74,6 +85,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         signInSilently();
+        /* Get Instance of Play Games Achievements CLient */
+        if(achievementsClient == null)
+            achievementsClient = Games.getAchievementsClient(this, getSignedInAccount());
+        /* Get Instance of Play Games Leaderboards CLient */
+        if(leaderboardsClient == null)
+            leaderboardsClient = Games.getLeaderboardsClient(this, getSignedInAccount());
     }
 
     @Override
@@ -129,6 +146,10 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, RC_SIGN_IN);
     }
 
+    /**
+     * Authenticates player signed in with a Play Account to Firebase
+     * @param account The Google Play Account with which the player is signed in.
+     */
     private void firebaseAuthWithPlayGames(@NotNull GoogleSignInAccount account) {
 
         AuthCredential credential = PlayGamesAuthProvider.getCredential(account.getServerAuthCode());
@@ -181,6 +202,12 @@ public class MainActivity extends AppCompatActivity {
     }
     public String getUserID() {
         return user.getUid();
+    }
+    public AchievementsClient getAchievementsClient() {
+        return achievementsClient;
+    }
+    public LeaderboardsClient getLeaderboardsClient() {
+        return leaderboardsClient;
     }
     public boolean playerIsSignedIn() {
         return (signedInAccount != null) && (user != null);
