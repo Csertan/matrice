@@ -30,6 +30,11 @@
         <action
             android:id="@+id/action_mainScreenFragment_to_levelsFragment"
             app:destination="@id/levelsFragment" />
+        <action
+            android:id="@+id/action_mainScreenFragment_to_bootScreenFragment"
+            app:destination="@id/bootScreenFragment"
+            app:popUpTo="@id/bootScreenFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/authorsScreenFragment"

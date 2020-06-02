@@ -3,6 +3,9 @@
     <string name="app_version" translatable="false">1.1.0</string>
     <string name="url_github" translatable="false">https://github.com/Csertan/matrice</string>
 
+    <!-- Sign In issue -->
+    <string name="sign_in_other_error">An error occurred while signing in.</string>
+
     <!-- Strings on BootScreenFragment -->
     <string name="studio_logo_description" translatable="false">studioLogo</string>
     <string name="gotomain_description" translatable="false">goToMain</string>
@@ -88,10 +91,19 @@
     <string name="title_send_feedback">Send Feedback</string>
     <string name="summary_support">Got any queries? We are happy to help!</string>
 
+    <string name="key_privacy_policy" translatable="false">privacy_policy</string>
     <string name="privacy_policy">Privacy Policy</string>
-    <string name="url_privacy" translatable="false">https://csertan.github.io/</string>
+    <string name="url_privacy" translatable="false">https://csertan.github.io/nosebite-studios</string>
+    <string name="view_webpage_error">Can\'t find application for opening webpage.</string>
 
     <string name="choose_email_client">Choose email client</string>
+    <string name="signed_out_message">Signed out successfully!</string>
+    <string name="feature_coming_soon">This feature is coming soon!</string>
+    <string name="sign_out_text">Sign Out</string>
+    <string name="sign_in_success">Signed in successfully!</string>
+    <string name="sign_in_process">Signing in...</string>
+    <string name="open_achievements_description" translatable="false">openAchievements</string>
+    <string name="open_leaderboards_description" translatable="false">openLeaderboards</string>
     <string name="summary_about">We would like to provide you with the best game experience so don\'t hesitate to tell us your opinion, report found bugs and to share ideas on future improvements.</string>
 
     <!-- TODO: Remove or change this placeholder text -->

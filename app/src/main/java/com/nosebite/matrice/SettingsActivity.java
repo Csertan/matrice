@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -93,7 +94,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             });
 
-            Preference privacyPolicy = findPreference(getString(R.string.privacy_policy));
+            Preference privacyPolicy = findPreference(getString(R.string.key_privacy_policy));
             if(privacyPolicy != null) {
                 privacyPolicy.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                     @Override
@@ -106,11 +107,15 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         void openWebPage(String url) {
-            Uri webpage = Uri.parse(url);
-            Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
-            if(webIntent.resolveActivity(getActivity().getPackageManager()) != null)
+            Uri webPage = Uri.parse(url);
+            Intent webIntent = new Intent(Intent.ACTION_VIEW);
+            webIntent.setData(webPage);
+            if(webIntent.resolveActivity(requireActivity().getPackageManager()) != null)
             {
                 startActivity(webIntent);
+            }
+            else {
+                Toast.makeText(getContext(), getString(R.string.view_webpage_error), Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -123,7 +128,8 @@ public class SettingsActivity extends AppCompatActivity {
         String body = null;
         try {
             body = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
-            body = "\n\n-----------------------------\nPlease don't remove this information\n Device OS: Android \n Device OS version: " +
+            body = "\n\n--------------------\nPlease don't remove the " +
+                    "information below!\n--------------------\n Device OS: Android \n Device OS version: " +
                     Build.VERSION.RELEASE + "\n App Version: " + body + "\n Device Brand: " + Build.BRAND +
                     "\n Device Model: " + Build.MODEL + "\n Device Manufacturer: " + Build.MANUFACTURER;
         } catch (PackageManager.NameNotFoundException e) {

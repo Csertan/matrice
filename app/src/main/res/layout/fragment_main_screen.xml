@@ -96,4 +96,86 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsButtonMain" />
 
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/mainScreenPlayFeaturesLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="64dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        app:columnCount="3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/authorsButtonMain"
+        app:rowCount="1">
+
+        <ImageButton
+            android:id="@+id/achievementsButtonMain"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="3dp"
+            android:contentDescription="@string/open_achievements_description"
+            android:src="@drawable/ic_achievements_icon"
+            app:layout_column="0"
+            app:layout_gravity="center_vertical"
+            app:layout_row="0" />
+
+        <ImageButton
+            android:id="@+id/leaderBoardsButtonMain"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="3dp"
+            android:contentDescription="@string/open_leaderboards_description"
+            android:src="@drawable/ic_leaderboards_icon"
+            app:layout_column="2"
+            app:layout_gravity="center_vertical"
+            app:layout_row="0" />
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_column="1"
+            app:layout_row="0"
+            app:layout_gravity="center_vertical"/>
+
+        <Button
+            android:id="@+id/sign_out_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:text="@string/sign_out_text"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_column="1"
+            app:layout_row="0"
+            app:layout_gravity="center_vertical"/>
+
+    </androidx.gridlayout.widget.GridLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
