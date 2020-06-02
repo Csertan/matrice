@@ -45,4 +45,5 @@
     <string name="sign_out_text">Kijelentkezés</string>
     <string name="sign_in_success">Sikeres bejelentkezés!</string>
     <string name="sign_in_process">Bejelentkezés...</string>
+    <string name="summary_about">Szeretnénk neked a legjobb játékélményt biztosítani, így bátran mondd el nekünk a vélaményedet, írd le az általad felfedezett hibákat és ötleteidet jövendő fejlesztésekkel kapcsolatban.</string>
 </resources>
