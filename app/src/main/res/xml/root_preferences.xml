@@ -1,4 +1,5 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Game Settings -->
     <PreferenceCategory
@@ -23,7 +24,7 @@
             app:defaultValue="0"
             app:entries="@array/pref_figure_set_entries"
             app:entryValues="@array/pref_figure_set_values"
-            app:enabled="false"/>
+            app:enabled="true"/>
 
         <ListPreference
             app:key="@string/key_transition_type"

@@ -33,11 +33,10 @@ public class BootScreenFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        /* Gets the reference of the Main Activity */
         mainActivity = (MainActivity) getActivity();
 
-        /*
-          Adds callback to the launcher Button to navigate the user to the Main Screen
-         */
+        /* Adds callback to the launcher Button to navigate the user to the Main Screen */
         ImageButton toMainButton = (ImageButton) view.findViewById(R.id.goToMainButton);
         toMainButton.setOnClickListener(new View.OnClickListener() {
             @Override

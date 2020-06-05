@@ -105,6 +105,8 @@
     <string name="open_achievements_description" translatable="false">openAchievements</string>
     <string name="open_leaderboards_description" translatable="false">openLeaderboards</string>
     <string name="summary_about">We would like to provide you with the best game experience so don\'t hesitate to tell us your opinion, report found bugs and to share ideas on future improvements.</string>
+    <string name="levels_text">Levels</string>
+    <string name="age_pref_invalid_input">Invalid input! Your age must be a number...</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 

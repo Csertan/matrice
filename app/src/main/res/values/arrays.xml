@@ -11,9 +11,9 @@
 
     <!-- Figure Set Preferences -->
     <string-array name="pref_figure_set_entries">
-        <item>O+</item>
-        <item>OX</item>
-        <item>+-</item>
+        <item>Plumpy</item>
+        <item>Tic Tac Toe</item>
+        <item>Plus Minus</item>
     </string-array>
     <string-array name="pref_figure_set_values">
         <item>0</item>

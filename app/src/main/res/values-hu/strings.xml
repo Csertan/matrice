@@ -46,4 +46,6 @@
     <string name="sign_in_success">Sikeres bejelentkezés!</string>
     <string name="sign_in_process">Bejelentkezés...</string>
     <string name="summary_about">Szeretnénk neked a legjobb játékélményt biztosítani, így bátran mondd el nekünk a vélaményedet, írd le az általad felfedezett hibákat és ötleteidet jövendő fejlesztésekkel kapcsolatban.</string>
+    <string name="levels_text">Pályák</string>
+    <string name="age_pref_invalid_input">Hibás érték! Az életkorod bizonyára egy szám, nem?</string>
 </resources>

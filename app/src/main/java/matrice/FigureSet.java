@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
  * Enum for signaling type of chosen figure set to Game handler
  */
 public enum FigureSet {
-    OPLUS(0), OEX(1), PLUSMINUS(2);
+    PLUMP(0), TICTACTOE(1), PLUSMINUS(2);
 
     private int id;
 

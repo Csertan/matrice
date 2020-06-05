@@ -35,9 +35,7 @@ public class SuccessScreenFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /*
-          Adds callback to Home Button to navigate the User to the Main Screen.
-         */
+        /* Adds callback to Home Button to navigate the User to the Main Screen. */
         ImageButton toHomeButton = (ImageButton) view.findViewById(R.id.homeButtonSuccess);
         toHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override

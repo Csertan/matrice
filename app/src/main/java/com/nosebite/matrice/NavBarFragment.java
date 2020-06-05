@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,9 +39,7 @@ public class NavBarFragment extends Fragment {
         assert getParentFragment() != null;
         parentFragmentName = getParentFragment().getClass().getSimpleName();
 
-        /*
-          Adds callback to the Home Button to navigate the user to the Main Screen.
-         */
+        /* Adds callback to the Home Button to navigate the user to the Main Screen. */
         ImageButton toHomeButton = (ImageButton) view.findViewById(R.id.navBarHomeButton);
         toHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +50,7 @@ public class NavBarFragment extends Fragment {
             }
         });
 
+        /* Displays different destinations upon current parent fragment */
         ImageButton levelsButton = (ImageButton) view.findViewById(R.id.navBarLevelsButton);
         if(parentFragmentName.equals("LevelsFragment"))
         {
@@ -72,9 +72,7 @@ public class NavBarFragment extends Fragment {
             }
         });
 
-        /*
-          On Click Listener for starting Settings Activity to adjust Preferences
-         */
+        /* On Click Listener for starting Settings Activity to adjust Preferences */
         ImageButton settingsButton = (ImageButton) view.findViewById(R.id.navBarSettingsButton);
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,5 +82,15 @@ public class NavBarFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        /* Updates displayed fragment title with parent fragments title */
+        TextView fragmentTitle = (TextView) view.findViewById(R.id.navBarTitle);
+        if(parentFragmentName.equals("LevelsFragment"))
+        {
+            fragmentTitle.setText(R.string.levels_text);
+        }
+        else {
+            fragmentTitle.setText(R.string.authors_text);
+        }
     }
 }

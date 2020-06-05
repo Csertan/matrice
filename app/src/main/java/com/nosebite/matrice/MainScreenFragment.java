@@ -42,11 +42,10 @@ public class MainScreenFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        /* Getting the reference of the Main Activity */
         mainActivity = (MainActivity) getActivity();
 
-        /*
-          On Click Listener for the navigation to Authors Screen
-         */
+        /* On Click Listener for the navigation to Authors Screen */
         Button toAuthorsButton = (Button) view.findViewById(R.id.authorsButtonMain);
         toAuthorsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,9 +55,7 @@ public class MainScreenFragment extends Fragment {
             }
         });
 
-        /*
-          On Click Listener for the navigation to Game Screen
-         */
+        /* On Click Listener for the navigation to Game Screen */
         Button playButton = (Button) view.findViewById(R.id.playButtonMain);
         playButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -78,9 +75,7 @@ public class MainScreenFragment extends Fragment {
             }
         });
 
-        /*
-          On Click Listener for starting Settings Activity to adjust Preferences
-         */
+        /* On Click Listener for starting Settings Activity to adjust Preferences */
         Button settingsButton = (Button) view.findViewById(R.id.settingsButtonMain);
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +86,7 @@ public class MainScreenFragment extends Fragment {
             }
         });
 
+        /* On CLick Listener for showing Achievements to the player */
         ImageButton showAchievementsButton = (ImageButton) view.findViewById(R.id.achievementsButtonMain);
         showAchievementsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +95,7 @@ public class MainScreenFragment extends Fragment {
             }
         });
 
+        /* On CLick Listener for showing Leaderboards to the player */
         ImageButton showLeaderboardsButton = (ImageButton) view.findViewById(R.id.leaderBoardsButtonMain);
         showLeaderboardsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +104,7 @@ public class MainScreenFragment extends Fragment {
             }
         });
 
+        /* On CLick Listener for signing the player in */
         signInButton = (SignInButton) view.findViewById(R.id.sign_in_button);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +113,7 @@ public class MainScreenFragment extends Fragment {
             }
         });
 
+        /* On CLick Listener for signing the player out */
         signOutButton = (Button) view.findViewById(R.id.sign_out_button);
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +124,7 @@ public class MainScreenFragment extends Fragment {
             }
         });
 
+        /* Updates buttons */
         updateUI(mainActivity.playerIsSignedIn());
     }
 
@@ -134,6 +134,10 @@ public class MainScreenFragment extends Fragment {
         updateUI(mainActivity.playerIsSignedIn());
     }
 
+    /**
+     * Updates Sign in and out Buttons upon changes.
+     * @param isSignedIn Determines whether the player is signed in.
+     */
     private void updateUI(boolean isSignedIn) {
         if(isSignedIn) {
             signInButton.setVisibility(View.GONE);

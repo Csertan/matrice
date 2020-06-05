@@ -86,6 +86,7 @@ public class GameScreenFragment extends Fragment {
      */
     private GestureDetectorCompat mDetector;
 
+    /* Reference of the Firebase Database Root */
     private DatabaseReference dataBase;
 
     public static GameScreenFragment newInstance() {
@@ -373,10 +374,10 @@ public class GameScreenFragment extends Fragment {
      * Updates layout with the appropriate figures in each cell of the Game board matrix
      * @param layout Layout to be updated (GridLayout)
      * @param state State with which the layout will be updated (GameState)
-     * TODO Implement functionality to switch between Figure Sets and update icons accordingly
      */
     private void updateLayout(@NotNull GridLayout layout, @NotNull GameState state) {
         int count = layout.getChildCount();
+        FigureSet figureSet = game.getFigureSet();
         Boolean value;
         int boardSize = this.game.getCurrentGame().getCurrentState().getBoardSize();
         //Loops through the Childs of the Layout
@@ -385,10 +386,28 @@ public class GameScreenFragment extends Fragment {
             //Gets the value of the appropriate board Cell and sets the Figure
             value = state.getCell((i / boardSize), (i % boardSize));
             if(value) {
-                field.setImageResource(R.drawable.ic_figure_o);
+                switch (figureSet) {
+                    case PLUMP:
+                        field.setImageResource(R.drawable.ic_figure_plump1);
+                        break;
+                    case TICTACTOE:
+                        field.setImageResource(R.drawable.ic_figure_o);
+                        break;
+                    case PLUSMINUS:
+                        field.setImageResource(R.drawable.ic_figure_minus);
+                }
             }
             else
-                field.setImageResource(R.drawable.ic_figure_x);
+                switch (figureSet) {
+                    case PLUMP:
+                        field.setImageResource(R.drawable.ic_figure_plump2);
+                        break;
+                    case TICTACTOE:
+                        field.setImageResource(R.drawable.ic_figure_x);
+                        break;
+                    case PLUSMINUS:
+                        field.setImageResource(R.drawable.ic_figure_plus);
+                }
         }
     }
 
@@ -416,6 +435,7 @@ public class GameScreenFragment extends Fragment {
      * Writes the game into the Firebase Realtime Database.
      */
     private void gameToDatabase() {
+        /* Writes game data into a readable format */
         GameData gameData = new GameData(game.getCurrentGame().getStartState().getStateId(),
                 game.getCurrentGame().getEndState().getStateId(),
                 game.getCurrentGame().sequenceToString(),
@@ -425,6 +445,7 @@ public class GameScreenFragment extends Fragment {
                 game.getDuration());
         Map<String, Object> gameDataValues = gameData.toMap();
 
+        /* Creates new user if needed */
         DatabaseReference userReference = dataBase.child("users").child(userId);
         userReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -440,6 +461,7 @@ public class GameScreenFragment extends Fragment {
             }
         });
 
+        /* Writes the data */
         String key = dataBase.child("games").child(userId).push().getKey();
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/games/" + userId + "/" + key, gameDataValues);
@@ -456,6 +478,9 @@ public class GameScreenFragment extends Fragment {
         mainActivity.getAchievementsClient().increment(getString(R.string.achievement_doctor_of_researching_things), 1);
     }
 
+    /**
+     * Updates leaderboard scores of current player.
+     */
     private void updateLeaderboardScores() {
         mainActivity.getLeaderboardsClient()
                 .submitScore(getString(R.string.leaderboard_best_score_ever), game.getScore());
@@ -467,16 +492,16 @@ public class GameScreenFragment extends Fragment {
      * Gesture Listener class used to handle common user gestures such as swipes.
      */
     class FlingGestureListener extends GestureDetector.SimpleOnGestureListener {
-        private static final String DEBUG_TAG = "Gestures";
+        //private static final String DEBUG_TAG = "Gestures";
 
         /* Constants that help decide whether the Motion has to be handled */
-        private static final int SWIPE_MIN_DISTANCE = 20;
-        private static final int SWIPE_THRESHOLD_VELOCITY = 10;
+        private static final int SWIPE_MIN_DISTANCE = 10;
+        private static final int SWIPE_THRESHOLD_VELOCITY = 5;
 
         /* Needed to Override onDown() method to listen to any motion */
         @Override
         public boolean onDown(@NotNull MotionEvent event) {
-            Log.d(DEBUG_TAG, "onDown: " + event.toString());
+            //Log.d(DEBUG_TAG, "onDown: " + event.toString());
             return true;
         }
 
@@ -486,11 +511,13 @@ public class GameScreenFragment extends Fragment {
                                float velocityX, float velocityY) {
             // Log.d(DEBUG_TAG, "onFLing: " + event1.toString() + event2.toString());
 
+            /* Gets coordinates of the move */
             float x1 = event1.getX();
             float y1 = event1.getY();
             float x2 = event2.getX();
             float y2 = event2.getY();
 
+            /* Checks if values exceed thresholds */
             if(Math.abs(x1 - x2) < SWIPE_MIN_DISTANCE || Math.abs(y1 - y2) < SWIPE_MIN_DISTANCE
                     || Math.abs(velocityX) < SWIPE_THRESHOLD_VELOCITY
                     || Math.abs(velocityY) < SWIPE_THRESHOLD_VELOCITY)
@@ -498,10 +525,12 @@ public class GameScreenFragment extends Fragment {
                 return false;
             }
 
+            /* Gets the characteristics of the move */
             double angle = getAngle(x1, y1, x2, y2);
             Move move = Move.fromAngle(angle);
             Transformation transformation = Transformation.fromAngle(angle);
             int id = getMoveId(move, x1, y1);
+            /* Handles move */
             onSwipe(move, transformation, id);
             return true;
         }
@@ -544,5 +573,4 @@ public class GameScreenFragment extends Fragment {
             }
         }
     }
-
 }

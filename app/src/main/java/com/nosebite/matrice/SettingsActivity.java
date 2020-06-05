@@ -9,14 +9,24 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreference;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import org.jetbrains.annotations.NotNull;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Settings Activity that helps the User adjust his/her Preferences.
@@ -38,42 +48,80 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
+
+        private DatabaseReference users;
+        private FirebaseUser user;
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
 
-            //Summary provider for Figure Set Preferences
+            users = FirebaseDatabase.getInstance().getReference().child("users");
+            user = FirebaseAuth.getInstance().getCurrentUser();
+
+            /* Summary provider for Figure Set Preferences */
             ListPreference figureSetPreferences = findPreference(getString(R.string.key_figure_set));
             if(figureSetPreferences != null) {
                 figureSetPreferences.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
             }
 
-            //Summary provider for Transition Type Preferences
+            /* Summary provider for Transition Type Preferences */
             ListPreference transitionTypePreferences = findPreference(getString(R.string.key_transition_type));
             if(transitionTypePreferences != null) {
                 transitionTypePreferences.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
             }
 
-            //Summary provider for Language Preferences
+            /* Summary provider for Language Preferences */
             ListPreference languagePreferences = findPreference(getString(R.string.key_app_language));
             if(languagePreferences != null) {
                 languagePreferences.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
-
+                //TODO Change language
             }
 
-            //Summary provider for Gender Preferences
+            /* Summary provider for Gender Preferences */
             ListPreference genderPreferences = findPreference(getString(R.string.key_gender_info));
             if(genderPreferences != null) {
                 genderPreferences.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
             }
+            /* Update Database with changed gender preferences */
+            assert genderPreferences != null;
+            genderPreferences.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    users.child(user.getUid()).child("gender").setValue(newValue);
+                    return true;
+                }
+            });
 
-            //Switches between Day and Night UI modes
+            /* Update Database with age preferences on change */
+            EditTextPreference agePreferences = findPreference(getString(R.string.key_age_info));
+            if(agePreferences != null) {
+                agePreferences.setSummaryProvider(EditTextPreference.SimpleSummaryProvider.getInstance());
+            }
+            assert agePreferences != null;
+            agePreferences.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    String pattern = "^[0-9]+$";
+                    Pattern regexp = Pattern.compile(pattern);
+                    Matcher matcher = regexp.matcher(newValue.toString());
+                    if(matcher.find()) {
+                        users.child(user.getUid()).child("age").setValue(newValue);
+                        return true;
+                    }
+                    new AlertDialog.Builder(requireActivity()).setMessage(R.string.age_pref_invalid_input)
+                            .setNeutralButton(android.R.string.ok, null).show();
+                    return false;
+                }
+            });
+
+            /* Switches between Day and Night UI modes */
             SwitchPreference darkModePreference = findPreference(getString(R.string.key_enable_dark_mode));
             assert darkModePreference != null;
             darkModePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if(darkModePreference.isChecked()) {
+                    if(!darkModePreference.isChecked()) {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     }
                     else {
@@ -83,7 +131,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             });
 
-            //On Click Listener for Send Feedback Preference
+            /* On Click Listener for Send Feedback Preference */
             Preference sendFeedbackPreference = findPreference(getString(R.string.key_send_feedback));
             assert sendFeedbackPreference != null;
             sendFeedbackPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -94,6 +142,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             });
 
+            /* On CLick Listener for viewing Privacy Policy on website */
             Preference privacyPolicy = findPreference(getString(R.string.key_privacy_policy));
             if(privacyPolicy != null) {
                 privacyPolicy.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -106,6 +155,10 @@ public class SettingsActivity extends AppCompatActivity {
             }
         }
 
+        /**
+         * Opens the desired webpage in the default browser.
+         * @param url String type URL of the webpage
+         */
         void openWebPage(String url) {
             Uri webPage = Uri.parse(url);
             Intent webIntent = new Intent(Intent.ACTION_VIEW);

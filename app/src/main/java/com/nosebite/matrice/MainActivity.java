@@ -85,12 +85,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         signInSilently();
-        /* Get Instance of Play Games Achievements CLient */
-        if(achievementsClient == null)
-            achievementsClient = Games.getAchievementsClient(this, getSignedInAccount());
-        /* Get Instance of Play Games Leaderboards CLient */
-        if(leaderboardsClient == null)
-            leaderboardsClient = Games.getLeaderboardsClient(this, getSignedInAccount());
+        if(getSignedInAccount() != null) {
+            initializePlayGamesClients();
+        }
     }
 
     @Override
@@ -181,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
                 signedInAccount = result.getSignInAccount();
                 Log.d(TAG, "Logged in with Play Games: " + signedInAccount);
                 firebaseAuthWithPlayGames(signedInAccount);
+                initializePlayGamesClients();
             }
             else {
                 signedInAccount = null;
@@ -214,6 +212,14 @@ public class MainActivity extends AppCompatActivity {
     }
     private void enablePersistence() {
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+    }
+    private void initializePlayGamesClients() {
+        /* Get Instance of Play Games Achievements CLient */
+        if (achievementsClient == null)
+            achievementsClient = Games.getAchievementsClient(this, getSignedInAccount());
+        /* Get Instance of Play Games Leaderboards CLient */
+        if (leaderboardsClient == null)
+            leaderboardsClient = Games.getLeaderboardsClient(this, getSignedInAccount());
     }
 
     /**
