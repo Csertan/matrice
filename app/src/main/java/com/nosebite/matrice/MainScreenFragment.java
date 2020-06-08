@@ -1,6 +1,7 @@
 package com.nosebite.matrice;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -41,6 +43,8 @@ public class MainScreenFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        updateBackgroundNightMode();
 
         /* Getting the reference of the Main Activity */
         mainActivity = (MainActivity) getActivity();
@@ -146,6 +150,22 @@ public class MainScreenFragment extends Fragment {
         else {
             signInButton.setVisibility(View.VISIBLE);
             signOutButton.setVisibility(View.GONE);
+        }
+    }
+
+    private void updateBackgroundNightMode() {
+        int nightModeFlags = getContext().getResources().getConfiguration()
+                .uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        ConstraintLayout layout = (ConstraintLayout) getView().findViewById(R.id.mainScreenFragmentLayout);
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                layout.setBackgroundResource(R.drawable.ic_game_surface2);
+                break;
+            case Configuration.UI_MODE_NIGHT_NO:
+                layout.setBackgroundResource(R.drawable.ic_game_surface3);
+                break;
+            case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                layout.setBackgroundResource(R.drawable.ic_game_surface3);
         }
     }
 

@@ -1,5 +1,6 @@
 package com.nosebite.matrice;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.navigation.Navigation;
@@ -34,6 +36,8 @@ public class SuccessScreenFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        updateBackgroundNightMode();
 
         /* Adds callback to Home Button to navigate the User to the Main Screen. */
         ImageButton toHomeButton = (ImageButton) view.findViewById(R.id.homeButtonSuccess);
@@ -105,5 +109,21 @@ public class SuccessScreenFragment extends Fragment {
                 scoreDetailView.setText(scoreDetails);
             }
         });
+    }
+
+    private void updateBackgroundNightMode() {
+        int nightModeFlags = getContext().getResources().getConfiguration()
+                .uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        ConstraintLayout layout = (ConstraintLayout) getView().findViewById(R.id.successFragmentLayout);
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                layout.setBackgroundResource(R.drawable.ic_game_surface2);
+                break;
+            case Configuration.UI_MODE_NIGHT_NO:
+                layout.setBackgroundResource(R.drawable.ic_game_surface3);
+                break;
+            case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                layout.setBackgroundResource(R.drawable.ic_game_surface3);
+        }
     }
 }

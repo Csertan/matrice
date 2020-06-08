@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainScreenFragmentLayout"
-    style="@style/MainFragmentFont"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ic_game_surface3"
@@ -44,7 +43,7 @@
 
     <Button
         android:id="@+id/playButtonMain"
-        style="@style/MainFragmentFont"
+        style="@style/MainFragmentButton"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
@@ -57,7 +56,7 @@
 
     <Button
         android:id="@+id/campaignButtonMain"
-        style="@style/MainFragmentFont"
+        style="@style/MainFragmentButton"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
@@ -70,7 +69,7 @@
 
     <Button
         android:id="@+id/settingsButtonMain"
-        style="@style/MainFragmentFont"
+        style="@style/MainFragmentButton"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
@@ -84,7 +83,7 @@
 
     <Button
         android:id="@+id/authorsButtonMain"
-        style="@style/MainFragmentFont"
+        style="@style/MainFragmentButton"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
@@ -150,14 +149,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
+            app:layout_column="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent"
-            app:layout_column="1"
-            app:layout_row="0"
-            app:layout_gravity="center_vertical"/>
+            app:layout_gravity="center_vertical"
+            app:layout_row="0" />
 
         <Button
             android:id="@+id/sign_out_button"
@@ -167,14 +166,14 @@
             android:layout_marginBottom="0dp"
             android:text="@string/sign_out_text"
             android:visibility="gone"
+            app:layout_column="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent"
-            app:layout_column="1"
-            app:layout_row="0"
-            app:layout_gravity="center_vertical"/>
+            app:layout_gravity="center_vertical"
+            app:layout_row="0" />
 
     </androidx.gridlayout.widget.GridLayout>
 

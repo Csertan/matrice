@@ -10,7 +10,6 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
         <meta-data android:name="com.google.android.gms.games.APP_ID"
             android:value="@string/app_id" />
@@ -23,8 +22,10 @@
             android:parentActivityName="com.nosebite.matrice.MainActivity">
 
         </activity>
-        <activity android:name="com.nosebite.matrice.MainActivity"
-            android:screenOrientation="sensorPortrait">
+        <activity
+            android:name="com.nosebite.matrice.MainActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
