@@ -8,7 +8,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -35,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
  * Main Activity of the Application.
  * Contains most of the Fragments via a NavHostFragment.
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     /* TAG used for debugging */
     private static final String TAG = "MainActivity";
@@ -139,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         GoogleSignInClient signInClient = GoogleSignIn
                 .getClient(this, signInOptions);
         Intent intent = signInClient.getSignInIntent();
-        Toast.makeText(getApplicationContext(), getString(R.string.sign_in_process), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.message_sign_in_process), Toast.LENGTH_SHORT).show();
         startActivityForResult(intent, RC_SIGN_IN);
     }
 
@@ -160,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         else {
                             user = null;
-                            Toast.makeText(getApplicationContext(), getString(R.string.sign_in_other_error), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.error_sign_in), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -184,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                 signedInAccount = null;
                 String message = result.getStatus().getStatusMessage();
                 if(message == null || message.isEmpty()) {
-                    message = getString(R.string.sign_in_other_error);
+                    message = getString(R.string.error_sign_in);
                 }
                 new AlertDialog.Builder(this).setMessage(message)
                         .setNeutralButton(android.R.string.ok, null).show();
@@ -231,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
         signInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(getApplicationContext(), getString(R.string.signed_out_message), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.message_signed_out), Toast.LENGTH_SHORT).show();
             }
         });
         firebaseAuth.signOut();

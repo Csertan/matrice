@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
@@ -31,15 +30,18 @@ import java.util.regex.Pattern;
 /**
  * Settings Activity that helps the User adjust his/her Preferences.
  */
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends BaseActivity {
+
+    public static final String SETTINGS_FRAGMENT_TAG = "SETTINGS_FRAGMENT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
+        setTitle(R.string.title_activity_settings);
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.settings, new SettingsFragment())
+                .replace(R.id.settings, new SettingsFragment(), SETTINGS_FRAGMENT_TAG)
                 .commit();
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -51,6 +53,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         private DatabaseReference users;
         private FirebaseUser user;
+        private SettingsActivity parentActivity;
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -58,6 +61,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             users = FirebaseDatabase.getInstance().getReference().child("users");
             user = FirebaseAuth.getInstance().getCurrentUser();
+            parentActivity = (SettingsActivity) getActivity();
 
             /* Summary provider for Figure Set Preferences */
             ListPreference figureSetPreferences = findPreference(getString(R.string.key_figure_set));
@@ -75,7 +79,6 @@ public class SettingsActivity extends AppCompatActivity {
             ListPreference languagePreferences = findPreference(getString(R.string.key_app_language));
             if(languagePreferences != null) {
                 languagePreferences.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
-                //TODO Change language
             }
 
             /* Summary provider for Gender Preferences */
@@ -109,9 +112,19 @@ public class SettingsActivity extends AppCompatActivity {
                         users.child(user.getUid()).child("age").setValue(newValue);
                         return true;
                     }
-                    new AlertDialog.Builder(requireActivity()).setMessage(R.string.age_pref_invalid_input)
+                    new AlertDialog.Builder(requireActivity()).setMessage(R.string.error_pref_age_invalid_input)
                             .setNeutralButton(android.R.string.ok, null).show();
                     return false;
+                }
+            });
+
+            assert languagePreferences != null;
+            languagePreferences.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    LocaleHelper.setLocale(parentActivity.getBaseContext(), newValue.toString());
+                    parentActivity.recreate();
+                    return true;
                 }
             });
 
@@ -168,7 +181,7 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(webIntent);
             }
             else {
-                Toast.makeText(getContext(), getString(R.string.view_webpage_error), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), getString(R.string.error_view_webpage), Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -192,6 +205,6 @@ public class SettingsActivity extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"csertant@edu.bme.hu"});
         intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback from android app");
         intent.putExtra(Intent.EXTRA_TEXT, body);
-        context.startActivity(Intent.createChooser(intent, context.getString(R.string.choose_email_client)));
+        context.startActivity(Intent.createChooser(intent, context.getString(R.string.text_choose_email_client)));
     }
 }

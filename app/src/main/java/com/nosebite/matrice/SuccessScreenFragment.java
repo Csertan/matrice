@@ -103,9 +103,9 @@ public class SuccessScreenFragment extends Fragment {
                 scoreView.setText(score);
 
                 TextView scoreDetailView = (TextView) view.findViewById(R.id.scoreDetail);
-                String scoreDetails = getString(R.string.score_details_start) + " " + stepSize + " "
-                        + getString(R.string.score_details_middle) + " " + elapsedTime + " "
-                        + getString(R.string.score_details_end);
+                String scoreDetails = getString(R.string.text_score_details_start) + " " + stepSize + " "
+                        + getString(R.string.text_score_details_middle) + " " + elapsedTime + " "
+                        + getString(R.string.text_score_details_end);
                 scoreDetailView.setText(scoreDetails);
             }
         });

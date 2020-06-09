@@ -4,6 +4,7 @@
     package="com.nosebite.matrice">
 
     <application
+        android:name="com.nosebite.matrice.Matrice"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,13 +20,14 @@
             android:name="com.nosebite.matrice.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:theme="@style/AppSettingsTheme"
-            android:parentActivityName="com.nosebite.matrice.MainActivity">
-
+            android:parentActivityName="com.nosebite.matrice.MainActivity"
+            android:configChanges="locale">
         </activity>
         <activity
             android:name="com.nosebite.matrice.MainActivity"
             android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:configChanges="locale">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

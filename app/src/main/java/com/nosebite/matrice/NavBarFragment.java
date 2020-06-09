@@ -68,7 +68,7 @@ public class NavBarFragment extends Fragment {
                 else {
                     //TODO Navigate to LevelsScreen
                 }
-                Toast.makeText(getContext(), getString(R.string.feature_coming_soon), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.message_feature_coming_soon), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -87,10 +87,10 @@ public class NavBarFragment extends Fragment {
         TextView fragmentTitle = (TextView) view.findViewById(R.id.navBarTitle);
         if(parentFragmentName.equals("LevelsFragment"))
         {
-            fragmentTitle.setText(R.string.levels_text);
+            fragmentTitle.setText(R.string.title_levels_fragment);
         }
         else {
-            fragmentTitle.setText(R.string.authors_text);
+            fragmentTitle.setText(R.string.text_menu_authors);
         }
     }
 }

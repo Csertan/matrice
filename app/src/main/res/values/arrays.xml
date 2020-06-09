@@ -1,19 +1,19 @@
 <resources>
     <!-- Language Preferences -->
     <string-array name="pref_app_language_entries">
-        <item>English</item>
-        <item>Hungarian</item>
+        <item>@string/text_pref_language_english</item>
+        <item>@string/text_pref_language_hungarian</item>
     </string-array>
     <string-array name="pref_app_language_values">
-        <item>0</item>
-        <item>1</item>
+        <item>en</item>
+        <item>hu</item>
     </string-array>
 
     <!-- Figure Set Preferences -->
     <string-array name="pref_figure_set_entries">
-        <item>Plumpy</item>
-        <item>Tic Tac Toe</item>
-        <item>Plus Minus</item>
+        <item>@string/text_pref_figures_plump</item>
+        <item>@string/text_pref_figures_tictactoe</item>
+        <item>@string/text_pref_figures_plusminus</item>
     </string-array>
     <string-array name="pref_figure_set_values">
         <item>0</item>
@@ -23,8 +23,8 @@
 
     <!-- Transformation Type Preferences -->
     <string-array name="pref_action_type_entries">
-        <item>Inversion</item>
-        <item>Circulation</item>
+        <item>@string/text_pref_action_inversion</item>
+        <item>@string/text_pref_action_rotation</item>
     </string-array>
     <string-array name="pref_action_type_values">
         <item>0</item>
@@ -33,10 +33,10 @@
 
     <!-- Gender Preferences -->
     <string-array name="pref_gender_entries">
-        <item>Not provided</item>
-        <item>Female</item>
-        <item>Male</item>
-        <item>Other</item>
+        <item>@string/text_pref_not_provided</item>
+        <item>@string/text_pref_gender_female</item>
+        <item>@string/text_pref_gender_male</item>
+        <item>@string/text_pref_gender_other</item>
     </string-array>
     <string-array name="pref_gender_values">
         <item>0</item>

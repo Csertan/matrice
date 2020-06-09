@@ -1,56 +1,56 @@
 <resources>
-    <string name="app_name">Matrice</string>
+    <string name="app_name" translatable="false">Matrice</string>
     <string name="app_version" translatable="false">1.1.0</string>
     <string name="url_github" translatable="false">https://github.com/Csertan/matrice</string>
 
     <!-- Sign In issue -->
-    <string name="sign_in_other_error">An error occurred while signing in.</string>
+    <string name="error_sign_in">An error occurred while signing in.</string>
 
     <!-- Strings on BootScreenFragment -->
-    <string name="studio_logo_description" translatable="false">studioLogo</string>
-    <string name="gotomain_description" translatable="false">goToMain</string>
+    <string name="description_studio_logo" translatable="false">studioLogo</string>
+    <string name="description_gotomain" translatable="false">goToMain</string>
 
     <!-- App Logo Description -->
-    <string name="applogomain_description" translatable="false">appLogoMain</string>
+    <string name="description_applogomain" translatable="false">appLogoMain</string>
 
     <!-- Strings on MainScreenFragment -->
-    <string name="play_text">Play</string>
-    <string name="campaign_text">Campaign</string>
-    <string name="settings_text">Settings</string>
-    <string name="authors_text">Authors</string>
+    <string name="text_menu_play">Play</string>
+    <string name="text_menu_campaign">Campaign</string>
+    <string name="text_menu_settings">Settings</string>
+    <string name="text_menu_authors">Authors</string>
 
     <!-- Strings on NavButtons -->
-    <string name="gotosettings_description" translatable="false">goToSettings</string>
-    <string name="gotolevels_description" translatable="false">goToLevels</string>
-    <string name="gotohome_description" translatable="false">goToHome</string>
-    <string name="goback_description" translatable="false">goBack</string>
+    <string name="description_gotosettings" translatable="false">goToSettings</string>
+    <string name="description_gotolevels" translatable="false">goToLevels</string>
+    <string name="description_gotohome" translatable="false">goToHome</string>
+    <string name="description_goback" translatable="false">goBack</string>
 
     <!-- Strings on AuthorsScreenFragment -->
-    <string name="research_text_title">Research</string>
-    <string name="research_text">This is the description of the research…</string>
-    <string name="designer_name_text" translatable="false">Designed by nosebite Studios</string>
-    <string name="programmer_name" translatable="false">Flow by Tamas Csertan</string>
-    <string name="copyright_notice" translatable="false">©2020 nosebite Studios</string>
-    <string name="copyright_warning">All rights reserved!</string>
+    <string name="title_authors_research">Research</string>
+    <string name="text_authors_research">This is the description of the research…</string>
+    <string name="text_designer" translatable="false">Designed by nosebite Studios</string>
+    <string name="text_programmer" translatable="false">Flow by Tamas Csertan</string>
+    <string name="text_copyright_notice" translatable="false">©2020 nosebite Studios</string>
+    <string name="text_copyright_warning">All rights reserved!</string>
 
     <!-- Strings on GameScreenFragment -->
-    <string name="figure_description" translatable="false">basic figure</string>
-    <string name="game_duration">0 s</string>
+    <string name="description_figure" translatable="false">basic figure</string>
+    <string name="placeholder_game_duration">0 s</string>
 
-    <string name="pauseplay_description" translatable="false">pausePlayControl</string>
-    <string name="stop_description" translatable="false">stopGameControl</string>
-    <string name="retry_description" translatable="false">retryGameControl</string>
-    <string name="clock_icon_description" translatable="false">clockIcon</string>
-    <string name="steps_icon_description" translatable="false">stepsIcon</string>
-    <string name="steps_text">Steps</string>
+    <string name="description_pauseplay" translatable="false">pausePlayControl</string>
+    <string name="description_stop" translatable="false">stopGameControl</string>
+    <string name="description_retry" translatable="false">retryGameControl</string>
+    <string name="description_clock_icon" translatable="false">clockIcon</string>
+    <string name="description_steps_icon" translatable="false">stepsIcon</string>
+    <string name="placeholder_text_steps">Steps</string>
 
     <!-- Strings on SuccessScreenFragment -->
-    <string name="score_text" translatable="false">Replace it with Score!</string>
-    <string name="score_details" translatable="false">Replace it with Score details!</string>
-    <string name="success_picture_description" translatable="false">Picture displayed at success</string>
-    <string name="score_details_start">Congratulations! You won in </string>
-    <string name="score_details_middle"> steps, and </string>
-    <string name="score_details_end"> seconds! Wanna play a new game?</string>
+    <string name="placeholder_text_score" translatable="false">Replace it with Score!</string>
+    <string name="placeholder_score_details" translatable="false">Replace it with Score details!</string>
+    <string name="description_success_picture" translatable="false">Picture displayed at success</string>
+    <string name="text_score_details_start">Congratulations! You won in </string>
+    <string name="text_score_details_middle"> steps, and </string>
+    <string name="text_score_details_end"> seconds! Wanna play a new game?</string>
 
     <!-- Settings Activity -->
     <string name="title_activity_settings">Settings</string>
@@ -92,21 +92,32 @@
     <string name="summary_support">Got any queries? We are happy to help!</string>
 
     <string name="key_privacy_policy" translatable="false">privacy_policy</string>
-    <string name="privacy_policy">Privacy Policy</string>
+    <string name="title_privacy_policy">Privacy Policy</string>
     <string name="url_privacy" translatable="false">https://csertan.github.io/nosebite-studios</string>
-    <string name="view_webpage_error">Can\'t find application for opening webpage.</string>
+    <string name="error_view_webpage">Can\'t find application for opening webpage.</string>
 
-    <string name="choose_email_client">Choose email client</string>
-    <string name="signed_out_message">Signed out successfully!</string>
-    <string name="feature_coming_soon">This feature is coming soon!</string>
-    <string name="sign_out_text">Sign Out</string>
-    <string name="sign_in_success">Signed in successfully!</string>
-    <string name="sign_in_process">Signing in...</string>
-    <string name="open_achievements_description" translatable="false">openAchievements</string>
-    <string name="open_leaderboards_description" translatable="false">openLeaderboards</string>
+    <string name="text_choose_email_client">Choose email client</string>
+    <string name="message_signed_out">Signed out successfully!</string>
+    <string name="message_feature_coming_soon">This feature is coming soon!</string>
+    <string name="text_sign_out">Sign Out</string>
+    <string name="message_sign_in_success">Signed in successfully!</string>
+    <string name="message_sign_in_process">Signing in…</string>
+    <string name="description_open_achievements" translatable="false">openAchievements</string>
+    <string name="description_open_leaderboards" translatable="false">openLeaderboards</string>
     <string name="summary_about">We would like to provide you with the best game experience so don\'t hesitate to tell us your opinion, report found bugs and to share ideas on future improvements.</string>
-    <string name="levels_text">Levels</string>
-    <string name="age_pref_invalid_input">Invalid input! Your age must be a number...</string>
+    <string name="title_levels_fragment">Levels</string>
+    <string name="error_pref_age_invalid_input">Invalid input! Your age must be a number…</string>
+    <string name="text_pref_language_english">English</string>
+    <string name="text_pref_language_hungarian">Hungarian</string>
+    <string name="text_pref_action_inversion">Inversion</string>
+    <string name="text_pref_action_rotation">Rotation</string>
+    <string name="text_pref_not_provided">Not provided</string>
+    <string name="text_pref_gender_male">Male</string>
+    <string name="text_pref_gender_female">Female</string>
+    <string name="text_pref_gender_other">Other</string>
+    <string name="text_pref_figures_plump">Plumpy</string>
+    <string name="text_pref_figures_tictactoe">Tic Tac Toe</string>
+    <string name="text_pref_figures_plusminus">Plus Minus</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 

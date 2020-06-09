@@ -75,7 +75,7 @@ public class MainScreenFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //TODO Navigate to LevelsScreen
-                Toast.makeText(getContext(), getString(R.string.feature_coming_soon), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.message_feature_coming_soon), Toast.LENGTH_SHORT).show();
             }
         });
 
