@@ -27,9 +27,8 @@
 
     <!-- Strings on AuthorsScreenFragment -->
     <string name="title_authors_research">Research</string>
-    <string name="text_authors_research">This is the description of the research…</string>
-    <string name="text_designer" translatable="false">Designed by nosebite Studios</string>
-    <string name="text_programmer" translatable="false">Flow by Tamas Csertan</string>
+    <string name="text_designer">Designed by nosebite Studios</string>
+    <string name="text_programmer">Programmed by Tamas Csertan</string>
     <string name="text_copyright_notice" translatable="false">©2020 nosebite Studios</string>
     <string name="text_copyright_warning">All rights reserved!</string>
 
@@ -118,6 +117,8 @@
     <string name="text_pref_figures_plump">Plumpy</string>
     <string name="text_pref_figures_tictactoe">Tic Tac Toe</string>
     <string name="text_pref_figures_plusminus">Plus Minus</string>
+    <string name="description_inversion_action" translatable="false">inversion</string>
+    <string name="text_authors_research">This game is part of a research project that is hosted by the High Speed Network Laboratory at the Budapest University of Technology and Economics. As part of our investigation on how humans could navigate and find its paths in real-life complex networks we are gathering anonymous usage data from this game to analyze user behaviour. You wonder what is the connection between navigation and playing with the app? It appears that finding the best solution for the puzzle is analogous to finding a shortest path in a complex graph namely a network.\nIf you are interested in what we are doing visit the website of the app from the Settings.\nAnd we are grateful if you play with the game, this way you considerably contribute to our research. Thank you!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 

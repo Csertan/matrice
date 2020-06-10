@@ -5,8 +5,9 @@
     android:id="@+id/authorsScreenFragmentLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AuthorsScreenFragment"
-    android:background="@drawable/ic_game_surface3">
+    android:background="@drawable/ic_game_surface3"
+    android:contentDescription="@string/description_studio_logo"
+    tools:context=".AuthorsScreenFragment">
 
     <fragment
         android:id="@+id/navBarFragmentAuthors"
@@ -25,6 +26,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/navBarFragmentAuthors">
 
@@ -43,10 +45,11 @@
                 android:id="@+id/researchTextTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
+                android:fontFamily="@font/titillium_web_light"
                 android:text="@string/title_authors_research"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -54,10 +57,11 @@
                 android:id="@+id/researchText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="5dp"
+                android:fontFamily="@font/titillium_web_light"
                 android:text="@string/text_authors_research"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -65,10 +69,11 @@
                 android:id="@+id/designerNameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
+                android:fontFamily="@font/titillium_web_light"
                 android:text="@string/text_designer"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
@@ -77,22 +82,33 @@
                 android:id="@+id/programmerNameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="0dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
+                android:fontFamily="@font/titillium_web_light"
                 android:text="@string/text_programmer"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <ImageView
+                android:id="@+id/authorsStudioLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="@string/description_studio_logo"
+                android:src="@drawable/ic_nosebite_logo_gray" />
 
             <TextView
                 android:id="@+id/copyrightNoticeText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
+                android:fontFamily="@font/titillium_web_light"
                 android:text="@string/text_copyright_notice"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -101,12 +117,14 @@
                 android:id="@+id/copyrightWarningText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
+                android:fontFamily="@font/titillium_web_light"
                 android:text="@string/text_copyright_warning"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
         </LinearLayout>
     </ScrollView>
 

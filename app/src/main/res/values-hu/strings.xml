@@ -58,4 +58,6 @@
     <string name="text_pref_figures_plump">Telt</string>
     <string name="text_pref_figures_tictactoe">Köriksz</string>
     <string name="text_pref_figures_plusminus">Plusz Mínusz</string>
+    <string name="text_programmer">Fejlesztette: Csertán Tamás</string>
+    <string name="text_designer">Dizájn: nosebite Studios</string>
 </resources>
