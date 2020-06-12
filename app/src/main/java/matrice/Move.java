@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 public enum Move {
     HORIZONTAL(0), VERTICAL(1), LEFTABRIGHTBE(2), LEFTBERIGHTAB(3);
 
-    private int id;
+    private final int id;
 
     /**
      * Default constructor for enum type object

@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 public enum FigureSet {
     PLUMP(0), TICTACTOE(1), PLUSMINUS(2);
 
-    private int id;
+    private final int id;
 
     /**
      * Default constructor for enum type object

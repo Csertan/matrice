@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 public enum Transformation {
     INVERT(0), ROTATE(1);
 
-    private int id;
+    private final int id;
 
     /**
      * Default constructor for enum type object

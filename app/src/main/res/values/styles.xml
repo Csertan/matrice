@@ -34,4 +34,9 @@
         <item name="android:fontFamily">@font/titillium_web_light</item>
     </style>
 
+    <!-- Launcher Theme -->
+    <style name="AppTheme.LauncherTheme">
+        <item name="android:windowBackground">@drawable/launcher_screen</item>
+    </style>
+
 </resources>

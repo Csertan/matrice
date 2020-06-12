@@ -13,7 +13,7 @@ public class Game {
 
     private FigureSet figureSet;
     private long startTime;
-    private StopWatch stopWatch;
+    private final StopWatch stopWatch;
     private boolean isGameStarted;
     private boolean isGamePaused;
 
@@ -102,7 +102,7 @@ public class Game {
     public int getScore() {
         double score = 50;
         double stepScore = 1000.0 / this.getCurrentGame().getStepSize();
-        double timeScore = 5000.0 / this.getDuration();
+        double timeScore = 5000.0 / (this.getDuration() == 0 ? 1 : this.getDuration());
         return (int)(score + stepScore + timeScore);
     }
 

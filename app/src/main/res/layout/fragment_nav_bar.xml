@@ -14,7 +14,7 @@
         android:layout_marginStart="36dp"
         android:layout_marginEnd="50dp"
         android:fontFamily="@font/titillium_web_light"
-        android:text="Parent ID"
+        android:text="@string/placeholder_parent_fragment_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/navBarHomeButton"

@@ -13,8 +13,8 @@
         <action
             android:id="@+id/action_bootScreenFragment_to_mainScreenFragment"
             app:destination="@id/mainScreenFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
             app:popUpTo="@id/mainScreenFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -31,18 +31,18 @@
         <action
             android:id="@+id/action_mainScreenFragment_to_gameScreenFragment"
             app:destination="@id/gameScreenFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim" />
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_mainScreenFragment_to_levelsFragment"
             app:destination="@id/levelsFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim" />
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_mainScreenFragment_to_bootScreenFragment"
             app:destination="@id/bootScreenFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/bootScreenFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -55,7 +55,7 @@
     <action
         android:id="@+id/action_popUpTo_mainScreenFragment"
         app:popUpTo="@id/mainScreenFragment"
-        app:enterAnim="@anim/nav_default_enter_anim"
+        app:enterAnim="@anim/nav_default_pop_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
         app:popExitAnim="@anim/nav_default_pop_exit_anim" />
@@ -67,8 +67,8 @@
         <action
             android:id="@+id/action_gameScreenFragment_to_successScreenFragment"
             app:destination="@id/successScreenFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right" />
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/successScreenFragment"

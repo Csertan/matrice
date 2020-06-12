@@ -5,13 +5,12 @@
     <string name="text_menu_settings">Beállítások</string>
     <string name="text_menu_authors">Készítők</string>
     <string name="title_authors_research">A kutatásról</string>
-    <string name="text_authors_research">Ide jön a kutatás leírása...</string>
     <string name="text_copyright_warning">Minden jog fenntartva!</string>
     <string name="placeholder_game_duration">0 mp</string>
     <string name="placeholder_text_steps">Lépésszám</string>
     <string name="text_score_details_start">Gratulálunk! Győztél</string>
     <string name="text_score_details_middle">lépésben,</string>
-    <string name="text_score_details_end">idő alatt! Szeretnél játszani még egyet?</string>
+    <string name="text_score_details_end">másodperc alatt! Szeretnél játszani még egyet?</string>
     <string name="title_activity_settings">Beállítások</string>
     <string name="title_game_category">Játék</string>
     <string name="title_game_boardsize">Táblaméret</string>
@@ -43,8 +42,8 @@
     <string name="error_view_webpage">Nincs olyan alkalmazás, ami kezelni tudná ezt a kérést.</string>
     <string name="text_sign_out">Kijelentkezés</string>
     <string name="message_sign_in_success">Sikeres bejelentkezés!</string>
-    <string name="message_sign_in_process">Bejelentkezés...</string>
-    <string name="summary_about">Szeretnénk neked a legjobb játékélményt biztosítani, így bátran mondd el nekünk a vélaményedet, írd le az általad felfedezett hibákat és ötleteidet jövendő fejlesztésekkel kapcsolatban.</string>
+    <string name="message_sign_in_process">Bejelentkezés…</string>
+    <string name="summary_about">Szeretnénk neked a legjobb játékélményt nyújtani, így bátran mondd el nekünk a vélaményedet, írd le az általad felfedezett hibákat és ötleteidet jövendő fejlesztésekkel kapcsolatban.</string>
     <string name="title_levels_fragment">Pályák</string>
     <string name="error_pref_age_invalid_input">Hibás érték! Az életkorod bizonyára egy szám, nem?</string>
     <string name="text_pref_language_english">Angol</string>
@@ -60,4 +59,12 @@
     <string name="text_pref_figures_plusminus">Plusz Mínusz</string>
     <string name="text_programmer">Fejlesztette: Csertán Tamás</string>
     <string name="text_designer">Dizájn: nosebite Studios</string>
+    <string name="text_authors_research">Ez a játék egy kutatási projekt része, amelyben az emberi elme komplex hálózatokban való tájékozódását
+        vizsgáljuk. A projekt gazdája a Budapesti Műszaki és Gazdaságtudományi Egyetem Nagysebességű Hálózatok Laboratóriumának hálózattudományi
+        kutatócsoportja.\nMikor ezzel a játékkal játszol és benne rejtvényeket oldasz meg, valójában egy analóg hálózatban keresel legrövidebb
+        útvonalakat. Emberi stratégiák és általános kognitív vonások vizsgálatához begyűjtjük ezen az appon keresztül az anonimizált
+        játékadatokat, s ezeket felhasználva és elemezve vonunk majd le következtetéseket az általános és az egyéni emberi viselkedéssel
+        kapcsolatban.\nHa részletesebben érdeklődsz a téma iránt, látogasd meg a játék weboldaláta Beállítások menüből.\nÉs hálásak vagyunk
+        azért, ha játszol a játékkal, így nagyban hozzájárulsz a kutatáshoz és a tudomány fejlődéséhez. Köszönjük!
+    </string>
 </resources>

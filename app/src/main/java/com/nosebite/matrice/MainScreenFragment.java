@@ -162,10 +162,9 @@ public class MainScreenFragment extends Fragment {
                 layout.setBackgroundResource(R.drawable.ic_game_surface2);
                 break;
             case Configuration.UI_MODE_NIGHT_NO:
-                layout.setBackgroundResource(R.drawable.ic_game_surface3);
-                break;
             case Configuration.UI_MODE_NIGHT_UNDEFINED:
                 layout.setBackgroundResource(R.drawable.ic_game_surface3);
+                break;
         }
     }
 
