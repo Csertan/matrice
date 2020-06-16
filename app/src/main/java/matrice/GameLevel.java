@@ -2,8 +2,6 @@ package matrice;
 
 import androidx.annotation.NonNull;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 
 /**
@@ -41,7 +39,7 @@ public class GameLevel {
      * @throws IllegalArgumentException If savedLevel does not contains all three states throws
      * exception.
      */
-    GameLevel(int boardSize, @NotNull String savedLevel) throws IllegalArgumentException {
+    GameLevel(int boardSize, @NonNull String savedLevel) throws IllegalArgumentException {
         String[] tokens = savedLevel.split(":");
         if(tokens.length != 3)
             throw new IllegalArgumentException("Not enough states to initialise level.");
@@ -132,7 +130,7 @@ public class GameLevel {
      * @param move Direction of the move.
      * @param id Specifies the affected row / column.
      */
-    void handleMove(Move move, @NotNull Transformation transformation, int id) {
+    void handleMove(Move move, @NonNull Transformation transformation, int id) {
         switch (transformation) {
             case INVERT:
                 calculateInversion(move, id);

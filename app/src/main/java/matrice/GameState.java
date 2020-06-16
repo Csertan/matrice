@@ -1,9 +1,7 @@
 package matrice;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
@@ -26,7 +24,7 @@ public class GameState {
      * @param boardSize Size of the game board.
      * @return Returns an arbitrary game state.
      */
-    @NotNull
+    @NonNull
     private static Boolean[][] generate(int boardSize) {
         Boolean[][] state = new Boolean[boardSize][boardSize];
         Random rand = new Random();
@@ -55,7 +53,7 @@ public class GameState {
      * Copy constructor for GameState objects.
      * @param other The state that is wished to be copied to the new object.
      */
-    GameState(@NotNull GameState other) {
+    GameState(@NonNull GameState other) {
         this.setBoardSize(other.getBoardSize());
         this.state = new Boolean[boardSize][boardSize];
         for(int i = 0; i < boardSize; i++) {
@@ -90,7 +88,6 @@ public class GameState {
         this.boardSize = boardSize;
     }
 
-    @Contract(pure = true)
     private Boolean[][] getState() {
         return state;
     }
@@ -201,7 +198,6 @@ public class GameState {
      * @param obj Object to be compared with this.
      * @return Result of the inspection.
      */
-    @Contract(value = "null -> false", pure = true)
     @Override
     public boolean equals(@Nullable Object obj) {
         /* If compares to itself returns true */
@@ -245,7 +241,7 @@ public class GameState {
      * Writes the essential data of the state to a String. Used to save a state.
      * @return String in <boolean value><whitespace><boolean value>... format.
      */
-    @NotNull
+    @NonNull
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
@@ -267,8 +263,8 @@ public class GameState {
      * @throws IllegalArgumentException If input does not contains all boardsize*boardsize values
      * throws an exception.
      */
-    @NotNull
-    private Boolean[][] stringToState(@NotNull String input) throws IllegalArgumentException {
+    @NonNull
+    private Boolean[][] stringToState(@NonNull String input) throws IllegalArgumentException {
         Boolean[][] state = new Boolean[this.boardSize][this.boardSize];
         String[] tokens = input.split(" ");
         if(tokens.length != boardSize*boardSize)

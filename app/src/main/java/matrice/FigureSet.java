@@ -1,7 +1,6 @@
 package matrice;
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * Enum for signaling type of chosen figure set to Game handler
@@ -32,7 +31,7 @@ public enum FigureSet {
         }
         return null;
     }
-    @Contract(pure = true)
+
     public int getId() {
         return this.id;
     }

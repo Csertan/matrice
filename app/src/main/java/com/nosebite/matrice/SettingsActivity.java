@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -21,8 +22,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -190,7 +189,7 @@ public class SettingsActivity extends BaseActivity {
      * Sends Feedback with device specifications to the developer.
      * @param context Actual context from the function is called.
      */
-    public static void sendFeedback(@NotNull Context context) {
+    public static void sendFeedback(@NonNull Context context) {
         String body = null;
         try {
             body = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;

@@ -1,7 +1,6 @@
 package matrice;
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * Enum for signaling applicable transformation upon each Move
@@ -32,7 +31,7 @@ public enum Transformation {
         }
         return null;
     }
-    @Contract(pure = true)
+
     public int getId() {
         return this.id;
     }
@@ -61,7 +60,6 @@ public enum Transformation {
      * @param upper upper bound of the interval
      * @return whether the given angle is in the specified interval
      */
-    @Contract(pure = true)
     private static boolean inRange(double angle, double lower, double upper) {
         return (angle >= lower) && (angle < upper);
     }

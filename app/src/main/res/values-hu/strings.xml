@@ -67,4 +67,14 @@
         kapcsolatban.\nHa részletesebben érdeklődsz a téma iránt, látogasd meg a játék weboldaláta Beállítások menüből.\nÉs hálásak vagyunk
         azért, ha játszol a játékkal, így nagyban hozzájárulsz a kutatáshoz és a tudomány fejlődéséhez. Köszönjük!
     </string>
+    <string name="title_activity_appintro">Útmutató</string>
+    <string name="title_appintro_slidefirst">Üdvözlünk a játékban</string>
+    <string name="title_appintro_slide2">A játék célja</string>
+    <string name="title_appintro_slide34">Irányítás</string>
+    <string name="title_appintro_slidelast">Jelentkezz be</string>
+    <string name="description_appintro_slidelast">Jelentkezz be a Google Play fiókoddal, hogy versenyezhess a barátaiddal és elnyerhess klassz küldetéseket.</string>
+    <string name="description_appintro_slide3">Ha balról vagy felülről húzod az ujjad, minden figura az ellenkezőjére változik a kiválasztott sorban vagy oszlopban.</string>
+    <string name="description_appintro_slide4">Ha jobbról vagy lentről húzod az ujjad, a figurák egyel eltolódnak a kiválasztott sorban vagy oszlopban.</string>
+    <string name="descritpion_appintro_slide2">A célod, hogy egy megadott mintát érj el a lehető legkevesebb lépésben egy véletlen kezdőállapotból.</string>
+    <string name="description_appintro_slidefirst">Légy gyors, de gondold meg! Oldj meg fejtörőket és találd meg a legjobb megoldást!</string>
 </resources>

@@ -126,6 +126,17 @@
         game, this way you considerably contribute to our research. Thank you!
     </string>
     <string name="placeholder_parent_fragment_name" translatable="false">Parent ID</string>
+    <string name="title_activity_appintro">How to Play</string>
+    <string name="title_appintro_slidefirst">Welcome in the Game</string>
+    <string name="description_appintro_slidefirst">Be fast, think twice! Solve awesome puzzles and find the best solutions!</string>
+    <string name="title_appintro_slide2">Goal of the Game</string>
+    <string name="descritpion_appintro_slide2">Your goal is to reach a specific pattern from a start pattern with the least possible swipes.</string>
+    <string name="title_appintro_slide34">Swipes</string>
+    <string name="description_appintro_slide3">When you swipe from the left or from the top of the table the selected row or column changes all cells.</string>
+    <string name="description_appintro_slide4">When you swipe from the right or from the bottom the selected row or column cells rotate by one.</string>
+    <string name="title_appintro_slidelast">Sign in</string>
+    <string name="description_appintro_slidelast">Sign in with your Play Games account to compete with your friends and earn achievements.</string>
+    <string name="key_first_run" translatable="false">first_run</string>
 
 
 </resources>

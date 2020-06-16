@@ -30,9 +30,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -272,7 +269,7 @@ public class GameScreenFragment extends Fragment {
      * Callback function firing when Pause/Play Button is clicked.
      * @param view View which the click happened in. Default parameter of onClick callbacks.
      */
-    private void onPausePlayButtonPressed(@NotNull View view) {
+    private void onPausePlayButtonPressed(@NonNull View view) {
         ImageButton button = (ImageButton) view.findViewById(R.id.rightControlsPausePlayButton);
         if(!this.isGameStopped) {
             if (!this.game.isGamePaused()) {
@@ -289,7 +286,7 @@ public class GameScreenFragment extends Fragment {
      * Callback function firing when Stop/New Game Button is clicked.
      * @param view View which the click happened in. Default parameter of onCLick callbacks.
      */
-    private void onStopButtonPressed(@NotNull View view) {
+    private void onStopButtonPressed(@NonNull View view) {
         ImageButton stopButton = (ImageButton) view.findViewById(R.id.rightControlsStopButton);
         if(this.game.isGameStarted()) {
             if(!this.isGameStopped) {
@@ -375,7 +372,7 @@ public class GameScreenFragment extends Fragment {
      * @param layout Layout to be updated (GridLayout)
      * @param state State with which the layout will be updated (GameState)
      */
-    private void updateLayout(@NotNull GridLayout layout, @NotNull GameState state) {
+    private void updateLayout(@NonNull GridLayout layout, @NonNull GameState state) {
         int count = layout.getChildCount();
         FigureSet figureSet = game.getFigureSet();
         Boolean value;
@@ -500,14 +497,14 @@ public class GameScreenFragment extends Fragment {
 
         /* Needed to Override onDown() method to listen to any motion */
         @Override
-        public boolean onDown(@NotNull MotionEvent event) {
+        public boolean onDown(@NonNull MotionEvent event) {
             //Log.d(DEBUG_TAG, "onDown: " + event.toString());
             return true;
         }
 
         /* Overrides default onFling method */
         @Override
-        public boolean onFling(@NotNull MotionEvent event1, @NotNull MotionEvent event2,
+        public boolean onFling(@NonNull MotionEvent event1, @NonNull MotionEvent event2,
                                float velocityX, float velocityY) {
             // Log.d(DEBUG_TAG, "onFLing: " + event1.toString() + event2.toString());
 
@@ -558,8 +555,7 @@ public class GameScreenFragment extends Fragment {
          * @param y1 y coordinate of the start event
          * @return (int) id of the row/column affected by user swipe
          */
-        @Contract(pure = true)
-        private int getMoveId(@NotNull Move move, float x1, float y1) {
+        private int getMoveId(@NonNull Move move, float x1, float y1) {
             int gameLayoutSize = getParentFragment().getView().findViewById(R.id.startStateLayout).getWidth();
             int boardSize = game.getCurrentGame().getCurrentState().getBoardSize();
             int scale = gameLayoutSize / boardSize;

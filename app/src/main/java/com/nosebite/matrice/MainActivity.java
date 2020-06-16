@@ -1,6 +1,7 @@
 package com.nosebite.matrice;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -28,8 +30,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PlayGamesAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * Main Activity of the Application.
  * Contains most of the Fragments via a NavHostFragment.
@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity {
     /* Stores the actual account which the user is signed in. */
     private GoogleSignInAccount signedInAccount;
 
-    /* Authenctication with Firebase */
+    /* Authentication with Firebase */
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
 
@@ -63,6 +63,7 @@ public class MainActivity extends BaseActivity {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        displayIntroOnFirstRun();
         if(GoogleSignIn.getLastSignedInAccount(this) != null) {
             GamesClient gamesClient = Games.getGamesClient(this, GoogleSignIn.getLastSignedInAccount(this));
             gamesClient.setViewForPopups(findViewById(android.R.id.content));
@@ -147,7 +148,7 @@ public class MainActivity extends BaseActivity {
      * Authenticates player signed in with a Play Account to Firebase
      * @param account The Google Play Account with which the player is signed in.
      */
-    private void firebaseAuthWithPlayGames(@NotNull GoogleSignInAccount account) {
+    private void firebaseAuthWithPlayGames(@NonNull GoogleSignInAccount account) {
 
         AuthCredential credential = PlayGamesAuthProvider.getCredential(account.getServerAuthCode());
         firebaseAuth.signInWithCredential(credential)
@@ -237,5 +238,14 @@ public class MainActivity extends BaseActivity {
         firebaseAuth.signOut();
         signedInAccount = null;
         user = null;
+    }
+
+    private void displayIntroOnFirstRun() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if(preferences.getBoolean(getString(R.string.key_first_run), true)) {
+            preferences.edit().putBoolean(getString(R.string.key_first_run), false).apply();
+            Intent intent = new Intent(getApplicationContext(), AppIntroActivity.class);
+            startActivity(intent);
+        }
     }
 }

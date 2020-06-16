@@ -9,7 +9,7 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
-import org.jetbrains.annotations.NotNull;
+import androidx.annotation.NonNull;
 
 import java.util.Locale;
 
@@ -59,7 +59,7 @@ public class LocaleHelper {
     }
 
     @TargetApi(Build.VERSION_CODES.N)
-    private static Context updateResources(@NotNull Context context, String language) {
+    private static Context updateResources(@NonNull Context context, String language) {
         Locale locale = new Locale(language);
         Locale.setDefault(locale);
 
@@ -70,7 +70,7 @@ public class LocaleHelper {
         return context.createConfigurationContext(configuration);
     }
 
-    private static Context updateResourcesLegacy(@NotNull Context context, String language) {
+    private static Context updateResourcesLegacy(@NonNull Context context, String language) {
         Locale locale = new Locale(language);
         Locale.setDefault(locale);
 

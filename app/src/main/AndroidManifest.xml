@@ -4,7 +4,7 @@
     package="com.nosebite.matrice">
 
     <application
-        android:name="com.nosebite.matrice.Matrice"
+        android:name=".Matrice"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,32 +12,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         tools:ignore="AllowBackup">
-        <meta-data android:name="com.google.android.gms.games.APP_ID"
+
+        <meta-data
+            android:name="com.google.android.gms.games.APP_ID"
             android:value="@string/app_id" />
-        <meta-data android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
         <activity
-            android:name="com.nosebite.matrice.SettingsActivity"
+            android:name=".AppIntroActivity"
+            android:label="@string/title_activity_appintro"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+        <activity
+            android:name=".SettingsActivity"
+            android:configChanges="locale"
             android:label="@string/title_activity_settings"
-            android:theme="@style/AppSettingsTheme"
-            android:parentActivityName="com.nosebite.matrice.MainActivity"
-            android:configChanges="locale">
-        </activity>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppSettingsTheme" />
         <activity
-            android:name="com.nosebite.matrice.MainActivity"
+            android:name=".MainActivity"
+            android:configChanges="locale"
             android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme.LauncherTheme"
-            android:configChanges="locale">
+            android:theme="@style/AppTheme.LauncherTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
