@@ -67,7 +67,7 @@ public class GameLevel {
         return startState;
     }
     public int getStepSize() {
-        return sequence.size();
+        return sequence.size() - 1;
     }
 
     private void setCurrentState(GameState state) {

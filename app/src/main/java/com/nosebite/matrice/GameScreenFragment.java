@@ -19,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
 import androidx.gridlayout.widget.GridLayout;
 import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
@@ -114,60 +113,48 @@ public class GameScreenFragment extends Fragment {
 
         /* Adds callback to Home Button which navigates the user to the Main Screen */
         ImageButton toHomeButton = (ImageButton) view.findViewById(R.id.leftControlsHomeButton);
-        toHomeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Uses popUpTo global action to remove Fragment instances from backstack
-                Navigation.findNavController(view).navigate(MainNavGraphDirections.actionPopUpToMainScreenFragment());
-            }
+        toHomeButton.setOnClickListener(v -> {
+            //Uses popUpTo global action to remove Fragment instances from backstack
+            Navigation.findNavController(view).navigate(MainNavGraphDirections.actionPopUpToMainScreenFragment());
         });
 
         /* Adds callback to Play/Pause Button to suspend/resume measuring elapsed time */
         ImageButton pausePlayButton = (ImageButton) view.findViewById(R.id.rightControlsPausePlayButton);
-        pausePlayButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onPausePlayButtonPressed(view);
-            }
-        });
+        pausePlayButton.setOnClickListener(this::onPausePlayButtonPressed);
 
         /* Adds callback to Stop/New Game Button to let the user stop the game or create new game */
         ImageButton stopButton = (ImageButton) view.findViewById(R.id.rightControlsStopButton);
-        stopButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onStopButtonPressed(view);
-            }
-        });
+        stopButton.setOnClickListener(this::onStopButtonPressed);
 
         /* Adds callback to Retry Button in order to let the user go back to the start
           states of the level */
         ImageButton retryButton = (ImageButton) view.findViewById(R.id.rightControlsRetryButton);
-        retryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onRetryButtonPressed(view);
-            }
-        });
+        retryButton.setOnClickListener(this::onRetryButtonPressed);
 
         /* Adds callback to Levels Button to navigate the user to the Level choser Screen */
         ImageButton levelsButton = (ImageButton) view.findViewById(R.id.leftControlsLevelsButton);
-        levelsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO Navigate to Levels Screen
-                Toast.makeText(getContext(), getString(R.string.message_feature_coming_soon), Toast.LENGTH_SHORT).show();
-            }
+        levelsButton.setOnClickListener(view1 -> {
+            //TODO Navigate to Levels Screen
+            Toast.makeText(getContext(), getString(R.string.message_feature_coming_soon), Toast.LENGTH_SHORT).show();
         });
 
         /* Adds callback to Back Button to navigate the user down in the back stack */
         ImageButton backButton = (ImageButton) view.findViewById(R.id.leftControlsBackButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mainActivity.onBackPressed();
-            }
-        });
+        backButton.setOnClickListener(view12 -> mainActivity.onBackPressed());
+
+        /* Set On CLick Listeners for user move help buttons */
+        view.findViewById(R.id.leftHelp1).setOnClickListener(view14 -> onSwipe(Move.HORIZONTAL, Transformation.INVERT, 0));
+        view.findViewById(R.id.leftHelp2).setOnClickListener(view15 -> onSwipe(Move.HORIZONTAL, Transformation.INVERT, 1));
+        view.findViewById(R.id.leftHelp3).setOnClickListener(view16 -> onSwipe(Move.HORIZONTAL, Transformation.INVERT, 2));
+        view.findViewById(R.id.topHelp1).setOnClickListener(view17 -> onSwipe(Move.VERTICAL, Transformation.INVERT, 0));
+        view.findViewById(R.id.topHelp2).setOnClickListener(view18 -> onSwipe(Move.VERTICAL, Transformation.INVERT, 1));
+        view.findViewById(R.id.topHelp3).setOnClickListener(view19 -> onSwipe(Move.VERTICAL, Transformation.INVERT, 2));
+        view.findViewById(R.id.rightHelp1).setOnClickListener(view20 -> onSwipe(Move.HORIZONTAL, Transformation.ROTATE, 0));
+        view.findViewById(R.id.rightHelp2).setOnClickListener(view21 -> onSwipe(Move.HORIZONTAL, Transformation.ROTATE, 1));
+        view.findViewById(R.id.rightHelp3).setOnClickListener(view22 -> onSwipe(Move.HORIZONTAL, Transformation.ROTATE, 2));
+        view.findViewById(R.id.bottomHelp1).setOnClickListener(view23 -> onSwipe(Move.VERTICAL, Transformation.ROTATE, 0));
+        view.findViewById(R.id.bottomHelp2).setOnClickListener(view24 -> onSwipe(Move.VERTICAL, Transformation.ROTATE, 1));
+        view.findViewById(R.id.bottomHelp3).setOnClickListener(view25 -> onSwipe(Move.VERTICAL, Transformation.ROTATE, 2));
 
         /* Handling TextView to displaying elapsed time in every second */
         timer = (TextView) view.findViewById(R.id.rightControlsGameDuration);
@@ -194,26 +181,18 @@ public class GameScreenFragment extends Fragment {
         mDetector = new GestureDetectorCompat(getActivity(), new FlingGestureListener());
 
         /* Setting on touch listener to the Game Board */
-        gameLayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                return mDetector.onTouchEvent(event);
-            }
-        });
+        gameLayout.setOnTouchListener((view13, event) -> mDetector.onTouchEvent(event));
 
         /* Getting previous game when returning from success screen to replay level. */
         getParentFragmentManager()
-                .setFragmentResultListener("replayGameData", this, new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                String previousGame = result.getString("previousGame");
-                initGameUponPreferences(previousGame);
-                updateLayout(endLayout, game.getCurrentGame().getEndState());
-                updateLayout(gameLayout, game.getCurrentGame().getStartState());
-                game.start();
-                timerHandler.postDelayed(timerRunnable, 1000);
-            }
-        });
+                .setFragmentResultListener("replayGameData", this, (requestKey, result) -> {
+                    String previousGame = result.getString("previousGame");
+                    initGameUponPreferences(previousGame);
+                    updateLayout(endLayout, game.getCurrentGame().getEndState());
+                    updateLayout(gameLayout, game.getCurrentGame().getStartState());
+                    game.start();
+                    timerHandler.postDelayed(timerRunnable, 1000);
+                });
     }
 
     /* Handling Fragment Lifecycle Changes */
@@ -227,8 +206,11 @@ public class GameScreenFragment extends Fragment {
     public void onStart() {
         super.onStart();
         updateLayout(endLayout, this.game.getCurrentGame().getEndState());
-        updateLayout(gameLayout, this.game.getCurrentGame().getStartState());
-        this.game.start();
+        updateLayout(gameLayout, this.game.getCurrentGame().getCurrentState());
+        if(!this.game.isGameStarted())
+            this.game.start();
+        else if(this.game.isGamePaused())
+            this.game.resume();
         timerHandler.postDelayed(timerRunnable, 1000);
     }
 
@@ -259,7 +241,7 @@ public class GameScreenFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        this.game.stop();
+        this.game.pause();
         timerHandler.removeCallbacks(timerRunnable);
     }
 
@@ -339,8 +321,14 @@ public class GameScreenFragment extends Fragment {
             updateLeaderboardScores();
 
             setScoreDetails();
-            Navigation.findNavController(this.getView())
-                    .navigate(GameScreenFragmentDirections.actionGameScreenFragmentToSuccessScreenFragment());
+            final Handler handler  = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Navigation.findNavController(requireView())
+                            .navigate(GameScreenFragmentDirections.actionGameScreenFragmentToSuccessScreenFragment());
+                }
+            }, 1000);
         }
     }
 

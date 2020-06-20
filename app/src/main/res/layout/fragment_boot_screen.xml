@@ -13,29 +13,45 @@
         android:layout_width="302dp"
         android:layout_height="336dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
         android:contentDescription="@string/description_studio_logo"
-        app:layout_constraintBottom_toTopOf="@+id/goToMainButton"
+        android:src="@drawable/ic_nosebite_logo_gray"
+        app:layout_constraintBottom_toTopOf="@+id/continueText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_nosebite_logo_gray" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/goToMainButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="48dp"
         android:contentDescription="@string/description_gotomain"
         android:src="@drawable/ic_loader_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/continueText" />
+
+    <TextView
+        android:id="@+id/continueText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/titillium_web_light"
+        android:text="@string/text_boot_continue"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/goToMainButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/studioLogo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

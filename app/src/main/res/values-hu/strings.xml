@@ -45,7 +45,7 @@
     <string name="message_sign_in_process">Bejelentkezés…</string>
     <string name="summary_about">Szeretnénk neked a legjobb játékélményt nyújtani, így bátran mondd el nekünk a vélaményedet, írd le az általad felfedezett hibákat és ötleteidet jövendő fejlesztésekkel kapcsolatban.</string>
     <string name="title_levels_fragment">Pályák</string>
-    <string name="error_pref_age_invalid_input">Hibás érték! Az életkorod bizonyára egy szám, nem?</string>
+    <string name="error_pref_age_invalid_input">Hibás érték! Az életkorodnak valamennyire valóságosnak kellene lennie...</string>
     <string name="text_pref_language_english">Angol</string>
     <string name="text_pref_language_hungarian">Magyar</string>
     <string name="text_pref_action_inversion">Invertálás</string>
@@ -73,8 +73,11 @@
     <string name="title_appintro_slide34">Irányítás</string>
     <string name="title_appintro_slidelast">Jelentkezz be</string>
     <string name="description_appintro_slidelast">Jelentkezz be a Google Play fiókoddal, hogy versenyezhess a barátaiddal és elnyerhess klassz küldetéseket.</string>
-    <string name="description_appintro_slide3">Ha balról vagy felülről húzod az ujjad, minden figura az ellenkezőjére változik a kiválasztott sorban vagy oszlopban.</string>
-    <string name="description_appintro_slide4">Ha jobbról vagy lentről húzod az ujjad, a figurák egyel eltolódnak a kiválasztott sorban vagy oszlopban.</string>
+    <string name="description_appintro_slide3">Ha balról vagy felülről húzod az ujjad vagy a mínuszjelet formázó gombokra böksz, minden figura az ellenkezőjére változik a kiválasztott sorban vagy oszlopban.</string>
+    <string name="description_appintro_slide4">Ha jobbról vagy lentről húzod az ujjad vagy a háromszögű gombokra böksz, a figurák egyel eltolódnak a kiválasztott sorban vagy oszlopban.</string>
     <string name="descritpion_appintro_slide2">A célod, hogy egy megadott mintát érj el a lehető legkevesebb lépésben egy véletlen kezdőállapotból.</string>
     <string name="description_appintro_slidefirst">Légy gyors, de gondold meg! Oldj meg fejtörőket és találd meg a legjobb megoldást!</string>
+    <string name="text_boot_continue">Érintsd meg a folytatáshoz</string>
+    <string name="title_appintro_slide5">Útmutató</string>
+    <string name="description_appintro_slide5">Érintsd meg a ? ikont miközben játszol további segítségért</string>
 </resources>

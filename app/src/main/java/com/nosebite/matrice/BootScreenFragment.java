@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,6 +20,7 @@ public class BootScreenFragment extends Fragment {
 
     private MainActivity mainActivity;
     private ImageButton toMainButton;
+    private TextView continueText;
 
     public BootScreenFragment() {
         // Required empty public constructor
@@ -40,6 +42,7 @@ public class BootScreenFragment extends Fragment {
 
         /* Adds callback to the launcher Button to navigate the user to the Main Screen */
         toMainButton = (ImageButton) view.findViewById(R.id.goToMainButton);
+        continueText = (TextView) view.findViewById(R.id.continueText);
         toMainButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,6 +59,12 @@ public class BootScreenFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         toMainButton.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.rotate));
+        continueText.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in));
     }
 }

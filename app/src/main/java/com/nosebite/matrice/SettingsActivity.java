@@ -87,12 +87,9 @@ public class SettingsActivity extends BaseActivity {
             }
             /* Update Database with changed gender preferences */
             assert genderPreferences != null;
-            genderPreferences.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    users.child(user.getUid()).child("gender").setValue(newValue);
-                    return true;
-                }
+            genderPreferences.setOnPreferenceChangeListener((preference, newValue) -> {
+                users.child(user.getUid()).child("gender").setValue(newValue);
+                return true;
             });
 
             /* Update Database with age preferences on change */
@@ -101,68 +98,53 @@ public class SettingsActivity extends BaseActivity {
                 agePreferences.setSummaryProvider(EditTextPreference.SimpleSummaryProvider.getInstance());
             }
             assert agePreferences != null;
-            agePreferences.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    String pattern = "^[0-9]+$";
-                    Pattern regexp = Pattern.compile(pattern);
-                    Matcher matcher = regexp.matcher(newValue.toString());
-                    if(matcher.find()) {
-                        users.child(user.getUid()).child("age").setValue(newValue);
-                        return true;
-                    }
-                    new AlertDialog.Builder(requireActivity()).setMessage(R.string.error_pref_age_invalid_input)
-                            .setNeutralButton(android.R.string.ok, null).show();
-                    return false;
+            agePreferences.setOnPreferenceChangeListener((preference, newValue) -> {
+                String pattern = "^[0-9]+$";
+                Pattern regexp = Pattern.compile(pattern);
+                Matcher matcher = regexp.matcher(newValue.toString());
+                if(matcher.find() && Integer.parseInt(newValue.toString()) < 125) {
+                    users.child(user.getUid()).child("age").setValue(newValue);
+                    return true;
                 }
+                new AlertDialog.Builder(requireActivity()).setMessage(getString(R.string.error_pref_age_invalid_input))
+                        .setNeutralButton(android.R.string.ok, null).show();
+                return false;
             });
 
             assert languagePreferences != null;
-            languagePreferences.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    LocaleHelper.setLocale(parentActivity.getBaseContext(), newValue.toString());
-                    parentActivity.recreate();
-                    return true;
-                }
+            languagePreferences.setOnPreferenceChangeListener((preference, newValue) -> {
+                LocaleHelper.setLocale(parentActivity.getBaseContext(), newValue.toString());
+                parentActivity.recreate();
+                return true;
             });
 
             /* Switches between Day and Night UI modes */
             SwitchPreference darkModePreference = findPreference(getString(R.string.key_enable_dark_mode));
             assert darkModePreference != null;
-            darkModePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if(!darkModePreference.isChecked()) {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    }
-                    else {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    }
-                    return true;
+            darkModePreference.setOnPreferenceChangeListener((preference, newValue) -> {
+                if(!darkModePreference.isChecked()) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 }
+                else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }
+                return true;
             });
 
             /* On Click Listener for Send Feedback Preference */
             Preference sendFeedbackPreference = findPreference(getString(R.string.key_send_feedback));
             assert sendFeedbackPreference != null;
-            sendFeedbackPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    sendFeedback(requireActivity());
-                    return true;
-                }
+            sendFeedbackPreference.setOnPreferenceClickListener(preference -> {
+                sendFeedback(requireActivity());
+                return true;
             });
 
             /* On CLick Listener for viewing Privacy Policy on website */
             Preference privacyPolicy = findPreference(getString(R.string.key_privacy_policy));
             if(privacyPolicy != null) {
-                privacyPolicy.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                    @Override
-                    public boolean onPreferenceClick(Preference preference) {
-                        openWebPage(getString(R.string.url_privacy));
-                        return true;
-                    }
+                privacyPolicy.setOnPreferenceClickListener(preference -> {
+                    openWebPage(getString(R.string.url_privacy));
+                    return true;
                 });
             }
         }

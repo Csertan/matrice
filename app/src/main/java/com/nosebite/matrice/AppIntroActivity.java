@@ -48,17 +48,25 @@ public class AppIntroActivity extends AppIntro {
                 .backgroundColor(getColor(R.color.colorIntro3))
                 .build();
 
+        SliderPage slideFive = new SliderPagerBuilder()
+                .title(getString(R.string.title_appintro_slide5))
+                .description(getString(R.string.description_appintro_slide5))
+                .imageDrawable(R.drawable.ic_twotone_help_24)
+                .backgroundColor(getColor(R.color.colorIntro4))
+                .build();
+
         SliderPage slideLast = new SliderPagerBuilder()
                 .title(getString(R.string.title_appintro_slidelast))
                 .description(getString(R.string.description_appintro_slidelast))
                 .imageDrawable(R.drawable.ic_intro_sign_in)
-                .backgroundColor(getColor(R.color.colorIntro4))
+                .backgroundColor(getColor(R.color.colorIntrolast))
                 .build();
 
         addSlide(AppIntroFragment.newInstance(slideFirst));
         addSlide(AppIntroFragment.newInstance(slideTwo));
         addSlide(AppIntroFragment.newInstance(slideThree));
         addSlide(AppIntroFragment.newInstance(slideFour));
+        addSlide(AppIntroFragment.newInstance(slideFive));
         addSlide(AppIntroFragment.newInstance(slideLast));
 
         setTransformer(new AppIntroPageTransformerType

@@ -12,5 +12,6 @@
     <color name="colorIntro1">#982c40</color>
     <color name="colorIntro2">#ffb707</color>
     <color name="colorIntro3">#43c76a</color>
-    <color name="colorIntro4">#7886AE</color>
+    <color name="colorIntro4">#6DA57D</color>
+    <color name="colorIntrolast">#5E74B3</color>
 </resources>

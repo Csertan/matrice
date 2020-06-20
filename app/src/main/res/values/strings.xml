@@ -48,7 +48,7 @@
     <string name="placeholder_score_details" translatable="false">Replace it with Score details!</string>
     <string name="description_success_picture" translatable="false">Picture displayed at success</string>
     <string name="text_score_details_start">Congratulations! You won in </string>
-    <string name="text_score_details_middle"> steps, and </string>
+    <string name="text_score_details_middle">" steps and "</string>
     <string name="text_score_details_end"> seconds! Want to play a new game?</string>
 
     <!-- Settings Activity -->
@@ -68,7 +68,7 @@
     <string name="summary_transition_type">Type of transition you would like to play with</string>
     <string name="key_data_category" translatable="false">data_category</string>
     <string name="title_data_category">Player Information</string>
-    <string name="summary_data_category">To contribute to our research please kindly provide us general information about you.</string>
+    <string name="summary_data_category">To contribute to our research please kindly provide us with general information about yourself.</string>
     <string name="key_gender_info" translatable="false">gender_info</string>
     <string name="title_gender_info">Gender</string>
     <string name="summary_gender_info">Add your gender to promote our research</string>
@@ -103,9 +103,9 @@
     <string name="message_sign_in_process">Signing in…</string>
     <string name="description_open_achievements" translatable="false">openAchievements</string>
     <string name="description_open_leaderboards" translatable="false">openLeaderboards</string>
-    <string name="summary_about">We would like to provide you with the best game experience so don\'t hesitate to tell us your opinion, report found bugs and to share ideas on future improvements.</string>
+    <string name="summary_about">We would like to provide you with the best game experience so don\'t hesitate to tell us your opinion, report any bugs that you found and to share ideas on future improvements.</string>
     <string name="title_levels_fragment">Levels</string>
-    <string name="error_pref_age_invalid_input">Invalid input! Your age must be a number…</string>
+    <string name="error_pref_age_invalid_input">Invalid input! Your age must be a real age…</string>
     <string name="text_pref_language_english">English</string>
     <string name="text_pref_language_hungarian">Hungarian</string>
     <string name="text_pref_action_inversion">Inversion</string>
@@ -119,10 +119,10 @@
     <string name="text_pref_figures_plusminus">Plus Minus</string>
     <string name="description_inversion_action" translatable="false">inversion</string>
     <string name="text_authors_research">This game is part of a research project that is hosted by the High Speed Network Laboratory at the Budapest University of Technology and Economics.
-        As part of our investigation on how humans could navigate and find its paths in real-life complex networks we are gathering anonymous
-        usage data from this game to analyze user behaviour. You wonder what is the connection between navigation and playing with the app?
-        It appears that finding the best solution for the puzzle is analogous to finding a shortest path in a complex graph namely a network.
-        \nIf you are interested in what we are doing visit the website of the app from the Settings.\nAnd we are grateful if you play with the
+        As part of our research on how humans can navigate and find its paths in real-life complex networks we are gathering anonymous
+        usage data from this game to analyze user behaviour. Are you wondering what the connection is between navigation and playing with the app?
+        It appears that finding the best solution for the puzzle is analogous to finding a shortest path in a complex graph, namely a network.
+        \nIf you are interested in what we are doing visit the website of the app from the Settings.\nAnd we are grateful if you play the
         game, this way you considerably contribute to our research. Thank you!
     </string>
     <string name="placeholder_parent_fragment_name" translatable="false">Parent ID</string>
@@ -132,11 +132,14 @@
     <string name="title_appintro_slide2">Goal of the Game</string>
     <string name="descritpion_appintro_slide2">Your goal is to reach a specific pattern from a start pattern with the least possible swipes.</string>
     <string name="title_appintro_slide34">Swipes</string>
-    <string name="description_appintro_slide3">When you swipe from the left or from the top of the table the selected row or column changes all cells.</string>
-    <string name="description_appintro_slide4">When you swipe from the right or from the bottom the selected row or column cells rotate by one.</string>
+    <string name="description_appintro_slide3">When you swipe from the left or from the top of the table or you tap on the minus shaped buttons the selected row or column changes all cells.</string>
+    <string name="description_appintro_slide4">When you swipe from the right or from the bottom of the table or you tap on the triangular buttons the selected row or column cells rotate by one.</string>
     <string name="title_appintro_slidelast">Sign in</string>
     <string name="description_appintro_slidelast">Sign in with your Play Games account to compete with your friends and earn achievements.</string>
     <string name="key_first_run" translatable="false">first_run</string>
+    <string name="text_boot_continue">Tap to continue</string>
+    <string name="title_appintro_slide5">Help</string>
+    <string name="description_appintro_slide5">Tap the ? icon while playing to get more help</string>
 
 
 </resources>

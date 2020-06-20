@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
         android:layout_marginEnd="3dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="3dp"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingRight="10dp"
@@ -270,8 +270,8 @@
         android:id="@+id/leftControlsLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="6dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="3dp"
         app:columnCount="1"
         app:layout_constraintBottom_toBottomOf="@+id/endStateLayout"
         app:layout_constraintEnd_toStartOf="@+id/endStateLayout"
@@ -321,8 +321,8 @@
         android:id="@+id/rightControlsLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="6dp"
         app:columnCount="1"
         app:layout_constraintBottom_toBottomOf="@+id/endStateLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -372,9 +372,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="3dp"
         app:columnCount="4"
         app:layout_constraintBottom_toTopOf="@+id/endStateLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -450,7 +450,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:paddingStart="3dp"
         android:paddingTop="3dp"
         android:paddingEnd="3dp"
@@ -464,7 +464,7 @@
         app:layout_constraintVertical_bias="0.0"
         app:rowCount="3">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/leftHelp1"
             android:layout_width="wrap_content"
             android:layout_height="90dp"
@@ -477,7 +477,7 @@
             app:layout_column="0"
             app:layout_row="0" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/leftHelp2"
             android:layout_width="wrap_content"
             android:layout_height="90dp"
@@ -490,7 +490,7 @@
             app:layout_column="0"
             app:layout_row="1" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/leftHelp3"
             android:layout_width="wrap_content"
             android:layout_height="90dp"
@@ -508,7 +508,7 @@
         android:id="@+id/topMoveHelpLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="3dp"
         android:layout_marginBottom="3dp"
         android:paddingStart="3dp"
         android:paddingTop="3dp"
@@ -521,7 +521,7 @@
         app:layout_constraintTop_toBottomOf="@+id/endStateLayout"
         app:rowCount="1">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/topHelp1"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
@@ -534,7 +534,7 @@
             app:layout_column="0"
             app:layout_row="0" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/topHelp2"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
@@ -547,7 +547,7 @@
             app:layout_column="1"
             app:layout_row="0" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/topHelp3"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
@@ -566,7 +566,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="3dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:paddingStart="3dp"
         android:paddingTop="3dp"
         android:paddingEnd="3dp"
@@ -580,7 +580,7 @@
         app:layout_constraintVertical_bias="0.0"
         app:rowCount="3">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/rightHelp1"
             android:layout_width="wrap_content"
             android:layout_height="90dp"
@@ -593,7 +593,7 @@
             app:layout_column="0"
             app:layout_row="0" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/rightHelp2"
             android:layout_width="wrap_content"
             android:layout_height="90dp"
@@ -606,7 +606,7 @@
             app:layout_column="0"
             app:layout_row="1" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/rightHelp3"
             android:layout_width="wrap_content"
             android:layout_height="90dp"
@@ -624,7 +624,6 @@
         android:id="@+id/bottomMoveHelpLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="3dp"
         android:layout_marginBottom="3dp"
         android:paddingStart="3dp"
         android:paddingTop="3dp"
@@ -632,12 +631,12 @@
         android:paddingBottom="3dp"
         app:columnCount="3"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startStateLayout"
         app:rowCount="1">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/bottomHelp1"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
@@ -650,7 +649,7 @@
             app:layout_column="0"
             app:layout_row="0" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/bottomHelp2"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
@@ -663,7 +662,7 @@
             app:layout_column="1"
             app:layout_row="0" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/bottomHelp3"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
