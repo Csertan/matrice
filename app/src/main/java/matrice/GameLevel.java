@@ -29,7 +29,7 @@ public class GameLevel {
         this.currentState = new GameState(this.startState);
 
         this.sequence = new ArrayList<>();
-        sequence.add(this.startState);
+        sequence.add(getCopyOfState(this.startState));
     }
 
     /**
@@ -49,7 +49,7 @@ public class GameLevel {
         this.currentState = new GameState(tokens[2], boardSize);
 
         this.sequence = new ArrayList<>();
-        sequence.add(this.startState);
+        sequence.add(getCopyOfState(this.startState));
     }
 
     /* Getters and Setters */
@@ -57,8 +57,8 @@ public class GameLevel {
     public GameState getCurrentState() {
         return currentState;
     }
-    public GameState getCopyOfCurrentState() {
-        return new GameState(this.currentState);
+    public GameState getCopyOfState(GameState state) {
+        return new GameState(state);
     }
     public GameState getEndState() {
         return endState;
@@ -138,7 +138,7 @@ public class GameLevel {
             case ROTATE:
                 calculateRotation(move, id);
         }
-        this.sequence.add(this.getCopyOfCurrentState());
+        this.sequence.add(this.getCopyOfState(this.currentState));
     }
 
     /* Game Control */
@@ -147,9 +147,9 @@ public class GameLevel {
      * Restarts the current Level.
      */
     void restart() {
-        this.setCurrentState(this.getStartState());
+        this.setCurrentState(getCopyOfState(this.startState));
         this.sequence.clear();
-        this.sequence.add(this.getStartState());
+        this.sequence.add(getCopyOfState(this.startState));
     }
 
     /**

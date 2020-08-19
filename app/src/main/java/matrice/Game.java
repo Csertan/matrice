@@ -167,9 +167,7 @@ public class Game {
             this.stopWatch.start();
             this.setGamePaused(false);
             this.setGameStarted(true);
-            if (this.currentGame.getStepSize() > 1) {
-                this.currentGame.restart();
-            }
+            this.currentGame.restart();
         }
     }
 

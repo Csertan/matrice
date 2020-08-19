@@ -85,6 +85,11 @@ public class GameScreenFragment extends Fragment {
     /* Reference of the Firebase Database Root */
     private DatabaseReference dataBase;
 
+    /**
+     * Store reference of Button to be able to change its drawable when needed.
+     */
+    private ImageButton pausePlayButton;
+
     public static GameScreenFragment newInstance() {
         return new GameScreenFragment();
     }
@@ -117,44 +122,81 @@ public class GameScreenFragment extends Fragment {
             //Uses popUpTo global action to remove Fragment instances from backstack
             Navigation.findNavController(view).navigate(MainNavGraphDirections.actionPopUpToMainScreenFragment());
         });
+        toHomeButton.setOnLongClickListener(v -> {
+            Toast.makeText(getContext(), getString(R.string.text_gotohome), Toast.LENGTH_SHORT).show();
+            return true;
+        });
 
         /* Adds callback to Play/Pause Button to suspend/resume measuring elapsed time */
-        ImageButton pausePlayButton = (ImageButton) view.findViewById(R.id.rightControlsPausePlayButton);
+        pausePlayButton = (ImageButton) view.findViewById(R.id.rightControlsPausePlayButton);
         pausePlayButton.setOnClickListener(this::onPausePlayButtonPressed);
+        pausePlayButton.setOnLongClickListener(v -> {
+            Toast.makeText(getContext(), getString(R.string.text_pauseplay), Toast.LENGTH_SHORT).show();
+            return true;
+        });
 
         /* Adds callback to Stop/New Game Button to let the user stop the game or create new game */
         ImageButton stopButton = (ImageButton) view.findViewById(R.id.rightControlsStopButton);
         stopButton.setOnClickListener(this::onStopButtonPressed);
+        stopButton.setOnLongClickListener(v -> {
+            Toast.makeText(getContext(), getString(R.string.text_stop), Toast.LENGTH_SHORT).show();
+            return true;
+        });
 
         /* Adds callback to Retry Button in order to let the user go back to the start
           states of the level */
         ImageButton retryButton = (ImageButton) view.findViewById(R.id.rightControlsRetryButton);
         retryButton.setOnClickListener(this::onRetryButtonPressed);
+        retryButton.setOnLongClickListener(v -> {
+            Toast.makeText(getContext(), getString(R.string.text_retry), Toast.LENGTH_SHORT).show();
+            return true;
+        });
 
         /* Adds callback to Levels Button to navigate the user to the Level choser Screen */
         ImageButton levelsButton = (ImageButton) view.findViewById(R.id.leftControlsLevelsButton);
-        levelsButton.setOnClickListener(view1 -> {
+        levelsButton.setOnClickListener(v -> {
             //TODO Navigate to Levels Screen
             Toast.makeText(getContext(), getString(R.string.message_feature_coming_soon), Toast.LENGTH_SHORT).show();
+        });
+        levelsButton.setOnLongClickListener(v -> {
+            Toast.makeText(getContext(), getString(R.string.text_gotolevels), Toast.LENGTH_SHORT).show();
+            return true;
         });
 
         /* Adds callback to Back Button to navigate the user down in the back stack */
         ImageButton backButton = (ImageButton) view.findViewById(R.id.leftControlsBackButton);
-        backButton.setOnClickListener(view12 -> mainActivity.onBackPressed());
+        backButton.setOnClickListener(v -> mainActivity.onBackPressed());
+        backButton.setOnLongClickListener(v -> {
+            Toast.makeText(getContext(), getString(R.string.text_goback), Toast.LENGTH_SHORT).show();
+            return true;
+        });
 
         /* Set On CLick Listeners for user move help buttons */
-        view.findViewById(R.id.leftHelp1).setOnClickListener(view14 -> onSwipe(Move.HORIZONTAL, Transformation.INVERT, 0));
-        view.findViewById(R.id.leftHelp2).setOnClickListener(view15 -> onSwipe(Move.HORIZONTAL, Transformation.INVERT, 1));
-        view.findViewById(R.id.leftHelp3).setOnClickListener(view16 -> onSwipe(Move.HORIZONTAL, Transformation.INVERT, 2));
-        view.findViewById(R.id.topHelp1).setOnClickListener(view17 -> onSwipe(Move.VERTICAL, Transformation.INVERT, 0));
-        view.findViewById(R.id.topHelp2).setOnClickListener(view18 -> onSwipe(Move.VERTICAL, Transformation.INVERT, 1));
-        view.findViewById(R.id.topHelp3).setOnClickListener(view19 -> onSwipe(Move.VERTICAL, Transformation.INVERT, 2));
-        view.findViewById(R.id.rightHelp1).setOnClickListener(view20 -> onSwipe(Move.HORIZONTAL, Transformation.ROTATE, 0));
-        view.findViewById(R.id.rightHelp2).setOnClickListener(view21 -> onSwipe(Move.HORIZONTAL, Transformation.ROTATE, 1));
-        view.findViewById(R.id.rightHelp3).setOnClickListener(view22 -> onSwipe(Move.HORIZONTAL, Transformation.ROTATE, 2));
-        view.findViewById(R.id.bottomHelp1).setOnClickListener(view23 -> onSwipe(Move.VERTICAL, Transformation.ROTATE, 0));
-        view.findViewById(R.id.bottomHelp2).setOnClickListener(view24 -> onSwipe(Move.VERTICAL, Transformation.ROTATE, 1));
-        view.findViewById(R.id.bottomHelp3).setOnClickListener(view25 -> onSwipe(Move.VERTICAL, Transformation.ROTATE, 2));
+        view.findViewById(R.id.leftHelp1).setOnClickListener(v -> onSwipe(Move.HORIZONTAL, Transformation.INVERT, 0));
+        view.findViewById(R.id.leftHelp2).setOnClickListener(v -> onSwipe(Move.HORIZONTAL, Transformation.INVERT, 1));
+        view.findViewById(R.id.leftHelp3).setOnClickListener(v -> onSwipe(Move.HORIZONTAL, Transformation.INVERT, 2));
+        view.findViewById(R.id.topHelp1).setOnClickListener(v -> onSwipe(Move.VERTICAL, Transformation.INVERT, 0));
+        view.findViewById(R.id.topHelp2).setOnClickListener(v -> onSwipe(Move.VERTICAL, Transformation.INVERT, 1));
+        view.findViewById(R.id.topHelp3).setOnClickListener(v -> onSwipe(Move.VERTICAL, Transformation.INVERT, 2));
+        view.findViewById(R.id.rightHelp1).setOnClickListener(v -> onSwipe(Move.HORIZONTAL, Transformation.ROTATE, 0));
+        view.findViewById(R.id.rightHelp2).setOnClickListener(v -> onSwipe(Move.HORIZONTAL, Transformation.ROTATE, 1));
+        view.findViewById(R.id.rightHelp3).setOnClickListener(v -> onSwipe(Move.HORIZONTAL, Transformation.ROTATE, 2));
+        view.findViewById(R.id.bottomHelp1).setOnClickListener(v -> onSwipe(Move.VERTICAL, Transformation.ROTATE, 0));
+        view.findViewById(R.id.bottomHelp2).setOnClickListener(v -> onSwipe(Move.VERTICAL, Transformation.ROTATE, 1));
+        view.findViewById(R.id.bottomHelp3).setOnClickListener(v -> onSwipe(Move.VERTICAL, Transformation.ROTATE, 2));
+
+        view.findViewById(R.id.leftHelp1).setOnLongClickListener(v -> {Toast.makeText(getContext(), getString(R.string.text_pref_action_inversion), Toast.LENGTH_SHORT).show(); return true;});
+        view.findViewById(R.id.leftHelp2).setOnLongClickListener(v -> {Toast.makeText(getContext(), getString(R.string.text_pref_action_inversion), Toast.LENGTH_SHORT).show(); return true;});
+        view.findViewById(R.id.leftHelp3).setOnLongClickListener(v -> {Toast.makeText(getContext(), getString(R.string.text_pref_action_inversion), Toast.LENGTH_SHORT).show(); return true;});
+        view.findViewById(R.id.topHelp1).setOnLongClickListener(v -> {Toast.makeText(getContext(), getString(R.string.text_pref_action_inversion), Toast.LENGTH_SHORT).show(); return true;});
+        view.findViewById(R.id.topHelp2).setOnLongClickListener(v -> {Toast.makeText(getContext(), getString(R.string.text_pref_action_inversion), Toast.LENGTH_SHORT).show(); return true;});
+        view.findViewById(R.id.topHelp3).setOnLongClickListener(v -> {Toast.makeText(getContext(), getString(R.string.text_pref_action_inversion), Toast.LENGTH_SHORT).show(); return true;});
+        view.findViewById(R.id.rightHelp1).setOnLongClickListener(v -> {Toast.makeText(getContext(), getString(R.string.text_pref_action_rotation), Toast.LENGTH_SHORT).show(); return true;});
+        view.findViewById(R.id.rightHelp2).setOnLongClickListener(v -> {Toast.makeText(getContext(), getString(R.string.text_pref_action_rotation), Toast.LENGTH_SHORT).show(); return true;});
+        view.findViewById(R.id.rightHelp3).setOnLongClickListener(v -> {Toast.makeText(getContext(), getString(R.string.text_pref_action_rotation), Toast.LENGTH_SHORT).show(); return true;});
+        view.findViewById(R.id.bottomHelp1).setOnLongClickListener(v -> {Toast.makeText(getContext(), getString(R.string.text_pref_action_rotation), Toast.LENGTH_SHORT).show(); return true;});
+        view.findViewById(R.id.bottomHelp2).setOnLongClickListener(v -> {Toast.makeText(getContext(), getString(R.string.text_pref_action_rotation), Toast.LENGTH_SHORT).show(); return true;});
+        view.findViewById(R.id.bottomHelp3).setOnLongClickListener(v -> {Toast.makeText(getContext(), getString(R.string.text_pref_action_rotation), Toast.LENGTH_SHORT).show(); return true;});
 
         /* Handling TextView to displaying elapsed time in every second */
         timer = (TextView) view.findViewById(R.id.rightControlsGameDuration);
@@ -252,14 +294,13 @@ public class GameScreenFragment extends Fragment {
      * @param view View which the click happened in. Default parameter of onClick callbacks.
      */
     private void onPausePlayButtonPressed(@NonNull View view) {
-        ImageButton button = (ImageButton) view.findViewById(R.id.rightControlsPausePlayButton);
         if(!this.isGameStopped) {
             if (!this.game.isGamePaused()) {
                 this.game.pause();
-                button.setImageResource(R.drawable.ic_play_icon);
+                pausePlayButton.setImageResource(R.drawable.ic_play_icon);
             } else {
                 this.game.resume();
-                button.setImageResource(R.drawable.ic_pause_icon);
+                pausePlayButton.setImageResource(R.drawable.ic_pause_icon);
             }
         }
     }
@@ -276,6 +317,7 @@ public class GameScreenFragment extends Fragment {
                 this.game.stop();
                 this.isGameStopped = true;
                 stopButton.setImageResource(R.drawable.ic_new_game_icon);
+                pausePlayButton.setImageResource(R.drawable.ic_play_icon);
             }
             else {
                 //Initialises New Game
@@ -285,6 +327,7 @@ public class GameScreenFragment extends Fragment {
                 this.game.start();
                 this.isGameStopped = false;
                 stopButton.setImageResource(R.drawable.ic_stop_icon);
+                pausePlayButton.setImageResource(R.drawable.ic_pause_icon);
             }
         }
     }
@@ -297,7 +340,11 @@ public class GameScreenFragment extends Fragment {
         if(this.game.isGameStarted()) {
             this.game.restart();
             this.isGameStopped = false;
-            updateLayout(gameLayout, this.game.getCurrentGame().getCurrentState());
+
+            /* Update UI elements */
+            updateLayout(gameLayout, this.game.getCurrentGame().getStartState());
+            stepCounter.setText(Integer.toString(this.game.getCurrentGame().getStepSize()));
+            pausePlayButton.setImageResource(R.drawable.ic_pause_icon);
         }
     }
 

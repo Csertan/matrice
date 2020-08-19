@@ -79,5 +79,11 @@
     <string name="description_appintro_slidefirst">Légy gyors, de gondold meg! Oldj meg fejtörőket és találd meg a legjobb megoldást!</string>
     <string name="text_boot_continue">Érintsd meg a folytatáshoz</string>
     <string name="title_appintro_slide5">Útmutató</string>
-    <string name="description_appintro_slide5">Érintsd meg a kérdőjel ikont miközben játszol további segítségért.</string>
+    <string name="description_appintro_slide5">Érintsd meg a kérdőjel ikont vagy bökj hosszan bármely gombra miközben játszol további segítségért.</string>
+    <string name="text_gotohome">Főmenü</string>
+    <string name="text_pauseplay">Szünet / Folytatás</string>
+    <string name="text_stop">Játék befejezése</string>
+    <string name="text_retry">Újrajátszás</string>
+    <string name="text_gotolevels">Pályák</string>
+    <string name="text_goback">Vissza</string>
 </resources>

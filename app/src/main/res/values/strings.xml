@@ -139,8 +139,14 @@
     <string name="key_first_run" translatable="false">first_run</string>
     <string name="text_boot_continue">Tap to continue</string>
     <string name="title_appintro_slide5">Help</string>
-    <string name="description_appintro_slide5">Tap the question mark icon while playing to get more help.</string>
+    <string name="description_appintro_slide5">Tap the question mark icon or long press on any button while playing to get more help.</string>
     <string name="key_version_name" translatable="false">version_name</string>
+    <string name="text_gotohome">Main menu</string>
+    <string name="text_pauseplay">Pause / Play</string>
+    <string name="text_stop">Stop game</string>
+    <string name="text_retry">Replay</string>
+    <string name="text_gotolevels">Levels</string>
+    <string name="text_goback">Previous</string>
 
 
 </resources>
