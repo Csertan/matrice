@@ -51,7 +51,7 @@ public class AppIntroActivity extends AppIntro {
         SliderPage slideFive = new SliderPagerBuilder()
                 .title(getString(R.string.title_appintro_slide5))
                 .description(getString(R.string.description_appintro_slide5))
-                .imageDrawable(R.drawable.ic_twotone_help_24)
+                .imageDrawable(R.drawable.ic_twotone_help_240)
                 .backgroundColor(getColor(R.color.colorIntro4))
                 .build();
 

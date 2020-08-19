@@ -184,7 +184,7 @@ public class SettingsActivity extends BaseActivity {
         }
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("message/rfc822");
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"csertant@edu.bme.hu"});
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"nosebitestudios@gmail.com"});
         intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback from android app");
         intent.putExtra(Intent.EXTRA_TEXT, body);
         context.startActivity(Intent.createChooser(intent, context.getString(R.string.text_choose_email_client)));
