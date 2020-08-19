@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceManager;
 
 import com.google.android.gms.auth.api.Auth;
@@ -71,6 +72,13 @@ public class MainActivity extends BaseActivity {
         if(firebaseDatabase == null) {
             firebaseDatabase = FirebaseDatabase.getInstance();
             enablePersistence();
+        }
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if(preferences.getBoolean(getString(R.string.key_enable_dark_mode), true)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
     }
 
