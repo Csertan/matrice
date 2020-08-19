@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Matrice</string>
-    <string name="app_version" translatable="false">1.1.0</string>
-    <string name="url_github" translatable="false">https://github.com/Csertan/matrice</string>
+    <string name="app_version" translatable="false">1.2.0</string>
+    <string name="url_github" translatable="false">https://github.com/csertant/matrice</string>
 
     <!-- Sign In issue -->
     <string name="error_sign_in">An error occurred while signing in.</string>
@@ -92,7 +92,7 @@
 
     <string name="key_privacy_policy" translatable="false">privacy_policy</string>
     <string name="title_privacy_policy">Privacy Policy</string>
-    <string name="url_privacy" translatable="false">https://csertan.github.io/nosebite-studios</string>
+    <string name="url_privacy" translatable="false">https://csertant.github.io/nosebite-studios</string>
     <string name="error_view_webpage">Can\'t find application for opening webpage.</string>
 
     <string name="text_choose_email_client">Choose email client</string>
@@ -140,6 +140,7 @@
     <string name="text_boot_continue">Tap to continue</string>
     <string name="title_appintro_slide5">Help</string>
     <string name="description_appintro_slide5">Tap the question mark icon while playing to get more help.</string>
+    <string name="key_version_name" translatable="false">version_name</string>
 
 
 </resources>
