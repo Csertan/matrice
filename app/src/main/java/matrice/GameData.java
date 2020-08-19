@@ -21,6 +21,9 @@ public class GameData {
     private long startTime;
     private long duration;
 
+    private int levelNumber;
+    private int maxScore;
+
     /**
      * Default constructor required to be able to get data.
      */
