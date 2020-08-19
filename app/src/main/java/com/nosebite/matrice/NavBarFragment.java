@@ -41,13 +41,10 @@ public class NavBarFragment extends Fragment {
 
         /* Adds callback to the Home Button to navigate the user to the Main Screen. */
         ImageButton toHomeButton = (ImageButton) view.findViewById(R.id.navBarHomeButton);
-        toHomeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Uses popUpTo global action to remove Fragment instances from backstack
-                Navigation.findNavController(view)
-                        .navigate(MainNavGraphDirections.actionPopUpToMainScreenFragment());
-            }
+        toHomeButton.setOnClickListener(view13 -> {
+            //Uses popUpTo global action to remove Fragment instances from backstack
+            Navigation.findNavController(view13)
+                    .navigate(MainNavGraphDirections.actionPopUpToMainScreenFragment());
         });
 
         /* Displays different destinations upon current parent fragment */
@@ -59,28 +56,22 @@ public class NavBarFragment extends Fragment {
         else {
             levelsButton.setImageResource(R.drawable.ic_levels_icon);
         }
-        levelsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(parentFragmentName.equals("LevelsFragment")) {
-                    //TODO Navigate to GameScreen
-                }
-                else {
-                    //TODO Navigate to LevelsScreen
-                }
-                Toast.makeText(getContext(), getString(R.string.message_feature_coming_soon), Toast.LENGTH_SHORT).show();
+        levelsButton.setOnClickListener(view12 -> {
+            if(parentFragmentName.equals("LevelsFragment")) {
+                //TODO Navigate to GameScreen
             }
+            else {
+                //TODO Navigate to LevelsScreen
+            }
+            Toast.makeText(getContext(), getString(R.string.message_feature_coming_soon), Toast.LENGTH_SHORT).show();
         });
 
         /* On Click Listener for starting Settings Activity to adjust Preferences */
         ImageButton settingsButton = (ImageButton) view.findViewById(R.id.navBarSettingsButton);
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Since it's another Activity we have to use an Intent
-                Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                startActivity(intent);
-            }
+        settingsButton.setOnClickListener(view1 -> {
+            //Since it's another Activity we have to use an Intent
+            Intent intent = new Intent(getActivity(), SettingsActivity.class);
+            startActivity(intent);
         });
 
         /* Updates displayed fragment title with parent fragments title */

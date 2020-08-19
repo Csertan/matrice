@@ -43,15 +43,12 @@ public class BootScreenFragment extends Fragment {
         /* Adds callback to the launcher Button to navigate the user to the Main Screen */
         toMainButton = (ImageButton) view.findViewById(R.id.goToMainButton);
         continueText = (TextView) view.findViewById(R.id.continueText);
-        toMainButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!mainActivity.playerIsSignedIn()) {
-                    mainActivity.startSignInIntent();
-                } else {
-                    Navigation.findNavController(view)
-                            .navigate(BootScreenFragmentDirections.actionBootScreenFragmentToMainScreenFragment());
-                }
+        toMainButton.setOnClickListener(view1 -> {
+            if (!mainActivity.playerIsSignedIn()) {
+                mainActivity.startSignInIntent();
+            } else {
+                Navigation.findNavController(view1)
+                        .navigate(BootScreenFragmentDirections.actionBootScreenFragmentToMainScreenFragment());
             }
         });
     }

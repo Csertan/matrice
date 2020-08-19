@@ -41,74 +41,59 @@ public class SuccessScreenFragment extends Fragment {
 
         /* Adds callback to Home Button to navigate the User to the Main Screen. */
         ImageButton toHomeButton = (ImageButton) view.findViewById(R.id.homeButtonSuccess);
-        toHomeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Uses popUpTo global action to remove Fragment instances from backstack
-                Navigation.findNavController(view)
-                        .navigate(MainNavGraphDirections.actionPopUpToMainScreenFragment());
-            }
+        toHomeButton.setOnClickListener(v -> {
+            //Uses popUpTo global action to remove Fragment instances from backstack
+            Navigation.findNavController(view)
+                    .navigate(MainNavGraphDirections.actionPopUpToMainScreenFragment());
         });
 
         /* Adds callback to Replay Button to navigate the user back and restart previous game */
         ImageButton replayButton = (ImageButton) view.findViewById(R.id.successControlsReplayButton);
-        replayButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Sets the data of the previous game as a result for GameScreenFragment
-                Bundle previousGameData = new Bundle();
-                previousGameData.putString("previousGame", previousGame);
-                getParentFragmentManager().setFragmentResult("replayGameData", previousGameData);
+        replayButton.setOnClickListener(view13 -> {
+            //Sets the data of the previous game as a result for GameScreenFragment
+            Bundle previousGameData = new Bundle();
+            previousGameData.putString("previousGame", previousGame);
+            getParentFragmentManager().setFragmentResult("replayGameData", previousGameData);
 
-                Navigation.findNavController(view)
-                        .navigate(SuccessScreenFragmentDirections.actionSuccessScreenFragmentToGameScreenFragment());
-            }
+            Navigation.findNavController(view13)
+                    .navigate(SuccessScreenFragmentDirections.actionSuccessScreenFragmentToGameScreenFragment());
         });
 
         /* Adds callback to Levels Button to navigate the user to the level chooser screen */
         ImageButton levelsButton = (ImageButton) view.findViewById(R.id.successControlsLevelsButton);
-        levelsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO Navigate to Levels Screen
-                Toast.makeText(getContext(), "This feature is coming soon!", Toast.LENGTH_SHORT).show();
-            }
+        levelsButton.setOnClickListener(view12 -> {
+            //TODO Navigate to Levels Screen
+            Toast.makeText(getContext(), "This feature is coming soon!", Toast.LENGTH_SHORT).show();
         });
 
         /* Adds callback to Play Button to navigate the user back and start new game */
         ImageButton playButton = (ImageButton) view.findViewById(R.id.successControlsPlayButton);
-        playButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO When levels will be implemented jump to next level instead
-                Navigation.findNavController(view)
-                        .navigate(SuccessScreenFragmentDirections.actionSuccessScreenFragmentToGameScreenFragment());
-            }
+        playButton.setOnClickListener(view1 -> {
+            //TODO When levels will be implemented jump to next level instead
+            Navigation.findNavController(view1)
+                    .navigate(SuccessScreenFragmentDirections.actionSuccessScreenFragmentToGameScreenFragment());
         });
 
         /*
         * Adds callback that listens to the results from the Game Fragment in order to display game details.
         */
         getParentFragmentManager()
-                .setFragmentResultListener("gameData", this, new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                String elapsedTime = result.getString("elapsedTime");
-                String score = result.getString("score");
-                String stepSize = result.getString("stepSize");
+                .setFragmentResultListener("gameData", this, (FragmentResultListener) (requestKey, result) -> {
+                    String elapsedTime = result.getString("elapsedTime");
+                    String score = result.getString("score");
+                    String stepSize = result.getString("stepSize");
 
-                previousGame = result.getString("previousGame");
+                    previousGame = result.getString("previousGame");
 
-                TextView scoreView = (TextView) view.findViewById(R.id.scoreText);
-                scoreView.setText(score);
+                    TextView scoreView = (TextView) view.findViewById(R.id.scoreText);
+                    scoreView.setText(score);
 
-                TextView scoreDetailView = (TextView) view.findViewById(R.id.scoreDetail);
-                String scoreDetails = getString(R.string.text_score_details_start) + " " + stepSize + " "
-                        + getString(R.string.text_score_details_middle) + " " + elapsedTime + " "
-                        + getString(R.string.text_score_details_end);
-                scoreDetailView.setText(scoreDetails);
-            }
-        });
+                    TextView scoreDetailView = (TextView) view.findViewById(R.id.scoreDetail);
+                    String scoreDetails = getString(R.string.text_score_details_start) + " " + stepSize + " "
+                            + getString(R.string.text_score_details_middle) + " " + elapsedTime + " "
+                            + getString(R.string.text_score_details_end);
+                    scoreDetailView.setText(scoreDetails);
+                });
     }
 
     private void updateBackgroundNightMode() {

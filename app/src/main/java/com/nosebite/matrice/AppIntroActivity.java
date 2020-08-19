@@ -59,7 +59,7 @@ public class AppIntroActivity extends AppIntro {
                 .title(getString(R.string.title_appintro_slidelast))
                 .description(getString(R.string.description_appintro_slidelast))
                 .imageDrawable(R.drawable.ic_intro_sign_in)
-                .backgroundColor(getColor(R.color.colorIntrolast))
+                .backgroundColor(getColor(R.color.colorIntroLast))
                 .build();
 
         addSlide(AppIntroFragment.newInstance(slideFirst));

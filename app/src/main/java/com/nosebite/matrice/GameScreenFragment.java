@@ -322,13 +322,8 @@ public class GameScreenFragment extends Fragment {
 
             setScoreDetails();
             final Handler handler  = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Navigation.findNavController(requireView())
-                            .navigate(GameScreenFragmentDirections.actionGameScreenFragmentToSuccessScreenFragment());
-                }
-            }, 1000);
+            handler.postDelayed(() -> Navigation.findNavController(requireView())
+                    .navigate(GameScreenFragmentDirections.actionGameScreenFragmentToSuccessScreenFragment()), 1000);
         }
     }
 

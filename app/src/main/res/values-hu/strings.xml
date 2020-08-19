@@ -45,7 +45,7 @@
     <string name="message_sign_in_process">Bejelentkezés…</string>
     <string name="summary_about">Szeretnénk neked a legjobb játékélményt nyújtani, így bátran mondd el nekünk a vélaményedet, írd le az általad felfedezett hibákat és ötleteidet jövendő fejlesztésekkel kapcsolatban.</string>
     <string name="title_levels_fragment">Pályák</string>
-    <string name="error_pref_age_invalid_input">Hibás érték! Az életkorodnak valamennyire valóságosnak kellene lennie...</string>
+    <string name="error_pref_age_invalid_input">Hibás érték! Az életkorodnak valamennyire valóságosnak kellene lennie…</string>
     <string name="text_pref_language_english">Angol</string>
     <string name="text_pref_language_hungarian">Magyar</string>
     <string name="text_pref_action_inversion">Invertálás</string>

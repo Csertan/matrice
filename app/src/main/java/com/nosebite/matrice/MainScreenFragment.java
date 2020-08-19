@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 
 /**
@@ -51,81 +50,47 @@ public class MainScreenFragment extends Fragment {
 
         /* On Click Listener for the navigation to Authors Screen */
         Button toAuthorsButton = (Button) view.findViewById(R.id.authorsButtonMain);
-        toAuthorsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view)
-                        .navigate(MainScreenFragmentDirections.actionMainScreenFragmentToAuthorsScreenFragment());
-            }
-        });
+        toAuthorsButton.setOnClickListener(view18 -> Navigation.findNavController(view18)
+                .navigate(MainScreenFragmentDirections.actionMainScreenFragmentToAuthorsScreenFragment()));
 
         /* On Click Listener for the navigation to Game Screen */
         Button playButton = (Button) view.findViewById(R.id.playButtonMain);
-        playButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view)
-                        .navigate(MainScreenFragmentDirections.actionMainScreenFragmentToGameScreenFragment());
-            }
-        });
+        playButton.setOnClickListener(view17 -> Navigation.findNavController(view17)
+                .navigate(MainScreenFragmentDirections.actionMainScreenFragmentToGameScreenFragment()));
 
         /* On Click listener for the navigation to Levels Screen */
         Button levelsButton = (Button) view.findViewById(R.id.campaignButtonMain);
-        levelsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO Navigate to LevelsScreen
-                Toast.makeText(getContext(), getString(R.string.message_feature_coming_soon), Toast.LENGTH_SHORT).show();
-            }
+        levelsButton.setOnClickListener(view16 -> {
+            //TODO Navigate to LevelsScreen
+            Toast.makeText(getContext(), getString(R.string.message_feature_coming_soon), Toast.LENGTH_SHORT).show();
         });
 
         /* On Click Listener for starting Settings Activity to adjust Preferences */
         Button settingsButton = (Button) view.findViewById(R.id.settingsButtonMain);
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Since it's another Activity we have to use an Intent
-                Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                startActivity(intent);
-            }
+        settingsButton.setOnClickListener(view15 -> {
+            //Since it's another Activity we have to use an Intent
+            Intent intent = new Intent(getActivity(), SettingsActivity.class);
+            startActivity(intent);
         });
 
         /* On CLick Listener for showing Achievements to the player */
         ImageButton showAchievementsButton = (ImageButton) view.findViewById(R.id.achievementsButtonMain);
-        showAchievementsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showAchievements();
-            }
-        });
+        showAchievementsButton.setOnClickListener(view14 -> showAchievements());
 
         /* On CLick Listener for showing Leaderboards to the player */
         ImageButton showLeaderboardsButton = (ImageButton) view.findViewById(R.id.leaderBoardsButtonMain);
-        showLeaderboardsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showLeaderboards();
-            }
-        });
+        showLeaderboardsButton.setOnClickListener(view13 -> showLeaderboards());
 
         /* On CLick Listener for signing the player in */
         signInButton = (SignInButton) view.findViewById(R.id.sign_in_button);
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mainActivity.startSignInIntent();
-            }
-        });
+        signInButton.setOnClickListener(view12 -> mainActivity.startSignInIntent());
 
         /* On CLick Listener for signing the player out */
         signOutButton = (Button) view.findViewById(R.id.sign_out_button);
-        signOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mainActivity.signOut();
-                Navigation.findNavController(view)
-                        .navigate(MainScreenFragmentDirections.actionMainScreenFragmentToBootScreenFragment());
-            }
+        signOutButton.setOnClickListener(view1 -> {
+            mainActivity.signOut();
+            Navigation.findNavController(view1)
+                    .navigate(MainScreenFragmentDirections.actionMainScreenFragmentToBootScreenFragment());
         });
 
         /* Updates buttons */
@@ -174,12 +139,7 @@ public class MainScreenFragment extends Fragment {
      */
     private void showAchievements() {
         mainActivity.getAchievementsClient().getAchievementsIntent()
-                .addOnSuccessListener(new OnSuccessListener<Intent>() {
-                    @Override
-                    public void onSuccess(Intent intent) {
-                        startActivityForResult(intent, MainActivity.RC_ACHIEVEMENTS_UI);
-                    }
-                });
+                .addOnSuccessListener(intent -> startActivityForResult(intent, MainActivity.RC_ACHIEVEMENTS_UI));
     }
 
     /**
@@ -187,11 +147,6 @@ public class MainScreenFragment extends Fragment {
      */
     private void showLeaderboards() {
         mainActivity.getLeaderboardsClient().getAllLeaderboardsIntent()
-                .addOnSuccessListener(new OnSuccessListener<Intent>() {
-                    @Override
-                    public void onSuccess(Intent intent) {
-                        startActivityForResult(intent, MainActivity.RC_LEADERBOARD_UI);
-                    }
-                });
+                .addOnSuccessListener(intent -> startActivityForResult(intent, MainActivity.RC_LEADERBOARD_UI));
     }
 }

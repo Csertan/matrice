@@ -21,10 +21,7 @@ import com.google.android.gms.games.AchievementsClient;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.GamesClient;
 import com.google.android.gms.games.LeaderboardsClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PlayGamesAuthProvider;
@@ -113,18 +110,15 @@ public class MainActivity extends BaseActivity {
         else {
             GoogleSignInClient signInClient = GoogleSignIn.getClient(this, signInOptions);
             signInClient.silentSignIn()
-                    .addOnCompleteListener(this, new OnCompleteListener<GoogleSignInAccount>() {
-                        @Override
-                        public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
-                            if(task.isSuccessful()) {
-                                signedInAccount = task.getResult();
-                                Log.d(TAG, "Logged in with Play Games: " + signedInAccount);
-                                firebaseAuthWithPlayGames(signedInAccount);
-                            }
-                            else {
-                                signedInAccount = null;
-                                startSignInIntent();
-                            }
+                    .addOnCompleteListener(this, task -> {
+                        if(task.isSuccessful()) {
+                            signedInAccount = task.getResult();
+                            Log.d(TAG, "Logged in with Play Games: " + signedInAccount);
+                            firebaseAuthWithPlayGames(signedInAccount);
+                        }
+                        else {
+                            signedInAccount = null;
+                            startSignInIntent();
                         }
                     });
         }
@@ -152,17 +146,14 @@ public class MainActivity extends BaseActivity {
 
         AuthCredential credential = PlayGamesAuthProvider.getCredential(account.getServerAuthCode());
         firebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()) {
-                            user = firebaseAuth.getCurrentUser();
-                            Log.d(TAG, "Logged in with Firebase: " + user);
-                        }
-                        else {
-                            user = null;
-                            Toast.makeText(getApplicationContext(), getString(R.string.error_sign_in), Toast.LENGTH_SHORT).show();
-                        }
+                .addOnCompleteListener(this, task -> {
+                    if(task.isSuccessful()) {
+                        user = firebaseAuth.getCurrentUser();
+                        Log.d(TAG, "Logged in with Firebase: " + user);
+                    }
+                    else {
+                        user = null;
+                        Toast.makeText(getApplicationContext(), getString(R.string.error_sign_in), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -229,12 +220,7 @@ public class MainActivity extends BaseActivity {
     public void signOut() {
         GoogleSignInClient signInClient = GoogleSignIn
                 .getClient(this, GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
-        signInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(getApplicationContext(), getString(R.string.message_signed_out), Toast.LENGTH_SHORT).show();
-            }
-        });
+        signInClient.signOut().addOnCompleteListener(task -> Toast.makeText(getApplicationContext(), getString(R.string.message_signed_out), Toast.LENGTH_SHORT).show());
         firebaseAuth.signOut();
         signedInAccount = null;
         user = null;
