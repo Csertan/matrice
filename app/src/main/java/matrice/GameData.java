@@ -62,6 +62,12 @@ public class GameData {
     public long getStartTime() {
         return startTime;
     }
+    public int getLevelNumber() {
+        return levelNumber;
+    }
+    public int getMaxScore() {
+        return maxScore;
+    }
 
     /**
      * Writes the data into a consumable format for the Database.
