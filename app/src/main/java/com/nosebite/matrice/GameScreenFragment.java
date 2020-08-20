@@ -171,6 +171,14 @@ public class GameScreenFragment extends Fragment {
             return true;
         });
 
+        /* Adds callback to Help Button to show hints to the user. */
+        ImageButton helpButton = (ImageButton) view.findViewById(R.id.helpButtonGameScreen);
+        helpButton.setOnClickListener(v -> {
+            /* Sends current game data so the user is able to continue the same game after closing the help screen. */
+            setScoreDetails();
+            Navigation.findNavController(v).navigate(GameScreenFragmentDirections.actionGameScreenFragmentToGameHelpFragment());
+        });
+
         /* Set On CLick Listeners for user move help buttons */
         view.findViewById(R.id.leftHelp1).setOnClickListener(v -> onSwipe(Move.HORIZONTAL, Transformation.INVERT, 0));
         view.findViewById(R.id.leftHelp2).setOnClickListener(v -> onSwipe(Move.HORIZONTAL, Transformation.INVERT, 1));

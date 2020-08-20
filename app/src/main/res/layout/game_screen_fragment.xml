@@ -5,8 +5,8 @@
     android:id="@+id/gameScreenFragmentLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_game_surface2"
     android:animateLayoutChanges="true"
+    android:background="@drawable/ic_game_surface2"
     tools:context=".GameScreenFragment">
 
     <androidx.gridlayout.widget.GridLayout
@@ -286,9 +286,9 @@
             android:layout_height="55dp"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="3dp"
+            android:background="?android:selectableItemBackground"
             android:contentDescription="@string/description_gotohome"
             android:src="@drawable/ic_home_icon"
-            android:background="?android:selectableItemBackground"
             app:layout_column="0"
             app:layout_gravity="center_horizontal"
             app:layout_row="0" />
@@ -384,7 +384,6 @@
         app:columnCount="4"
         app:layout_constraintBottom_toTopOf="@+id/endStateLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:rowCount="1">
@@ -691,5 +690,22 @@
             app:layout_column="2"
             app:layout_row="0" />
     </androidx.gridlayout.widget.GridLayout>
+
+    <ImageButton
+        android:id="@+id/helpButtonGameScreen"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?android:selectableItemBackground"
+        android:src="@drawable/ic_twotone_help_24"
+        app:layout_constraintBottom_toTopOf="@+id/rightControlsLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/topDetailsLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/title_game_help_screen" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

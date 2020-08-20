@@ -130,7 +130,7 @@
     <string name="title_appintro_slidefirst">Welcome in the Game</string>
     <string name="description_appintro_slidefirst">Be fast, think twice! Solve awesome puzzles and find the best solutions!</string>
     <string name="title_appintro_slide2">Goal of the Game</string>
-    <string name="descritpion_appintro_slide2">Your goal is to reach a specific pattern from a start pattern with the least possible swipes.</string>
+    <string name="description_appintro_slide2">Your goal is to reach a specific pattern from a start pattern with the least possible swipes.</string>
     <string name="title_appintro_slide34">Swipes</string>
     <string name="description_appintro_slide3">When you swipe from the left or from the top of the table or you tap on the minus shaped buttons the selected row or column changes all cells.</string>
     <string name="description_appintro_slide4">When you swipe from the right or from the bottom of the table or you tap on the triangular buttons the selected row or column cells rotate by one.</string>
@@ -143,10 +143,14 @@
     <string name="key_version_name" translatable="false">version_name</string>
     <string name="text_gotohome">Main menu</string>
     <string name="text_pauseplay">Pause / Play</string>
-    <string name="text_stop">Stop game</string>
+    <string name="text_stop">Stop / New game</string>
     <string name="text_retry">Replay</string>
     <string name="text_gotolevels">Levels</string>
     <string name="text_goback">Previous</string>
+    <string name="title_game_help_screen">Help</string>
+    <string name="description_close" translatable="false">close</string>
+    <string name="text_button_help">Controls and buttons</string>
+    <!-- TODO: Remove or change this placeholder text -->
 
 
 </resources>

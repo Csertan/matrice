@@ -50,24 +50,24 @@ public class MainScreenFragment extends Fragment {
 
         /* On Click Listener for the navigation to Authors Screen */
         Button toAuthorsButton = (Button) view.findViewById(R.id.authorsButtonMain);
-        toAuthorsButton.setOnClickListener(view18 -> Navigation.findNavController(view18)
+        toAuthorsButton.setOnClickListener(v -> Navigation.findNavController(v)
                 .navigate(MainScreenFragmentDirections.actionMainScreenFragmentToAuthorsScreenFragment()));
 
         /* On Click Listener for the navigation to Game Screen */
         Button playButton = (Button) view.findViewById(R.id.playButtonMain);
-        playButton.setOnClickListener(view17 -> Navigation.findNavController(view17)
+        playButton.setOnClickListener(v -> Navigation.findNavController(v)
                 .navigate(MainScreenFragmentDirections.actionMainScreenFragmentToGameScreenFragment()));
 
         /* On Click listener for the navigation to Levels Screen */
         Button levelsButton = (Button) view.findViewById(R.id.campaignButtonMain);
-        levelsButton.setOnClickListener(view16 -> {
+        levelsButton.setOnClickListener(v -> {
             //TODO Navigate to LevelsScreen
             Toast.makeText(getContext(), getString(R.string.message_feature_coming_soon), Toast.LENGTH_SHORT).show();
         });
 
         /* On Click Listener for starting Settings Activity to adjust Preferences */
         Button settingsButton = (Button) view.findViewById(R.id.settingsButtonMain);
-        settingsButton.setOnClickListener(view15 -> {
+        settingsButton.setOnClickListener(v -> {
             //Since it's another Activity we have to use an Intent
             Intent intent = new Intent(getActivity(), SettingsActivity.class);
             startActivity(intent);
@@ -75,21 +75,21 @@ public class MainScreenFragment extends Fragment {
 
         /* On CLick Listener for showing Achievements to the player */
         ImageButton showAchievementsButton = (ImageButton) view.findViewById(R.id.achievementsButtonMain);
-        showAchievementsButton.setOnClickListener(view14 -> showAchievements());
+        showAchievementsButton.setOnClickListener(v -> showAchievements());
 
         /* On CLick Listener for showing Leaderboards to the player */
         ImageButton showLeaderboardsButton = (ImageButton) view.findViewById(R.id.leaderBoardsButtonMain);
-        showLeaderboardsButton.setOnClickListener(view13 -> showLeaderboards());
+        showLeaderboardsButton.setOnClickListener(v -> showLeaderboards());
 
         /* On CLick Listener for signing the player in */
         signInButton = (SignInButton) view.findViewById(R.id.sign_in_button);
-        signInButton.setOnClickListener(view12 -> mainActivity.startSignInIntent());
+        signInButton.setOnClickListener(v -> mainActivity.startSignInIntent());
 
         /* On CLick Listener for signing the player out */
         signOutButton = (Button) view.findViewById(R.id.sign_out_button);
-        signOutButton.setOnClickListener(view1 -> {
+        signOutButton.setOnClickListener(v -> {
             mainActivity.signOut();
-            Navigation.findNavController(view1)
+            Navigation.findNavController(v)
                     .navigate(MainScreenFragmentDirections.actionMainScreenFragmentToBootScreenFragment());
         });
 

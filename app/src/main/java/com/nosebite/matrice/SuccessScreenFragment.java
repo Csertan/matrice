@@ -49,28 +49,28 @@ public class SuccessScreenFragment extends Fragment {
 
         /* Adds callback to Replay Button to navigate the user back and restart previous game */
         ImageButton replayButton = (ImageButton) view.findViewById(R.id.successControlsReplayButton);
-        replayButton.setOnClickListener(view13 -> {
+        replayButton.setOnClickListener(v -> {
             //Sets the data of the previous game as a result for GameScreenFragment
             Bundle previousGameData = new Bundle();
             previousGameData.putString("previousGame", previousGame);
             getParentFragmentManager().setFragmentResult("replayGameData", previousGameData);
 
-            Navigation.findNavController(view13)
+            Navigation.findNavController(v)
                     .navigate(SuccessScreenFragmentDirections.actionSuccessScreenFragmentToGameScreenFragment());
         });
 
         /* Adds callback to Levels Button to navigate the user to the level chooser screen */
         ImageButton levelsButton = (ImageButton) view.findViewById(R.id.successControlsLevelsButton);
-        levelsButton.setOnClickListener(view12 -> {
+        levelsButton.setOnClickListener(v -> {
             //TODO Navigate to Levels Screen
             Toast.makeText(getContext(), "This feature is coming soon!", Toast.LENGTH_SHORT).show();
         });
 
         /* Adds callback to Play Button to navigate the user back and start new game */
         ImageButton playButton = (ImageButton) view.findViewById(R.id.successControlsPlayButton);
-        playButton.setOnClickListener(view1 -> {
+        playButton.setOnClickListener(v -> {
             //TODO When levels will be implemented jump to next level instead
-            Navigation.findNavController(view1)
+            Navigation.findNavController(v)
                     .navigate(SuccessScreenFragmentDirections.actionSuccessScreenFragmentToGameScreenFragment());
         });
 

@@ -75,15 +75,17 @@
     <string name="description_appintro_slidelast">Jelentkezz be a Google Play fiókoddal, hogy versenyezhess a barátaiddal és elnyerhess klassz küldetéseket.</string>
     <string name="description_appintro_slide3">Ha balról vagy felülről húzod az ujjad vagy a mínuszjelet formázó gombokra böksz, minden figura az ellenkezőjére változik a kiválasztott sorban vagy oszlopban.</string>
     <string name="description_appintro_slide4">Ha jobbról vagy lentről húzod az ujjad vagy a háromszögű gombokra böksz, a figurák egyel eltolódnak a kiválasztott sorban vagy oszlopban.</string>
-    <string name="descritpion_appintro_slide2">A célod, hogy egy megadott mintát érj el a lehető legkevesebb lépésben egy véletlen kezdőállapotból.</string>
+    <string name="description_appintro_slide2">A célod, hogy egy megadott mintát érj el a lehető legkevesebb lépésben egy véletlen kezdőállapotból.</string>
     <string name="description_appintro_slidefirst">Légy gyors, de gondold meg! Oldj meg fejtörőket és találd meg a legjobb megoldást!</string>
     <string name="text_boot_continue">Érintsd meg a folytatáshoz</string>
     <string name="title_appintro_slide5">Útmutató</string>
     <string name="description_appintro_slide5">Érintsd meg a kérdőjel ikont vagy bökj hosszan bármely gombra miközben játszol további segítségért.</string>
     <string name="text_gotohome">Főmenü</string>
     <string name="text_pauseplay">Szünet / Folytatás</string>
-    <string name="text_stop">Játék befejezése</string>
+    <string name="text_stop">Befejezés / Új játék</string>
     <string name="text_retry">Újrajátszás</string>
     <string name="text_gotolevels">Pályák</string>
     <string name="text_goback">Vissza</string>
+    <string name="title_game_help_screen">Útmutató</string>
+    <string name="text_button_help">Gombok és vezérlés</string>
 </resources>
