@@ -57,7 +57,7 @@
     <string name="text_pref_figures_plump">Telt</string>
     <string name="text_pref_figures_tictactoe">Köriksz</string>
     <string name="text_pref_figures_plusminus">Plusz Mínusz</string>
-    <string name="text_programmer">Fejlesztette: Csertán Tamás</string>
+    <string name="text_programmer">Fejlesztés: Csertán Tamás</string>
     <string name="text_designer">Dizájn: nosebite Studios</string>
     <string name="text_authors_research">Ez a játék egy kutatási projekt része, amelyben az emberi elme komplex hálózatokban való tájékozódását
         vizsgáljuk. A projekt gazdája a Budapesti Műszaki és Gazdaságtudományi Egyetem Nagysebességű Hálózatok Laboratóriumának hálózattudományi
@@ -88,4 +88,13 @@
     <string name="text_goback">Vissza</string>
     <string name="title_game_help_screen">Útmutató</string>
     <string name="text_button_help">Gombok és vezérlés</string>
+    <string name="text_home_help">Lépj vissza a főmenübe.</string>
+    <string name="text_levels_help">Válassz pályát a küldetés módban.</string>
+    <string name="text_back_help">Visszaléphetsz az előző szintre küldetés módban, egyébként a főmenübe.</string>
+    <string name="text_pause_help">Szüneteltesd a játékot.</string>
+    <string name="text_play_help">Folytasd a játékot.</string>
+    <string name="text_stop_help">Fejezd be a játékot. Ha megnyomod ezt a gombot, az aktuális játékot nem tudod folytatni.</string>
+    <string name="text_new_game_help">Kezdj egy új játékot.</string>
+    <string name="text_retry_help">Kezdd elölről a játékot.</string>
+    <string name="text_buttons_help">Nyomj hosszan bármely gombra, és megjelenik a funkciójának leírása.</string>
 </resources>

@@ -150,6 +150,15 @@
     <string name="title_game_help_screen">Help</string>
     <string name="description_close" translatable="false">close</string>
     <string name="text_button_help">Controls and buttons</string>
+    <string name="text_home_help">Press this button to go back to the main menu.</string>
+    <string name="text_levels_help">Press the button to go to the level chooser screen of the campaign mode.</string>
+    <string name="text_back_help">Proceed to the previous level in campaign mode or to the main menu.</string>
+    <string name="text_pause_help">Pause the game. You can not swipe when the game is paused.</string>
+    <string name="text_play_help">Continue the game.</string>
+    <string name="text_stop_help">Stop and finish the game. You cannot continue after stopping.</string>
+    <string name="text_new_game_help">Start a new game.</string>
+    <string name="text_retry_help">Replay game.</string>
+    <string name="text_buttons_help">Press long on any of the buttons to get a hint about its function.</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 

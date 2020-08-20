@@ -159,6 +159,260 @@
                     android:paddingBottom="5dp"
                     android:text="@string/text_button_help"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <androidx.gridlayout.widget.GridLayout
+                    android:id="@+id/buttonsHelpLayoutGameHelp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:columnCount="2"
+                    app:rowCount="8">
+
+                    <ImageView
+                        android:id="@+id/imageHomeHelp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:contentDescription="@string/description_gotohome"
+                        android:src="@drawable/ic_home_icon"
+                        app:layout_column="0"
+                        app:layout_row="0"/>
+
+                    <TextView
+                        android:id="@+id/textHomeHelp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="15dp"
+                        android:fontFamily="@font/titillium_web_light"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:singleLine="false"
+                        android:text="@string/text_home_help"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        app:layout_column="1"
+                        app:layout_gravity="center_vertical"
+                        app:layout_row="0" />
+
+                    <ImageView
+                        android:id="@+id/imageLevelsHelp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:contentDescription="@string/description_gotolevels"
+                        android:src="@drawable/ic_levels_icon"
+                        app:layout_column="0"
+                        app:layout_row="1" />
+
+                    <TextView
+                        android:id="@+id/textLevelsHelp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="15dp"
+                        android:fontFamily="@font/titillium_web_light"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:singleLine="false"
+                        android:text="@string/text_levels_help"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        app:layout_column="1"
+                        app:layout_gravity="center_vertical"
+                        app:layout_row="1" />
+
+                    <ImageView
+                        android:id="@+id/imageBackHelp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:contentDescription="@string/description_goback"
+                        android:src="@drawable/ic_arrow_back_icon"
+                        app:layout_column="0"
+                        app:layout_row="2"/>
+
+                    <TextView
+                        android:id="@+id/textBackHelp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="15dp"
+                        android:fontFamily="@font/titillium_web_light"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:singleLine="false"
+                        android:text="@string/text_back_help"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        app:layout_column="1"
+                        app:layout_gravity="center_vertical"
+                        app:layout_row="2" />
+
+                    <ImageView
+                        android:id="@+id/imagePauseHelp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:contentDescription="@string/description_pauseplay"
+                        android:src="@drawable/ic_pause_icon"
+                        app:layout_column="0"
+                        app:layout_row="3"/>
+
+                    <TextView
+                        android:id="@+id/textPauseHelp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="15dp"
+                        android:fontFamily="@font/titillium_web_light"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:singleLine="false"
+                        android:text="@string/text_pause_help"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        app:layout_column="1"
+                        app:layout_gravity="center_vertical"
+                        app:layout_row="3" />
+
+                    <ImageView
+                        android:id="@+id/imagePlayHelp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:contentDescription="@string/description_pauseplay"
+                        android:src="@drawable/ic_play_icon"
+                        app:layout_column="0"
+                        app:layout_row="4"/>
+
+                    <TextView
+                        android:id="@+id/textPlayHelp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="15dp"
+                        android:fontFamily="@font/titillium_web_light"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:singleLine="false"
+                        android:text="@string/text_play_help"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        app:layout_column="1"
+                        app:layout_gravity="center_vertical"
+                        app:layout_row="4" />
+
+                    <ImageView
+                        android:id="@+id/imageStopHelp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:contentDescription="@string/description_stop"
+                        android:src="@drawable/ic_stop_icon"
+                        app:layout_column="0"
+                        app:layout_row="5"/>
+
+                    <TextView
+                        android:id="@+id/textStopHelp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="15dp"
+                        android:fontFamily="@font/titillium_web_light"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:singleLine="false"
+                        android:text="@string/text_stop_help"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        app:layout_column="1"
+                        app:layout_gravity="center_vertical"
+                        app:layout_row="5" />
+
+                    <ImageView
+                        android:id="@+id/imageNewGameHelp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:contentDescription="@string/description_stop"
+                        android:src="@drawable/ic_new_game_icon"
+                        app:layout_column="0"
+                        app:layout_row="6"/>
+
+                    <TextView
+                        android:id="@+id/textNewGameHelp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="15dp"
+                        android:fontFamily="@font/titillium_web_light"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:singleLine="false"
+                        android:text="@string/text_new_game_help"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        app:layout_column="1"
+                        app:layout_gravity="center_vertical"
+                        app:layout_row="6" />
+
+                    <ImageView
+                        android:id="@+id/imageRetryHelp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:contentDescription="@string/description_retry"
+                        android:src="@drawable/ic_retry_icon"
+                        app:layout_column="0"
+                        app:layout_row="7"/>
+
+                    <TextView
+                        android:id="@+id/textRetryHelp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/titillium_web_light"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:singleLine="false"
+                        android:text="@string/text_retry_help"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        app:layout_column="1"
+                        app:layout_gravity="center_vertical"
+                        app:layout_row="7"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="15dp" />
+
+                </androidx.gridlayout.widget.GridLayout>
+
+                <TextView
+                    android:id="@+id/textButtonsHelp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/titillium_web_light"
+                    android:paddingStart="15dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="15dp"
+                    android:paddingBottom="30dp"
+                    android:text="@string/text_buttons_help"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
             </LinearLayout>
         </ScrollView>
 
