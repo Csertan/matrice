@@ -159,7 +159,6 @@
     <string name="text_new_game_help">Start a new game.</string>
     <string name="text_retry_help">Replay game.</string>
     <string name="text_buttons_help">Press long on any of the buttons to get a hint about its function.</string>
-    <!-- TODO: Remove or change this placeholder text -->
 
 
 </resources>

@@ -103,7 +103,6 @@
             app:summary="@string/summary_support"
             app:title="@string/title_send_feedback"/>
 
-        <!--TODO Not working yet! -->
         <Preference
             app:key="@string/key_privacy_policy"
             app:title="@string/title_privacy_policy">
