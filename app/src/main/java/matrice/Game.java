@@ -4,6 +4,8 @@ import org.apache.commons.lang3.time.StopWatch;
 
 import java.util.concurrent.TimeUnit;
 
+import static java.lang.Math.ceil;
+
 /**
  * Class for a Game upon given Settings, handles game control, timing and logging out statistics
  */
@@ -70,7 +72,13 @@ public class Game {
         if(this.stopWatch.isStopped())
             return stopWatch.getTime(TimeUnit.SECONDS);
         else
-            return 0;
+            return 1;
+    }
+    public double getFineDuration() {
+        if(this.stopWatch.isStopped())
+            return stopWatch.getTime(TimeUnit.MILLISECONDS) / 1000.0;
+        else
+            return 1.0;
     }
 
     /**
@@ -102,8 +110,8 @@ public class Game {
     public int getScore() {
         double score = 50;
         double stepScore = 1000.0 / this.getCurrentGame().getStepSize();
-        double timeScore = 5000.0 / (this.getDuration() == 0 ? 1 : this.getDuration());
-        return (int)(score + stepScore + timeScore);
+        double timeScore = 5000.0 / this.getFineDuration();
+        return (int) ceil(score + stepScore + timeScore);
     }
 
     public void setCurrentGame(GameLevel currentGame) {

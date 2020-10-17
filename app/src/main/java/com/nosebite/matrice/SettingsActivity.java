@@ -132,6 +132,8 @@ public class SettingsActivity extends BaseActivity {
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
+                LocaleHelper.setLocale(parentActivity.getBaseContext(), LocaleHelper.getLanguage(parentActivity.getBaseContext()));
+                parentActivity.recreate();
                 return true;
             });
 

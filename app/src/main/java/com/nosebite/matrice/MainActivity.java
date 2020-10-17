@@ -74,7 +74,7 @@ public class MainActivity extends BaseActivity {
             enablePersistence();
         }
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if(preferences.getBoolean(getString(R.string.key_enable_dark_mode), true)) {
+        if(preferences.getBoolean(getString(R.string.key_enable_dark_mode), false)) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
         else {
