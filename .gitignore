@@ -12,3 +12,5 @@
 /captures
 .externalNativeBuild
 .cxx
+drawable_resources/
+app_ids.txt
